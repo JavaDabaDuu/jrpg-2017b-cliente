@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/XXX/jrpg-2017b-cliente.svg?branch=master)](https://travis-ci.org/XXX/jrpg-2017b-cliente)
+[![Build Status](https://travis-ci.org/JavaDabaDuu/jrpg-2017b-cliente.svg?branch=master)](https://travis-ci.org/JavaDabaDuu/jrpg-2017b-cliente)
 # World Of Middle Earth (WOME) - cliente
 
 ## Sobre las personas
@@ -12,14 +12,14 @@
 
 ### Integrantes del equipo
 
-* Completar ([Lucas Secchi](https://github.com/Secchi1))
-* Completar ([Micaela Ramos](https://github.com/RamosMicaela))
-* Completar ([Pablo Joel López](https://github.com/pabloL0pez))
-* Completar ([Fabián Norberto Escobar](https://github.com/FabianNorbertoEscobar))
-* Completar ([Federico Schafer](https://github.com/federicoSchafer))
-* Completar ([Ezequiel Tejerina](https://github.com/EzequielTejerina))
-* Completar ([Ezequiel Corno](https://github.com/EzequielCorno))
-* Completar ([Leonel Ávalos](https://github.com/leoavalos95))
+* Lucas Secchi ([Secchi1](https://github.com/Secchi1))<br>
+* Micaela Ramos ([RamosMicaela](https://github.com/RamosMicaela))<br>
+* Pablo López ([pabloL0pez](https://github.com/pabloL0pez))<br>
+* Fabián Escobar ([FabianNorbertoEscobar](https://github.com/FabianNorbertoEscobar))<br>
+* Federico Schafer ([federicoSchafer](https://github.com/federicoSchafer))<br>
+* Ezequiel Tejerina ([EzequielTejerina](https://github.com/EzequielTejerina))<br>
+* Ezequiel Corno ([EzequielCorno](https://github.com/EzequielCorno))<br>
+* Leonel Ávalos ([leoavalos95](https://github.com/leoavalos95))
 
 ## Sobre la tecnología
 
