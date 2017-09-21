@@ -3,6 +3,7 @@ package mensajeria;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int nivel = 1;
 	private int experiencia;
 	private ArrayList<Item> items = new ArrayList<Item>();
+	private int puntosPorNivel = 0;
 	
 	public PaquetePersonaje() throws IOException {
 		estado = Estado.estadoOffline;
@@ -277,5 +279,21 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		for (Item item : items) {
 			this.items.add(item);
 		}
+	}
+	
+	public void actualizarPuntosPorNivel() {
+		this.puntosPorNivel += 3;
+	}
+	
+	public int getPuntosNivel() {
+		return this.puntosPorNivel;
+	}
+	
+	public void actualizarAtributosNivel(HashMap<String, Number> updates) {
+		this.saludTope += updates.get("salud").intValue();
+		this.destreza += updates.get("destreza").intValue();
+		this.fuerza += updates.get("fuerza").intValue();
+		this.inteligencia += updates.get("inteligencia").intValue();
+		this.energiaTope += updates.get("energia").intValue();
 	}
 }
