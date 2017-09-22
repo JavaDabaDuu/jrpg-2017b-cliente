@@ -41,7 +41,7 @@ public class MenuAsignarSkills extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
-		puntosAsignarInicial = 3;
+		puntosAsignarInicial = cliente.getPaquetePersonaje().getPuntosPorNivel();
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
 		puntosDestrezaInicial = cliente.getPaquetePersonaje().getDestreza();
 		puntosInteligenciaInicial = cliente.getPaquetePersonaje().getInteligencia();

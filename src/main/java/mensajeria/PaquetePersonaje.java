@@ -296,4 +296,8 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		this.inteligencia += updates.get("inteligencia").intValue();
 		this.energiaTope += updates.get("energia").intValue();
 	}
+	
+	public int getPuntosPorNivel() {
+		return this.puntosPorNivel;
+	}
 }
