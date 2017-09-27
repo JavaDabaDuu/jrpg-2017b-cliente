@@ -24,14 +24,18 @@ import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
+import mensajeria.PaqueteNPC;
 
 public class EstadoJuego extends Estado {
 
 	private Entidad entidadPersonaje;
 	private PaquetePersonaje paquetePersonaje;
+	private PaqueteNPC paqueteNPC;
 	private Mundo mundo;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
+	private Map<Integer, PaqueteNPC> npcs;
+	private Map<Integer, PaqueteMovimiento> ubicacionNpcs;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
 
@@ -71,6 +75,7 @@ public class EstadoJuego extends Estado {
 		mundo.graficar(g);
 		//entidadPersonaje.graficar(g);
 		graficarPersonajes(g);
+		graficarNpc(g);
 		mundo.graficarObstaculos(g);
 		entidadPersonaje.graficarNombre(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
@@ -81,6 +86,37 @@ public class EstadoJuego extends Estado {
 		if(haySolicitud)
 			menuEnemigo.graficar(g, tipoSolicitud);
 
+	}
+
+	private void graficarNpc(Graphics g) {
+		// TODO Auto-generated method stub
+		Integer i = 0;
+		PaqueteNPC npc = new PaqueteNPC("Mega-Charizard",10,10,10,10,10);
+		PaqueteMovimiento posicion = new PaqueteMovimiento (0,400,300);
+		Map<Integer, PaqueteNPC> npcs = new HashMap <Integer, PaqueteNPC>();
+		Map<Integer,PaqueteMovimiento> ubicacionNpcs = new HashMap <Integer, PaqueteMovimiento>();
+		npcs.put(i, npc);
+		ubicacionNpcs.put(i, posicion);
+		
+		juego.setNpcs(npcs);
+		juego.setUbicacionNpcs(ubicacionNpcs);
+		
+		npcs = juego.getNpcs();
+		ubicacionNpcs = juego.getUbicacionNpcs();
+		
+		Iterator <Integer> itNpcs = npcs.keySet().iterator();
+		int key;
+		PaqueteMovimiento actual;
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+		while (itNpcs.hasNext()) {
+		key = itNpcs.next();
+		actual = ubicacionNpcs.get(key);
+		Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), npcs.get(actual.getIdPersonaje()).getNombre());
+		g.drawImage(Recursos.megaCharizard.get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+		
+		}
+		
 	}
 
 	public void graficarPersonajes(Graphics g) {

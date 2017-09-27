@@ -17,6 +17,7 @@ import estados.EstadoBatalla;
 import estados.EstadoJuego;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
+import mensajeria.PaqueteNPC;
 
 public class Juego implements Runnable {
 
@@ -45,9 +46,11 @@ public class Juego implements Runnable {
 	private Cliente cliente;
 	private EscuchaMensajes escuchaMensajes;
 	private PaquetePersonaje paquetePersonaje;
-	private PaqueteMovimiento ubicacionPersonaje;
+	private PaqueteMovimiento ubicacionPersonaje,ubicacionNpc;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+	private Map<Integer, PaqueteNPC> npcs;
+	private Map<Integer, PaqueteMovimiento> ubicacionNpcs;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
 
 
@@ -219,6 +222,10 @@ public class Juego implements Runnable {
 	public PaqueteMovimiento getUbicacionPersonaje(){
 		return ubicacionPersonaje;
 	}
+	
+	public PaqueteMovimiento getUbicacionNpc(){
+		return ubicacionNpc;
+	}
 
 	public void setPersonaje(PaquetePersonaje paquetePersonaje) {
 		this.paquetePersonaje = paquetePersonaje;
@@ -231,9 +238,17 @@ public class Juego implements Runnable {
 	public Map<Integer, PaquetePersonaje> getPersonajesConectados() {
 		return personajesConectados;
 	}
+	
+	public Map<Integer, PaqueteNPC> getNpcs() {
+		return npcs;
+	}
 
 	public void setPersonajesConectados(Map<Integer, PaquetePersonaje> map) {
 		this.personajesConectados = map;
+	}
+	
+	public void setNpcs(Map<Integer, PaqueteNPC> map) {
+		this.npcs = map;
 	}
 	
 	public Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
@@ -242,6 +257,14 @@ public class Juego implements Runnable {
 
 	public void setUbicacionPersonajes(Map<Integer, PaqueteMovimiento> ubicacionPersonajes) {
 		this.ubicacionPersonajes = ubicacionPersonajes;
+	}
+	
+	public void setUbicacionNpcs(Map<Integer, PaqueteMovimiento> ubicacionNpcs) {
+		this.ubicacionNpcs = ubicacionNpcs;
+	}
+	
+	public Map<Integer, PaqueteMovimiento> getUbicacionNpcs() {
+		return ubicacionNpcs ;
 	}
 
 	public Map<String, MiChat> getChatsActivos() {

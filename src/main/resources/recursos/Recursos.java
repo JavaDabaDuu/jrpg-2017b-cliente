@@ -73,7 +73,19 @@ public class Recursos {
 	public static BufferedImage nievePiso1;
 	public static BufferedImage iceBlock;
 	// Fin Entorno
-
+	
+	private static SpriteSheet spriteMegaCharizard;
+	public static LinkedList<BufferedImage[]> megaCharizard = new LinkedList<>();
+	private static BufferedImage[] megaIzq;
+	private static BufferedImage[] megaArribaIzq;
+	private static BufferedImage[] megaArriba;
+	private static BufferedImage[] megaArribaDer;
+	private static BufferedImage[] megaDer;
+	private static BufferedImage[] megaAbajoDer;
+	private static BufferedImage[] megaAbajo;
+	private static BufferedImage[] megaAbajoIzq;
+	
+	
 	// Batalla
 	public static BufferedImage barraSpells;
 	public static BufferedImage estadoPersonaje;
@@ -99,8 +111,6 @@ public class Recursos {
 		ANCHO = 256;
 		ALTO = 256;
 		//Items
-		
-		
 		
 		noItem = ImageIO.read(new File("recursos//noItem.png"));
 		mochila = ImageIO.read(new File("recursos//mochila.png"));
@@ -178,7 +188,81 @@ public class Recursos {
 		humano.add(humanoAbajo);
 		humano.add(humanoAbajoIzq);
 		// Fin humano
+		
+		// inicio MegaCHarizard
+		
+		spriteMegaCharizard = new SpriteSheet(CargadorImagen.cargarImagen("/MegaCharizardHD.png"));
+		
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		megaIzq = new BufferedImage[4];
+		megaArribaIzq = new BufferedImage[4];
+		megaArriba = new BufferedImage[4];
+		megaArribaDer = new BufferedImage[4];
+		megaDer = new BufferedImage[4];
+		megaAbajoDer = new BufferedImage[4];
+		megaAbajo = new BufferedImage[4];
+		megaAbajoIzq = new BufferedImage[4];
 
+		for (int i = 0; i < 4; i++) {
+			megaIzq[i] = spriteMegaCharizard.getTile(ANCHO * i, 0, ANCHO, ALTO);
+		}
+		
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			megaArribaIzq[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		for (int i = 0; i < 4; i++) {
+			megaArriba[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+		}
+		
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			megaArribaDer[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
+		}
+		
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			megaDer[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		for (int i = 0; i < 4; i++) {
+			megaAbajoDer[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
+		}
+		
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			megaAbajo[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		for (int i = 0; i < 4; i++) {
+			megaAbajoIzq[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		megaCharizard.add(megaIzq);
+		megaCharizard.add(megaArribaIzq);
+		megaCharizard.add(megaArriba);
+		megaCharizard.add(megaArribaDer);
+		megaCharizard.add(megaDer);
+		megaCharizard.add(megaAbajoDer);
+		megaCharizard.add(megaAbajo);
+		megaCharizard.add(megaAbajoIzq);
+		
+		// fin megacharizard
+		
 		// Inicio Ogro
 		spriteOgro = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
 
