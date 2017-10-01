@@ -41,7 +41,8 @@ public class MenuAsignarSkills extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
-		puntosAsignarInicial = cliente.getPaquetePersonaje().getPuntosPorNivel();
+		puntosAsignarInicial = cliente.getPaquetePersonaje().getPuntosNivel();
+		//puntosAsignarInicial = 3;
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
 		puntosDestrezaInicial = cliente.getPaquetePersonaje().getDestreza();
 		puntosInteligenciaInicial = cliente.getPaquetePersonaje().getInteligencia();
@@ -138,6 +139,7 @@ public class MenuAsignarSkills extends JFrame {
 				int bonusI = puntosInteligencia-puntosInteligenciaInicial;
 				cliente.getPaquetePersonaje().useBonus(0, 0, bonusF, bonusD, bonusI);
 				cliente.getPaquetePersonaje().removerBonus();
+				cliente.getPaquetePersonaje().setPuntosNivel(Integer.valueOf(labelPuntos.getText()));
 				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
 				try {
 					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
@@ -163,6 +165,30 @@ public class MenuAsignarSkills extends JFrame {
 		});
 		buttonCancel.setBounds(176, 146, 97, 25);
 		contentPane.add(buttonCancel);
+		
+		final JButton buttonReset = new JButton("Resetear");
+		ImageIcon icono_Reset = new ImageIcon("recursos//botonConfirmar.png");
+		buttonReset.setIcon(icono_Reset);
+		buttonReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {;
+				puntosAsignarInicial = (cliente.getPaquetePersonaje().getNivel() - 1) * 3;
+				int energia = cliente.getPaquetePersonaje().getEnergiaTope();
+				int salud = cliente.getPaquetePersonaje().getSaludTope();
+				cliente.getPaquetePersonaje().setAtributos(salud, energia, 15, 10, 10);
+				cliente.getPaquetePersonaje().setPuntosNivel(puntosAsignarInicial);
+				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
+				try {
+					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(null, "Error al resetear stats");
+
+				}
+				JOptionPane.showMessageDialog(null,"Se han reseteado tus atributos.");
+				dispose();
+			}
+		});
+		buttonReset.setBounds(176, 210, 97, 25);
+		contentPane.add(buttonReset);
 		
 		final JButton buttonMinus = new JButton("");
 		final JButton buttonMinus1 = new JButton("");
