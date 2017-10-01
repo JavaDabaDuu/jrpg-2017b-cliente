@@ -239,17 +239,17 @@ public class Juego implements Runnable {
 		return personajesConectados;
 	}
 	
-	public Map<Integer, PaqueteNPC> getNpcs() {
+	/*public Map<Integer, PaqueteNPC> getNpcs() {
 		return npcs;
-	}
+	}*/
 
 	public void setPersonajesConectados(Map<Integer, PaquetePersonaje> map) {
 		this.personajesConectados = map;
 	}
 	
-	public void setNpcs(Map<Integer, PaqueteNPC> map) {
+	/*public void setNpcs(Map<Integer, PaqueteNPC> map) {
 		this.npcs = map;
-	}
+	}*/
 	
 	public Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
 		return ubicacionPersonajes;
