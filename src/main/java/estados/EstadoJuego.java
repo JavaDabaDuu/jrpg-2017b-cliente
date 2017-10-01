@@ -73,7 +73,7 @@ public class EstadoJuego extends Estado {
 	public void graficar(Graphics g) {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
-		//entidadPersonaje.graficar(g);
+		entidadPersonaje.graficar(g);
 		graficarPersonajes(g);
 		graficarNpc(g);
 		mundo.graficarObstaculos(g);
@@ -98,10 +98,10 @@ public class EstadoJuego extends Estado {
 		npcs.put(i, npc);
 		ubicacionNpcs.put(i, posicion);
 		
-		juego.setNpcs(npcs);
+		//juego.setNpcs(npcs);
 		juego.setUbicacionNpcs(ubicacionNpcs);
 		
-		npcs = juego.getNpcs();
+		//npcs = juego.getNpcs();
 		ubicacionNpcs = juego.getUbicacionNpcs();
 		
 		Iterator <Integer> itNpcs = npcs.keySet().iterator();
