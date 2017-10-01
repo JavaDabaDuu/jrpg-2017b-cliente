@@ -27,7 +27,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int nivel = 1;
 	private int experiencia;
 	private ArrayList<Item> items = new ArrayList<Item>();
-	private int puntosPorNivel = 0;
+	private int puntosPorNivel;
 	
 	public PaquetePersonaje() throws IOException {
 		estado = Estado.estadoOffline;
@@ -213,7 +213,15 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 			i++;
 		}
 	}
-
+	
+	public void setAtributos(int salud, int energia, int ataque, int defensa, int inteligencia){
+		saludTope = salud;
+		energiaTope = energia;
+		fuerza = ataque;
+		destreza = defensa;
+		this.inteligencia = inteligencia; 
+	}
+	
 	public void useBonus(int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia) {
 		saludTope += bonusSalud;
 		energiaTope += bonusEnergia;
@@ -289,6 +297,10 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		return this.puntosPorNivel;
 	}
 	
+	public void setPuntosNivel(int puntos){
+		this.puntosPorNivel = puntos;
+	}
+	
 	public void actualizarAtributosNivel(HashMap<String, Number> updates) {
 		this.saludTope += updates.get("salud").intValue();
 		this.destreza += updates.get("destreza").intValue();
@@ -297,7 +309,4 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		this.energiaTope += updates.get("energia").intValue();
 	}
 	
-	public int getPuntosPorNivel() {
-		return this.puntosPorNivel;
-	}
 }
