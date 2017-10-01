@@ -51,6 +51,9 @@ public class EstadoBatalla extends Estado {
 	private BufferedImage miniaturaEnemigo;
 
 	private MenuBatalla menuBatalla;
+	
+	private int nivelPersonaje;
+	private int nivelEnemigo;
 
 	public EstadoBatalla(Juego juego, PaqueteBatalla paqueteBatalla) {
 		super(juego);
@@ -201,7 +204,10 @@ public class EstadoBatalla extends Estado {
 		int experiencia = paquetePersonaje.getExperiencia();
 		int nivel = paquetePersonaje.getNivel();
 		int id = paquetePersonaje.getId();
-
+		
+		// Guardo el nivel con el que empieza el Personaje la batalla
+		this.nivelPersonaje = nivel;
+		
 		Casta casta = null;
 		try {
 			casta = (Casta) Class.forName("dominio" + "." + paquetePersonaje.getCasta()).newInstance();
@@ -226,7 +232,10 @@ public class EstadoBatalla extends Estado {
 		experiencia = paqueteEnemigo.getExperiencia();
 		nivel = paqueteEnemigo.getNivel();
 		id = paqueteEnemigo.getId();
-
+		
+		//Guardo el nivel con el que empezo la batalla el Enemigo
+		this.nivelEnemigo = nivel;
+		
 		casta = null;
 		if (paqueteEnemigo.getCasta().equals("Guerrero")) {
 			casta = new Guerrero();
@@ -277,7 +286,17 @@ public class EstadoBatalla extends Estado {
 			paqueteEnemigo.setFuerza(enemigo.getFuerza());
 			paqueteEnemigo.setInteligencia(enemigo.getInteligencia());
 			paqueteEnemigo.removerBonus();
-
+			
+			/**
+			 * Comparo si subierio alguno de nivel para asignarle los 3 puntos correspondientes
+			 */
+			if(paquetePersonaje.getNivel() > this.nivelPersonaje)
+				paquetePersonaje.setPuntosNivel(3);
+			else if(paqueteEnemigo.getNivel() > this.nivelEnemigo)
+					paqueteEnemigo.setPuntosNivel(3);
+			/**
+			 * fin comparacion
+			 */
 			paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
 			paqueteEnemigo.setComando(Comando.ACTUALIZARPERSONAJE);
 
