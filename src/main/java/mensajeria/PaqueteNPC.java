@@ -81,5 +81,7 @@ public class PaqueteNPC extends Paquete implements Serializable, Cloneable {
 		this.nombre = nombre;
 	}
 	
-	
+	public String getTipo() {
+		return this.nombre;
+	}
 }

@@ -93,7 +93,6 @@ public class EstadoJuego extends Estado {
 		
 		PaqueteNPC npc = new PaqueteNPC("Mega-Charizard",10,10,10,10,10);
 		PaqueteMovimiento posicion = new PaqueteMovimiento (0,400,300);
-
 		PaqueteNPC npc2 = new PaqueteNPC("Alien",10,10,10,10,10);
 		PaqueteMovimiento posicion2 = new PaqueteMovimiento(1,450,350);
 
@@ -102,7 +101,6 @@ public class EstadoJuego extends Estado {
 		
 		npcs.put(i, npc);
 		ubicacionNpcs.put(i, posicion);
-	
 		npcs.put(i+1, npc2);
 		ubicacionNpcs.put(i+1, posicion2);
 		
@@ -121,12 +119,10 @@ public class EstadoJuego extends Estado {
 			key = itNpcs.next();
 			actual = ubicacionNpcs.get(key);
 			Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), npcs.get(actual.getIdPersonaje()).getNombre());
-			g.drawImage(Recursos.megaCharizard.get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
-			g.drawImage(Recursos.alien.get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
-			//g.drawImage(Recursos.npcsMap.get(npcs.get(actual.getIdPersonaje())).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+			g.drawImage(Recursos.npcsMap.get(npcs.get(actual.getIdPersonaje()).getTipo()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 		}
-		
-		// 
+		//g.drawImage(Recursos.megaCharizard.get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+		//g.drawImage(Recursos.alien.get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 		
 	}
 
