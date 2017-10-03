@@ -49,7 +49,8 @@ public class EstadoJuego extends Estado {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
 		paquetePersonaje = juego.getPersonaje();
-		entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje.get(juego.getPersonaje().getRaza()), 150);
+		entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0,
+				Recursos.personaje.get(juego.getPersonaje().getRaza()), 150);
 		miniaturaPersonaje = Recursos.personaje.get(paquetePersonaje.getRaza()).get(5)[0];
 
 		try {
@@ -57,7 +58,8 @@ public class EstadoJuego extends Estado {
 			juego.getPersonaje().setComando(Comando.CONEXION);
 			juego.getPersonaje().setEstado(Estado.estadoJuego);
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
-			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
+			juego.getCliente().getSalida()
+					.writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor al ingresar al mundo");
 		}
@@ -83,34 +85,74 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.mochila, 738, 545, 59, 52, null);
 		g.drawImage(Recursos.menu, 3, 562, 102, 35, null);
 		g.drawImage(Recursos.chat, 3, 524, 102, 35, null);
-		if(haySolicitud)
+		if (haySolicitud)
 			menuEnemigo.graficar(g, tipoSolicitud);
 
 	}
 
 	private void graficarNpc(Graphics g) {
 		Integer i = 0;
-		
-		PaqueteNPC npc = new PaqueteNPC("Mega-Charizard",10,10,10,10,10);
-		PaqueteMovimiento posicion = new PaqueteMovimiento (0,400,300);
-		PaqueteNPC npc2 = new PaqueteNPC("Alien",10,10,10,10,10);
-		PaqueteMovimiento posicion2 = new PaqueteMovimiento(1,450,350);
 
-		Map<Integer, PaqueteNPC> npcs = new HashMap <Integer, PaqueteNPC>();
-		Map<Integer,PaqueteMovimiento> ubicacionNpcs = new HashMap <Integer, PaqueteMovimiento>();
-		
-		npcs.put(i, npc);
-		ubicacionNpcs.put(i, posicion);
-		npcs.put(i+1, npc2);
-		ubicacionNpcs.put(i+1, posicion2);
-		
-		//juego.setNpcs(npcs);
+		PaqueteNPC minotauro0 = new PaqueteNPC(0, "Minotauro0", "Minotauro", 5, -1, 97, 559);
+		PaqueteMovimiento posicion0 = new PaqueteMovimiento(0, minotauro0.getPosX(), minotauro0.getPosY()); //
+		PaqueteNPC minotauro1 = new PaqueteNPC(1, "Minotauro1", "Minotauro", 6, -1, -609, 1359);
+		PaqueteMovimiento posicion1 = new PaqueteMovimiento(1, minotauro1.getPosX(), minotauro1.getPosY()); //
+		PaqueteNPC minotauro2 = new PaqueteNPC(2, "Minotauro2", "Minotauro", 4, -1, -1055, 1631);
+		PaqueteMovimiento posicion2 = new PaqueteMovimiento(2, minotauro2.getPosX(), minotauro2.getPosY()); //
+		PaqueteNPC minotauro3 = new PaqueteNPC(3, "Minotauro3", "Minotauro", 7, -1, -1311, 1391);
+		PaqueteMovimiento posicion3 = new PaqueteMovimiento(3, minotauro3.getPosX(), minotauro3.getPosY());
+		PaqueteNPC minotauro4 = new PaqueteNPC(4, "Minotauro4", "Minotauro", 4, -1, -1601, 832);
+		PaqueteMovimiento posicion4 = new PaqueteMovimiento(4, minotauro4.getPosX(), minotauro4.getPosY());
+		PaqueteNPC minotauro5 = new PaqueteNPC(5, "Minotauro5", "Minotauro", 5, -1, -2079, 1167);
+		PaqueteMovimiento posicion5 = new PaqueteMovimiento(5, minotauro5.getPosX(), minotauro5.getPosY());
+		PaqueteNPC minotauro6 = new PaqueteNPC(6, "Minotauro6", "Minotauro", 4, -1, 1, 1791);
+		PaqueteMovimiento posicion6 = new PaqueteMovimiento(6, minotauro6.getPosX(), minotauro6.getPosY());
+		PaqueteNPC minotauro7 = new PaqueteNPC(7, "Minotauro7", "Minotauro", 6, -1, 800, 1041);
+		PaqueteMovimiento posicion7 = new PaqueteMovimiento(7, minotauro7.getPosX(), minotauro7.getPosY());
+		PaqueteNPC minotauro8 = new PaqueteNPC(8, "Minotauro8", "Minotauro", 5, -1, -545, 719);
+		PaqueteMovimiento posicion8 = new PaqueteMovimiento(8, minotauro8.getPosX(), minotauro8.getPosY());
+		PaqueteNPC minotauro9 = new PaqueteNPC(9, "Minotauro9", "Minotauro", 8, -1, -959, 1343); // POWER
+																									// OVERWHELMING
+		PaqueteMovimiento posicion9 = new PaqueteMovimiento(9, minotauro9.getPosX(), minotauro9.getPosY());
+
+		PaqueteNPC minotauroTest = new PaqueteNPC(10, "MinotauroTest", "Minotauro", 2, -1, 400, 300);
+		PaqueteMovimiento posicionTest = new PaqueteMovimiento(10, minotauroTest.getPosX(), minotauroTest.getPosY());
+
+		Map<Integer, PaqueteNPC> npcs = new HashMap<Integer, PaqueteNPC>();
+		Map<Integer, PaqueteMovimiento> ubicacionNpcs = new HashMap<Integer, PaqueteMovimiento>();
+
+		npcs.put(i, minotauro0);
+		ubicacionNpcs.put(i, posicion0);
+		npcs.put(++i, minotauro1);
+		ubicacionNpcs.put(i, posicion1);
+		npcs.put(++i, minotauro2);
+		ubicacionNpcs.put(i, posicion2);
+		npcs.put(++i, minotauro3);
+		ubicacionNpcs.put(i, posicion3);
+		npcs.put(++i, minotauro4);
+		ubicacionNpcs.put(i, posicion4);
+		npcs.put(++i, minotauro5);
+		ubicacionNpcs.put(i, posicion5);
+		npcs.put(++i, minotauro6);
+		ubicacionNpcs.put(i, posicion6);
+		npcs.put(++i, minotauro7);
+		ubicacionNpcs.put(i, posicion7);
+		npcs.put(++i, minotauro8);
+		ubicacionNpcs.put(i, posicion8);
+		npcs.put(++i, minotauro9);
+		ubicacionNpcs.put(i, posicion9);
+
+		// A este hay que sacarlo despues, es para probar las batallas
+		npcs.put(++i, minotauroTest);
+		ubicacionNpcs.put(i, posicionTest);
+
+		// juego.setNpcs(npcs);
 		juego.setUbicacionNpcs(ubicacionNpcs);
-		
-		//npcs = juego.getNpcs();
+
+		// npcs = juego.getNpcs();
 		ubicacionNpcs = juego.getUbicacionNpcs();
-		
-		Iterator <Integer> itNpcs = npcs.keySet().iterator();
+
+		Iterator<Integer> itNpcs = npcs.keySet().iterator();
 		int key;
 		PaqueteMovimiento actual;
 		g.setColor(Color.WHITE);
@@ -118,17 +160,28 @@ public class EstadoJuego extends Estado {
 		while (itNpcs.hasNext()) {
 			key = itNpcs.next();
 			actual = ubicacionNpcs.get(key);
-			Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), npcs.get(actual.getIdPersonaje()).getNombre());
-			g.drawImage(Recursos.npcsMap.get(npcs.get(actual.getIdPersonaje()).getTipo()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+			Pantalla.centerString(g,
+					new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
+							(int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10),
+					npcs.get(actual.getIdPersonaje()).getNombre());
+			g.drawImage(
+					Recursos.npcsMap.get(npcs.get(actual.getIdPersonaje()).getTipo()).get(actual.getDireccion())[actual
+							.getFrame()],
+					(int) (actual.getPosX() - juego.getCamara().getxOffset()),
+					(int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 		}
-		//g.drawImage(Recursos.megaCharizard.get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
-		//g.drawImage(Recursos.alien.get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
-		
+		// g.drawImage(Recursos.megaCharizard.get(actual.getDireccion())[actual.getFrame()],
+		// (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int)
+		// (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+		// g.drawImage(Recursos.alien.get(actual.getDireccion())[actual.getFrame()],
+		// (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int)
+		// (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+
 	}
 
 	public void graficarPersonajes(Graphics g) {
 
-		if(juego.getPersonajesConectados() != null){
+		if (juego.getPersonajesConectados() != null) {
 			personajesConectados = new HashMap(juego.getPersonajesConectados());
 			ubicacionPersonajes = new HashMap(juego.getUbicacionPersonajes());
 			Iterator<Integer> it = personajesConectados.keySet().iterator();
@@ -139,9 +192,18 @@ public class EstadoJuego extends Estado {
 			while (it.hasNext()) {
 				key = it.next();
 				actual = ubicacionPersonajes.get(key);
-				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
-						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
-						g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
+						&& personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+
+					Pantalla.centerString(g,
+							new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
+									(int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10),
+							personajesConectados.get(actual.getIdPersonaje()).getNombre());
+					g.drawImage(
+							Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza())
+									.get(actual.getDireccion())[actual.getFrame()],
+							(int) (actual.getPosX() - juego.getCamara().getxOffset()),
+							(int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 				}
 			}
 		}
@@ -180,14 +242,14 @@ public class EstadoJuego extends Estado {
 		paquetePersonaje = juego.getPersonaje();
 	}
 
-	public MenuInfoPersonaje getMenuEnemigo(){
+	public MenuInfoPersonaje getMenuEnemigo() {
 		return menuEnemigo;
 	}
 
 	public int getTipoSolicitud() {
 		return tipoSolicitud;
 	}
-	
+
 	@Override
 	public boolean esEstadoDeJuego() {
 		return true;

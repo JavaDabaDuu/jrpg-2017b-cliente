@@ -6,11 +6,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Scanner;
-
 import javax.imageio.ImageIO;
 
-import dominio.Item;
 import frames.MenuCarga;
 import frames.MenuMapas;
 import mundo.Tile;
@@ -39,7 +36,7 @@ public class Recursos {
 	private static BufferedImage[] humanoAbajo;
 	private static BufferedImage[] humanoAbajoIzq;
 
-	private static SpriteSheet spriteOgro;
+	private static SpriteSheet spriteOrco;
 	public static LinkedList<BufferedImage[]> orco = new LinkedList<>();
 	private static BufferedImage[] orcoIzq;
 	private static BufferedImage[] orcoArribaIzq;
@@ -75,29 +72,18 @@ public class Recursos {
 	public static BufferedImage iceBlock;
 	// Fin Entorno
 
-	// Inicio NPCs
-	private static SpriteSheet spriteMegaCharizard;
-	public static LinkedList<BufferedImage[]> megaCharizard = new LinkedList<>();
-	private static BufferedImage[] megaIzq;
-	private static BufferedImage[] megaArribaIzq;
-	private static BufferedImage[] megaArriba;
-	private static BufferedImage[] megaArribaDer;
-	private static BufferedImage[] megaDer;
-	private static BufferedImage[] megaAbajoDer;
-	private static BufferedImage[] megaAbajo;
-	private static BufferedImage[] megaAbajoIzq;
-
-	private static SpriteSheet spriteAlien;
-	public static LinkedList<BufferedImage[]> alien = new LinkedList<>();
-	private static BufferedImage[] alienIzq;
-	private static BufferedImage[] alienArribaIzq;
-	private static BufferedImage[] alienArriba;
-	private static BufferedImage[] alienArribaDer;
-	private static BufferedImage[] alienDer;
-	private static BufferedImage[] alienAbajoDer;
-	private static BufferedImage[] alienAbajo;
-	private static BufferedImage[] alienAbajoIzq;
-	// Fin NPCs
+	// Inicio NPCs minotauro
+	private static SpriteSheet spriteMinotauro;
+	public static LinkedList<BufferedImage[]> minotauro = new LinkedList<>();
+	private static BufferedImage[] minotauroIzq;
+	private static BufferedImage[] minotauroArribaIzq;
+	private static BufferedImage[] minotauroArriba;
+	private static BufferedImage[] minotauroArribaDer;
+	private static BufferedImage[] minotauroDer;
+	private static BufferedImage[] minotauroAbajoDer;
+	private static BufferedImage[] minotauroAbajo;
+	private static BufferedImage[] minotauroAbajoIzq;
+	// Fin NPCs minotauro
 
 	// Batalla
 	public static BufferedImage barraSpells;
@@ -115,7 +101,6 @@ public class Recursos {
 	// Fin Batalla
 
 	// Se cargan todos los recursos del juego una sola vez al inicio
-
 	public static void cargar(MenuCarga menuCarga) throws NumberFormatException, IOException {
 
 		int elementosCargados = 0;
@@ -201,8 +186,8 @@ public class Recursos {
 		humano.add(humanoAbajoIzq);
 		// Fin humano
 
-		// Inicio Ogro
-		spriteOgro = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
+		// Inicio Orco
+		spriteOrco = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
@@ -216,49 +201,49 @@ public class Recursos {
 		orcoAbajoIzq = new BufferedImage[4];
 
 		for (int i = 0; i < 4; i++) {
-			orcoIzq[i] = spriteOgro.getTile(ANCHO * i, 0, ANCHO, ALTO);
+			orcoIzq[i] = spriteOrco.getTile(ANCHO * i, 0, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			orcoArribaIzq[i] = spriteOgro.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+			orcoArribaIzq[i] = spriteOrco.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			orcoArriba[i] = spriteOgro.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+			orcoArriba[i] = spriteOrco.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			orcoArribaDer[i] = spriteOgro.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
+			orcoArribaDer[i] = spriteOrco.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			orcoDer[i] = spriteOgro.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
+			orcoDer[i] = spriteOrco.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			orcoAbajoDer[i] = spriteOgro.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
+			orcoAbajoDer[i] = spriteOrco.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			orcoAbajo[i] = spriteOgro.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
+			orcoAbajo[i] = spriteOrco.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			orcoAbajoIzq[i] = spriteOgro.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
+			orcoAbajoIzq[i] = spriteOrco.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
@@ -272,7 +257,7 @@ public class Recursos {
 		orco.add(orcoAbajo);
 		orco.add(orcoAbajoIzq);
 
-		// Fin Ogro
+		// Fin Orco
 
 		// Inicio Elfo
 		spriteElfo = new SpriteSheet(CargadorImagen.cargarImagen("/elfo2.png"));
@@ -352,157 +337,83 @@ public class Recursos {
 		personaje.put("Orco", orco);
 		personaje.put("Elfo", elfo);
 
-		// inicio MegaCHarizard
+		// inicio Minotauro
 
-		spriteMegaCharizard = new SpriteSheet(CargadorImagen.cargarImagen("/MegaCharizardHD.png"));
+		spriteMinotauro = new SpriteSheet(CargadorImagen.cargarImagen("/minotauro.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-		megaIzq = new BufferedImage[4];
-		megaArribaIzq = new BufferedImage[4];
-		megaArriba = new BufferedImage[4];
-		megaArribaDer = new BufferedImage[4];
-		megaDer = new BufferedImage[4];
-		megaAbajoDer = new BufferedImage[4];
-		megaAbajo = new BufferedImage[4];
-		megaAbajoIzq = new BufferedImage[4];
+		minotauroIzq = new BufferedImage[4];
+		minotauroArribaIzq = new BufferedImage[4];
+		minotauroArriba = new BufferedImage[4];
+		minotauroArribaDer = new BufferedImage[4];
+		minotauroDer = new BufferedImage[4];
+		minotauroAbajoDer = new BufferedImage[4];
+		minotauroAbajo = new BufferedImage[4];
+		minotauroAbajoIzq = new BufferedImage[4];
 
 		for (int i = 0; i < 4; i++) {
-			megaIzq[i] = spriteMegaCharizard.getTile(ANCHO * i, 0, ANCHO, ALTO);
+			minotauroIzq[i] = spriteMinotauro.getTile(ANCHO * i, 0, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			megaArribaIzq[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+			minotauroArribaIzq[i] = spriteMinotauro.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			megaArriba[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+			minotauroArriba[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			megaArribaDer[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
+			minotauroArribaDer[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			megaDer[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
+			minotauroDer[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			megaAbajoDer[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
+			minotauroAbajoDer[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			megaAbajo[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
+			minotauroAbajo[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			megaAbajoIzq[i] = spriteMegaCharizard.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
+			minotauroAbajoIzq[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-		megaCharizard.add(megaIzq);
-		megaCharizard.add(megaArribaIzq);
-		megaCharizard.add(megaArriba);
-		megaCharizard.add(megaArribaDer);
-		megaCharizard.add(megaDer);
-		megaCharizard.add(megaAbajoDer);
-		megaCharizard.add(megaAbajo);
-		megaCharizard.add(megaAbajoIzq);
+		minotauro.add(minotauroIzq);
+		minotauro.add(minotauroArribaIzq);
+		minotauro.add(minotauroArriba);
+		minotauro.add(minotauroArribaDer);
+		minotauro.add(minotauroDer);
+		minotauro.add(minotauroAbajoDer);
+		minotauro.add(minotauroAbajo);
+		minotauro.add(minotauroAbajoIzq);
 
-		// fin megacharizard
-
-		// Inicio Alien
-		spriteAlien = new SpriteSheet(CargadorImagen.cargarImagen("/Elfo.png"));
-
-		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-
-		alienIzq = new BufferedImage[4];
-		alienArribaIzq = new BufferedImage[4];
-		alienArriba = new BufferedImage[4];
-		alienArribaDer = new BufferedImage[4];
-		alienDer = new BufferedImage[4];
-		alienAbajoDer = new BufferedImage[4];
-		alienAbajo = new BufferedImage[4];
-		alienAbajoIzq = new BufferedImage[4];
-
-		for (int i = 0; i < 4; i++) {
-			alienIzq[i] = spriteAlien.getTile(ANCHO * i, 0, ANCHO, ALTO);
-		}
-
-		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-
-		for (int i = 0; i < 4; i++) {
-			alienArribaIzq[i] = spriteAlien.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
-		}
-
-		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-
-		for (int i = 0; i < 4; i++) {
-			alienArriba[i] = spriteAlien.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
-		}
-
-		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-
-		for (int i = 0; i < 4; i++) {
-			alienArribaDer[i] = spriteAlien.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
-		}
-
-		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-
-		for (int i = 0; i < 4; i++) {
-			alienDer[i] = spriteAlien.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
-		}
-
-		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-
-		for (int i = 0; i < 4; i++) {
-			alienAbajoDer[i] = spriteAlien.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
-		}
-
-		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-
-		for (int i = 0; i < 4; i++) {
-			alienAbajo[i] = spriteAlien.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
-		}
-
-		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-
-		for (int i = 0; i < 4; i++) {
-			alienAbajoIzq[i] = spriteAlien.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
-		}
-
-		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-
-		alien.add(alienIzq);
-		alien.add(alienArribaIzq);
-		alien.add(alienArriba);
-		alien.add(alienArribaDer);
-		alien.add(alienDer);
-		alien.add(alienAbajoDer);
-		alien.add(alienAbajo);
-		alien.add(alienAbajoIzq);
-
-		// Fin Alien
+		// fin minotauro
 
 		// Agrego los npcs al hash
-		npcsMap.put("Mega-Charizard", megaCharizard);
-		npcsMap.put("Alien", alien);
-		
+		npcsMap.put("Minotauro", minotauro);
+
 		// Inicio Entorno
 		cesped = CargadorImagen.cargarImagen("/Cesped.png");
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
