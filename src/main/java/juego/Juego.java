@@ -302,8 +302,8 @@ public class Juego implements Runnable {
 		return npcs;
 	}
 
-	public void setNpcs(Map<Integer, PaqueteNPC> npcs) {
-		this.npcs = npcs;
+	public void setNpcs(HashMap<Integer,PaqueteNPC> hashMap) {
+		this.npcs = hashMap;
 	}
 	
 	public void actualizarPaqueteNpc() {

@@ -12,6 +12,10 @@ public class PaqueteNPC extends Paquete implements Serializable, Cloneable {
 
 	private int posX;
 	private int posY;
+	
+	public PaqueteNPC() {
+		
+	}
 
 	public PaqueteNPC(int id, String nombre, String tipo, int nivel, int dificultad, int posX, int posY) {
 		this.npc = new NonPlayableCharacter(nombre, nivel, dificultad);
