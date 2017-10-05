@@ -53,8 +53,16 @@ public class Juego implements Runnable {
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaqueteNPC> npcs;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
-
+	private PaqueteNPC paqueteNpc;
 	private CargarRecursos cargarRecursos;
+
+	public PaqueteNPC getPaqueteNpc() {
+		return paqueteNpc;
+	}
+
+	public void setPaqueteNpc(PaqueteNPC paqueteNpc) {
+		this.paqueteNpc = paqueteNpc;
+	}
 
 	public Juego(final String nombre, final int ancho, final int alto, Cliente cliente, PaquetePersonaje pp) {
 		this.NOMBRE = nombre;
@@ -296,6 +304,10 @@ public class Juego implements Runnable {
 
 	public void setNpcs(Map<Integer, PaqueteNPC> npcs) {
 		this.npcs = npcs;
+	}
+	
+	public void actualizarPaqueteNpc() {
+		paqueteNpc = (PaqueteNPC) (npcs.get(paqueteNpc.getId()).clone());
 	}
 	
 	

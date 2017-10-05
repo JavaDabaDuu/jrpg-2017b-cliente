@@ -282,5 +282,8 @@ public class EstadoJuego extends Estado {
 		   }
 		  }
 		 }
-
+	
+	 public void actualizarNpc() {
+	  paqueteNPC = juego.getPaqueteNpc();
+	 }
 }
