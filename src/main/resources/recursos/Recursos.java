@@ -187,7 +187,7 @@ public class Recursos {
 		// Fin humano
 
 		// Inicio Orco
-		spriteOrco = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
+		spriteOrco = new SpriteSheet(CargadorImagen.cargarImagen("/Orco.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 

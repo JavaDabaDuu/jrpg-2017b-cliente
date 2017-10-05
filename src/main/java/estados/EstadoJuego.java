@@ -77,7 +77,7 @@ public class EstadoJuego extends Estado {
 		mundo.graficar(g);
 		entidadPersonaje.graficar(g);
 		graficarPersonajes(g);
-		graficarNpc(g);
+		graficarNPC(g);
 		mundo.graficarObstaculos(g);
 		entidadPersonaje.graficarNombre(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
@@ -147,10 +147,10 @@ public class EstadoJuego extends Estado {
 		ubicacionNpcs.put(i, posicionTest);
 
 		// juego.setNpcs(npcs);
-		juego.setUbicacionNpcs(ubicacionNpcs);
+		//juego.setUbicacionNpcs(ubicacionNpcs);
 
 		// npcs = juego.getNpcs();
-		ubicacionNpcs = juego.getUbicacionNpcs();
+		//ubicacionNpcs = juego.getUbicacionNpcs();
 
 		Iterator<Integer> itNpcs = npcs.keySet().iterator();
 		int key;
@@ -254,5 +254,33 @@ public class EstadoJuego extends Estado {
 	public boolean esEstadoDeJuego() {
 		return true;
 	}
+	
+	private void graficarNPC(Graphics g) {
+		  int i=0;
+		  if (juego.getNpcs() != null) {
+		   npcs = new HashMap<Integer, PaqueteNPC>();
+		   npcs = juego.getNpcs();
+		  
+		   Iterator<Integer> itNpcs = npcs.keySet().iterator();
+		   int key;
+		   PaqueteMovimiento actual;
+		   g.setColor(Color.WHITE);
+		   g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+		   
+		   while (itNpcs.hasNext()) {
+		    key = itNpcs.next();
+		    actual = ubicacionNpcs.get(key);
+		    Pantalla.centerString(g,
+		      new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
+		        (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10),
+		      npcs.get(actual.getIdPersonaje()).getNombre());
+		    g.drawImage(
+		      Recursos.npcsMap.get(npcs.get(actual.getIdPersonaje()).getTipo()).get(actual.getDireccion())[actual
+		        .getFrame()],
+		      (int) (actual.getPosX() - juego.getCamara().getxOffset()),
+		      (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+		   }
+		  }
+		 }
 
 }
