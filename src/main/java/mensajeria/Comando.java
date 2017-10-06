@@ -6,9 +6,9 @@ public abstract class Comando {
 	// Nombre del paquete donde se encuentran las clases con las responsabilidades
 	public static final String NOMBREPAQUETE = "comandos";
 	public static final String[] CLASSNAMES = { "Conexion", "CrearPersonaje", "Desconectar", "InicioSesion", "MostrarMapas",
-			"Movimiento", "Registro", "Salir", "Batalla", "Atacar", "FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk", "ActualizarPtsLvl", "ActualizarNPC"};
+			"Movimiento", "Registro", "Salir", "Batalla", "Atacar", "FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk", "ActualizarPtsLvl", "ActualizarNPC", "SetearNPC"};
 	public static final String[] CLASSNAMESBIS = { "Conexion", "CrearPersonaje", "Desconectar", "InicioSesionSet", "MostrarMapas",
-			"Movimiento", "RegistroSet", "SalirSet", "Batalla", "Atacar", "FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk", "ActualizarPtsLvl","ActualizarNPC" };
+			"Movimiento", "RegistroSet", "SalirSet", "Batalla", "Atacar", "FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk", "ActualizarPtsLvl","ActualizarNPC", "SetearNPC" };
 	
 	public static final int CONEXION = 0;
 	public static final int CREACIONPJ = 1;
@@ -31,6 +31,7 @@ public abstract class Comando {
 	public static final int TALK = 18;
 	public static final int ACTUALIZARPTOSLVL = 19;
 	public static final int ACTUALIZARNPC = 20;
+	public static final int SETEARNPCS = 21;
 	
 	protected final Gson gson = new Gson();
 	protected String cadenaLeida;

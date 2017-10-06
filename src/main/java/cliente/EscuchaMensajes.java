@@ -1,6 +1,7 @@
 package cliente;
 
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -25,8 +26,6 @@ public class EscuchaMensajes extends Thread {
 	private ObjectInputStream entrada;
 	private final Gson gson = new Gson();
 
-	//private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
-	//private Map<Integer, PaquetePersonaje> personajesConectados;
 	/**Constructor de EsuchaMensaje
 	 * @param juego juego del que se escucha el mensaje
 	 */
@@ -46,7 +45,7 @@ public class EscuchaMensajes extends Thread {
 			ComandosEscucha comand;
 			juego.setPersonajesConectados(new HashMap<Integer, PaquetePersonaje>());
 			juego.setUbicacionPersonajes(new HashMap<Integer, PaqueteMovimiento>());
-			juego.setNpcs(new HashMap<Integer, PaqueteNPC>());
+			juego.setNpcs(new ArrayList<PaqueteNPC>());
 
 			while (true) {
 

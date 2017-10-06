@@ -9,13 +9,12 @@ public class ActualizarNPC extends ComandosEscucha{
 	  PaqueteNPC paqueteNpc = (PaqueteNPC) gson.fromJson(cadenaLeida, PaqueteNPC.class);
 
 	  juego.getNpcs().remove(paqueteNpc.getId());
-	  juego.getNpcs().put(paqueteNpc.getId(), paqueteNpc);
+	  juego.getNpcs().add(paqueteNpc);
 	  
 	  if (juego.getPaqueteNpc().getId() == paqueteNpc.getId()) {
 	   juego.actualizarPaqueteNpc();
 	   juego.getEstadoJuego().actualizarNpc();
 	   juego.getCliente().actualizarNPC(juego.getNpcs().get(paqueteNpc.getId()));
-
 	  
 	 }
 	}	
