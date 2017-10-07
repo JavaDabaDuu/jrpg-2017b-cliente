@@ -291,9 +291,9 @@ public class EstadoBatalla extends Estado {
 			 * Comparo si subierio alguno de nivel para asignarle los 3 puntos correspondientes
 			 */
 			if(paquetePersonaje.getNivel() > this.nivelPersonaje)
-				paquetePersonaje.setPuntosNivel(3);
+				paquetePersonaje.actualizarPuntosPorNivel();
 			else if(paqueteEnemigo.getNivel() > this.nivelEnemigo)
-					paqueteEnemigo.setPuntosNivel(3);
+					paqueteEnemigo.actualizarPuntosPorNivel();
 			/**
 			 * fin comparacion
 			 */

@@ -167,7 +167,7 @@ public class MenuAsignarSkills extends JFrame {
 		contentPane.add(buttonCancel);
 		
 		final JButton buttonReset = new JButton("Resetear");
-		ImageIcon icono_Reset = new ImageIcon("recursos//botonConfirmar.png");
+		ImageIcon icono_Reset = new ImageIcon("recursos//botonResetear.png");
 		buttonReset.setIcon(icono_Reset);
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {;
