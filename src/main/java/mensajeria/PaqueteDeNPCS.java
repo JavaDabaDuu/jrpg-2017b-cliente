@@ -1,6 +1,7 @@
 package mensajeria;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashMap;
+
 import mensajeria.Paquete;
 import mensajeria.PaqueteNPC;
 
@@ -9,17 +10,17 @@ public class PaqueteDeNPCS extends Paquete implements Serializable, Cloneable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ArrayList<PaqueteNPC> npcs;
+	private HashMap<Integer, PaqueteNPC> npcs;
 	
 	public PaqueteDeNPCS(){
 
 	}
 
-	public PaqueteDeNPCS(ArrayList<PaqueteNPC> npcs){
+	public PaqueteDeNPCS(HashMap<Integer, PaqueteNPC>npcs){
 		this.npcs = npcs;
 	}
 
-	public ArrayList<PaqueteNPC> getNpcs(){
+	public HashMap<Integer, PaqueteNPC> getNpcs(){
 		return npcs;
 	}
 

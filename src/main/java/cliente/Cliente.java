@@ -69,9 +69,6 @@ public class Cliente extends Thread {
 	/**Constructor del Cliente
 	 */
 	public Cliente() {
-
-
-		
 		ip = JOptionPane.showInputDialog("Ingrese IP del servidor: (default localhost)");
 		if(ip == null) {
 			ip = "localhost";

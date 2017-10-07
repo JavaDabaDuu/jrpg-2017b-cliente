@@ -45,7 +45,7 @@ public class EscuchaMensajes extends Thread {
 			ComandosEscucha comand;
 			juego.setPersonajesConectados(new HashMap<Integer, PaquetePersonaje>());
 			juego.setUbicacionPersonajes(new HashMap<Integer, PaqueteMovimiento>());
-			juego.setNpcs(new ArrayList<PaqueteNPC>());
+			juego.setNpcs(new HashMap<Integer,PaqueteNPC>());
 
 			while (true) {
 
@@ -55,6 +55,9 @@ public class EscuchaMensajes extends Thread {
 				comand = (ComandosEscucha) paquete.getObjeto(Comando.NOMBREPAQUETE);
 				comand.setJuego(juego);
 				comand.setCadena(objetoLeido);
+				
+				System.out.println(comand.getClass());
+				
 				comand.ejecutar();
 				
 			}

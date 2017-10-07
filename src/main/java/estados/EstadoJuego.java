@@ -37,7 +37,7 @@ public class EstadoJuego extends Estado {
 	private Mundo mundo;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
-	private ArrayList<PaqueteNPC> npcs;
+	private HashMap<Integer, PaqueteNPC> npcs;
 	private Map<Integer, PaqueteMovimiento> ubicacionNpcs;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
@@ -171,23 +171,26 @@ public class EstadoJuego extends Estado {
 
 	private void graficarNPC(Graphics g) {
 		if (juego.getNpcs() != null) {
-			npcs = new ArrayList<PaqueteNPC>();
+			npcs = new HashMap<Integer, PaqueteNPC>();
 			npcs = juego.getNpcs();
 
 			BufferedImage imagen;
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
-
-			for (PaqueteNPC npc : npcs) {
-				Pantalla.centerString(g, new Rectangle((int) (npc.getPosX() - juego.getCamara().getxOffset() + 32),
-						(int) (npc.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), npc.getNombre());
+			
+			Iterator<Integer> it = personajesConectados.keySet().iterator();
+			int key;
+			while (it.hasNext()) {
+				key = it.next();
+				
+				Pantalla.centerString(g, new Rectangle((int) (npcs.get(key).getPosX() - juego.getCamara().getxOffset() + 32),
+						(int) (npcs.get(key).getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), npcs.get(key).getNombre());
 				try {
 					imagen = ImageIO.read(getClass().getResourceAsStream("/minotauro.png"));
-					g.drawImage(imagen, npc.getPosX(), npc.getPosY(), 64, 64, null);
+					g.drawImage(imagen, npcs.get(key).getPosX(), npcs.get(key).getPosY(), 64, 64, null);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
 			}
 		}
 	}
