@@ -16,6 +16,7 @@ import dominio.Personaje;
 import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoJuego;
+import mensajeria.PaqueteDeNPCS;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 import mensajeria.PaqueteNPC;
@@ -55,6 +56,7 @@ public class Juego implements Runnable {
 	private HashMap<Integer, PaqueteNPC> npcs;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
 	private PaqueteNPC paqueteNpc;
+	private PaqueteDeNPCS paqueteDeNPCS;
 	private CargarRecursos cargarRecursos;
 
 	public PaqueteNPC getPaqueteNpc() {
@@ -71,6 +73,7 @@ public class Juego implements Runnable {
 		this.ANCHO = ancho;
 		this.cliente = cliente;
 		this.paquetePersonaje = pp;
+		this.paqueteDeNPCS = new PaqueteDeNPCS();
 
 		// Inicializo la ubicacion del personaje
 		ubicacionPersonaje = new PaqueteMovimiento();
@@ -293,6 +296,14 @@ public class Juego implements Runnable {
 
 	public void setNpcs(HashMap<Integer, PaqueteNPC> npcs2) {
 		this.npcs = npcs2;
+	}
+
+	public PaqueteDeNPCS getPaqueteDeNPCS() {
+		return paqueteDeNPCS;
+	}
+
+	public void setPaqueteDeNPCS(PaqueteDeNPCS paqueteDeNPCS) {
+		this.paqueteDeNPCS = paqueteDeNPCS;
 	}
 	
 	

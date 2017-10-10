@@ -12,8 +12,9 @@ public class PaqueteDeNPCS extends Paquete implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 	private HashMap<Integer, PaqueteNPC> npcs;
 	
+	
 	public PaqueteDeNPCS(){
-
+		npcs = new HashMap<Integer, PaqueteNPC>();
 	}
 
 	public PaqueteDeNPCS(HashMap<Integer, PaqueteNPC>npcs){

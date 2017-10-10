@@ -23,6 +23,7 @@ import interfaz.MenuInfoPersonaje;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
+import mensajeria.PaqueteDeNPCS;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
@@ -61,8 +62,11 @@ public class EstadoJuego extends Estado {
 			juego.getPersonaje().setComando(Comando.CONEXION);
 			juego.getPersonaje().setEstado(Estado.estadoJuego);
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
-			juego.getCliente().getSalida()
-					.writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
+			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
+			
+			juego.getPaqueteDeNPCS().setComando(Comando.SETEARNPC);
+			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPaqueteDeNPCS(), PaqueteDeNPCS.class));
+			
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor al ingresar al mundo");
 		}
@@ -178,13 +182,11 @@ public class EstadoJuego extends Estado {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
 			
-			Iterator<Integer> it = personajesConectados.keySet().iterator();
+			Iterator<Integer> it = npcs.keySet().iterator();
 			int key;
 			while (it.hasNext()) {
 				key = it.next();
 				
-				Pantalla.centerString(g, new Rectangle((int) (npcs.get(key).getPosX() - juego.getCamara().getxOffset() + 32),
-						(int) (npcs.get(key).getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), npcs.get(key).getNombre());
 				try {
 					imagen = ImageIO.read(getClass().getResourceAsStream("/minotauro.png"));
 					g.drawImage(imagen, npcs.get(key).getPosX(), npcs.get(key).getPosY(), 64, 64, null);

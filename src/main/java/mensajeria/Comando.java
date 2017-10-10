@@ -31,7 +31,7 @@ public abstract class Comando {
 	public static final int TALK = 18;
 	public static final int ACTUALIZARPTOSLVL = 19;
 	public static final int ACTUALIZARNPC = 20;
-	public static final int SETEARNPCS = 21;
+	public static final int SETEARNPC = 21;
 	
 	protected final Gson gson = new Gson();
 	protected String cadenaLeida;
