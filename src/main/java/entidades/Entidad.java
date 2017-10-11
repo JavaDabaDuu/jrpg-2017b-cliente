@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -54,26 +55,19 @@ public class Entidad {
 	private int[] tile;
 
 	// Movimiento Actual
-	private static final int horizontalDer = 4;
 	private static final int horizontalIzq = 0;
+	private static final int diagonalSupIzq = 1;
 	private static final int verticalSup = 2;
+	private static final int diagonalSupDer = 3;
+	private static final int horizontalDer = 4;
+	private static final int diagonalInfDer = 5;
 	private static final int verticalInf = 6;
 	private static final int diagonalInfIzq = 7;
-	private static final int diagonalInfDer = 5;
-	private static final int diagonalSupDer = 3;
-	private static final int diagonalSupIzq = 1;
 	private int movimientoHacia = 6;
 	private boolean enMovimiento;
-
-	// Animaciones
-	private final Animacion moverIzq;
-	private final Animacion moverArribaIzq;
-	private final Animacion moverArriba;
-	private final Animacion moverArribaDer;
-	private final Animacion moverDer;
-	private final Animacion moverAbajoDer;
-	private final Animacion moverAbajo;
-	private final Animacion moverAbajoIzq;
+	
+	// HashMap de animaciones
+	private HashMap<Integer, Animacion> animaciones = new HashMap<Integer, Animacion>();
 
 	private final Gson gson = new Gson();
 	private int intervaloEnvio = 0;
@@ -117,15 +111,15 @@ public class Entidad {
 		yOffset = alto / 2;
 		x = (int) (spawnX / 64) * 64;
 		y = (int) (spawnY / 32) * 32;
-
-		moverIzq = new Animacion(velAnimacion, animaciones.get(0));
-		moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
-		moverArriba = new Animacion(velAnimacion, animaciones.get(2));
-		moverArribaDer = new Animacion(velAnimacion, animaciones.get(3));
-		moverDer = new Animacion(velAnimacion, animaciones.get(4));
-		moverAbajoDer = new Animacion(velAnimacion, animaciones.get(5));
-		moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
-		moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
+		
+		this.animaciones.put(horizontalIzq, new Animacion(velAnimacion, animaciones.get(horizontalIzq)));
+		this.animaciones.put(diagonalSupIzq, new Animacion(velAnimacion, animaciones.get(diagonalSupIzq)));
+		this.animaciones.put(verticalSup, new Animacion(velAnimacion, animaciones.get(verticalSup)));
+		this.animaciones.put(diagonalSupDer, new Animacion(velAnimacion, animaciones.get(diagonalSupDer)));
+		this.animaciones.put(horizontalDer, new Animacion(velAnimacion, animaciones.get(horizontalDer)));
+		this.animaciones.put(diagonalInfDer, new Animacion(velAnimacion, animaciones.get(diagonalInfDer)));
+		this.animaciones.put(verticalInf, new Animacion(velAnimacion, animaciones.get(verticalInf)));
+		this.animaciones.put(diagonalInfIzq, new Animacion(velAnimacion, animaciones.get(diagonalInfIzq)));
 
 		// Informo mi posicion actual
 		juego.getUbicacionPersonaje().setPosX(x);
@@ -138,23 +132,23 @@ public class Entidad {
 	public void actualizar() {
 
 		if (enMovimiento) {
-			moverIzq.actualizar();
-			moverArribaIzq.actualizar();
-			moverArriba.actualizar();
-			moverArribaDer.actualizar();
-			moverDer.actualizar();
-			moverAbajoDer.actualizar();
-			moverAbajo.actualizar();
-			moverAbajoIzq.actualizar();
+			this.animaciones.get(horizontalIzq).actualizar();
+			this.animaciones.get(diagonalSupIzq).actualizar();
+			this.animaciones.get(verticalSup).actualizar();
+			this.animaciones.get(diagonalSupDer).actualizar();
+			this.animaciones.get(horizontalDer).actualizar();
+			this.animaciones.get(diagonalInfDer).actualizar();
+			this.animaciones.get(verticalInf).actualizar();
+			this.animaciones.get(diagonalInfIzq).actualizar();
 		} else {
-			moverIzq.reset();
-			moverArribaIzq.reset();
-			moverArriba.reset();
-			moverArribaDer.reset();
-			moverDer.reset();
-			moverAbajoDer.reset();
-			moverAbajo.reset();
-			moverAbajoIzq.reset();
+			this.animaciones.get(horizontalIzq).reset();
+			this.animaciones.get(diagonalSupIzq).reset();
+			this.animaciones.get(verticalSup).reset();
+			this.animaciones.get(diagonalSupDer).reset();
+			this.animaciones.get(horizontalDer).reset();
+			this.animaciones.get(diagonalInfDer).reset();
+			this.animaciones.get(verticalInf).reset();
+			this.animaciones.get(diagonalInfIzq).reset();
 		}
 
 		getEntrada();
@@ -463,25 +457,7 @@ public class Entidad {
 	/**Obtiene el frameActual del personaje
 	 */
 	private BufferedImage getFrameAnimacionActual() {
-		if (movimientoHacia == horizontalIzq) {
-			return moverIzq.getFrameActual();
-		} else if (movimientoHacia == horizontalDer) {
-			return moverDer.getFrameActual();
-		} else if (movimientoHacia == verticalSup) {
-			return moverArriba.getFrameActual();
-		} else if (movimientoHacia == verticalInf) {
-			return moverAbajo.getFrameActual();
-		} else if (movimientoHacia == diagonalInfIzq) {
-			return moverAbajoIzq.getFrameActual();
-		} else if (movimientoHacia == diagonalInfDer) {
-			return moverAbajoDer.getFrameActual();
-		} else if (movimientoHacia == diagonalSupIzq) {
-			return moverArribaIzq.getFrameActual();
-		} else if (movimientoHacia == diagonalSupDer) {
-			return moverArribaDer.getFrameActual();
-		}
-
-		return Recursos.orco.get(6)[0];
+		return this.animaciones.get(movimientoHacia).getFrameActual();
 	}
 	/**Pide la direccion donde va
 	 * @return devuelve el movimiento hacia donde va
@@ -492,25 +468,7 @@ public class Entidad {
 	/**Obtiene el frame donde esta el personaje
 	 */
 	private int getFrame() {
-		if (movimientoHacia == horizontalIzq) {
-			return moverIzq.getFrame();
-		} else if (movimientoHacia == horizontalDer) {
-			return moverDer.getFrame();
-		} else if (movimientoHacia == verticalSup) {
-			return moverArriba.getFrame();
-		} else if (movimientoHacia == verticalInf) {
-			return moverAbajo.getFrame();
-		} else if (movimientoHacia == diagonalInfIzq) {
-			return moverAbajoIzq.getFrame();
-		} else if (movimientoHacia == diagonalInfDer) {
-			return moverAbajoDer.getFrame();
-		} else if (movimientoHacia == diagonalSupIzq) {
-			return moverArribaIzq.getFrame();
-		} else if (movimientoHacia == diagonalSupDer) {
-			return moverArribaDer.getFrame();
-		}
-
-		return 0;
+		return this.animaciones.get(movimientoHacia).getFrame();
 	}
 	/**Envia la posicion del personaje
 	 */
