@@ -1,9 +1,13 @@
 package cliente;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
@@ -47,10 +51,14 @@ public class Cliente extends Thread {
 
 	//MENU COMERCIAR
 	private MenuComerciar m1;
-		
+	
+	// Archivo de propiedades
+	private Properties propiedades;
+	
 	// Ip y puerto
 	private String ip;
-	private final int puerto = 55050;
+	private int puerto;
+	
 	/**Pide la accion
 	 * @return Devuelve la accion
 	 */
@@ -69,6 +77,14 @@ public class Cliente extends Thread {
 	/**Constructor del Cliente
 	 */
 	public Cliente() {
+		
+		try {
+			obtenerPuerto();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error al abrir puerto. Revise archivo de propiedades.");
+			System.exit(1);
+		}
+		
 		ip = JOptionPane.showInputDialog("Ingrese IP del servidor: (default localhost)");
 		if(ip == null) {
 			ip = "localhost";
@@ -83,6 +99,14 @@ public class Cliente extends Thread {
 					+ "Revise la conexión con el servidor.");
 			System.exit(1);
 		}
+	}
+	
+	private void obtenerPuerto() throws IOException {
+		propiedades = new Properties();
+		InputStream input = new FileInputStream("configCliente.properties");
+		propiedades.load(input);
+		puerto = Integer.parseInt(propiedades.getProperty("puerto"));
+		input.close();
 	}
 
 	public Cliente(String ip, int puerto) {
