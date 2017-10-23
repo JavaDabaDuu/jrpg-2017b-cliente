@@ -44,5 +44,13 @@ public class PaqueteNPC extends Paquete implements Serializable, Cloneable {
 	public int getPosY() {
 		return posY;
 	}
+	
+	public NonPlayableCharacter getNpc() {
+		return this.npc;
+	}
+	
+	public void setNpc(NonPlayableCharacter npc) {
+		this.npc = npc;
+	}
 
 }

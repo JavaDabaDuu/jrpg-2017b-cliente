@@ -32,6 +32,21 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 		mapEnemigo.put("probEvitarDanio", probEvitarDanoEnemgio);
 	}
 
+	public PaqueteAtacar(int personaje, int enemigo, int salud, int energia, int saludEnemigo,int defensa, int defensaEnemigo, double probabilidadEvitarDaño) {
+		setComando(Comando.ATACAR);
+		this.id = personaje;
+		this.idEnemigo = enemigo;
+		this.nuevaSaludPersonaje = salud;
+		this.nuevaEnergiaPersonaje = energia;
+		this.nuevaSaludEnemigo = saludEnemigo;
+		mapPersonaje.put("salud", salud);
+		mapPersonaje.put("energia", energia);
+		mapPersonaje.put("defensa", defensa);
+		mapPersonaje.put("probEvitarDanio", probabilidadEvitarDaño);
+		mapEnemigo.put("salud", saludEnemigo);
+		mapEnemigo.put("defensa", defensaEnemigo);
+	}
+
 	public int getId() {
 		return id;
 	}

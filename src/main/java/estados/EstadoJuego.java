@@ -173,21 +173,11 @@ public class EstadoJuego extends Estado {
 			npcs = new HashMap<Integer, PaqueteNPC>();
 			npcs = juego.getNpcs();
 
-			BufferedImage imagen;
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
 			
-			Iterator<Integer> it = npcs.keySet().iterator();
-			int key;
-			while (it.hasNext()) {
-				key = it.next();
-				
-				try {
-					imagen = ImageIO.read(getClass().getResourceAsStream("/minotauro.png"));
-					g.drawImage(imagen, npcs.get(key).getPosX(), npcs.get(key).getPosY(), 64, 64, null);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+			for(int i = 0; i<this.npcs.size(); i++) {
+				g.drawImage(Recursos.personaje.get("Minotauro").get(6)[0],(int) (npcs.get(i).getPosX()- juego.getCamara().getxOffset()),(int) (npcs.get(i).getPosY()- juego.getCamara().getyOffset()), 64, 64, null);
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import dominio.NonPlayableCharacter;
 import dominio.Personaje;
 import mensajeria.PaquetePersonaje;
 import recursos.Recursos;
@@ -90,5 +91,21 @@ public class EstadoDePersonaje {
 		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		g.setColor(Color.GREEN);
 		g.drawString(String.valueOf(personaje.getNivel()), x + 59, y + 70);
+	}
+
+	public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, NonPlayableCharacter enemigo, BufferedImage miniaturaEnemigo) {
+		g.drawImage(Recursos.estadoPersonaje, x, y, null);
+
+		g.drawImage(miniaturaEnemigo, x + 10, y + 9, ANCHOMINIATURA, ALTOMINIATURA, null);
+
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		g.drawImage(Recursos.barraSalud, x + 80, y + 26, ANCHOBARRA, ALTOSALUD, null);
+		g.drawString(String.valueOf(enemigo.getSalud()) + " / " + String.valueOf(enemigo.getSalud()), x + 132, y + 37);
+
+		g.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		g.setColor(Color.GREEN);
+		g.drawString(String.valueOf(enemigo.getNivel()), x + 59, y + 70);
+		
 	}
 }

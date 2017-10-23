@@ -41,7 +41,6 @@ public class EscuchaMensajes extends Thread {
 		try {
 
 			Paquete paquete;
-			//TENGO QUE HACER UN DIBUJAR MINOTAURO ACA
 			ComandosEscucha comand;
 			juego.setPersonajesConectados(new HashMap<Integer, PaquetePersonaje>());
 			juego.setUbicacionPersonajes(new HashMap<Integer, PaqueteMovimiento>());
@@ -55,8 +54,6 @@ public class EscuchaMensajes extends Thread {
 				comand = (ComandosEscucha) paquete.getObjeto(Comando.NOMBREPAQUETE);
 				comand.setJuego(juego);
 				comand.setCadena(objetoLeido);
-				
-				System.out.println(comand.getClass());
 				
 				comand.ejecutar();
 				

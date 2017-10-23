@@ -57,6 +57,17 @@ public class Recursos {
 	private static BufferedImage[] elfoAbajoDer;
 	private static BufferedImage[] elfoAbajo;
 	private static BufferedImage[] elfoAbajoIzq;
+	
+	private static SpriteSheet spriteMinotauro;
+	public static LinkedList<BufferedImage[]> minotauro = new LinkedList<>();
+	private static BufferedImage[] minotauroIzq;
+	private static BufferedImage[] minotauroArribaIzq;
+	private static BufferedImage[] minotauroArriba;
+	private static BufferedImage[] minotauroArribaDer;
+	private static BufferedImage[] minotauroDer;
+	private static BufferedImage[] minotauroAbajoDer;
+	private static BufferedImage[] minotauroAbajo;
+	private static BufferedImage[] minotauroAbajoIzq;
 	// Fin Personajes
 
 	// Entorno
@@ -72,18 +83,18 @@ public class Recursos {
 	public static BufferedImage iceBlock;
 	// Fin Entorno
 
-	// Inicio NPCs minotauro
-	private static SpriteSheet spriteMinotauro;
-	public static LinkedList<BufferedImage[]> minotauro = new LinkedList<>();
-	private static BufferedImage[] minotauroIzq;
-	private static BufferedImage[] minotauroArribaIzq;
-	private static BufferedImage[] minotauroArriba;
-	private static BufferedImage[] minotauroArribaDer;
-	private static BufferedImage[] minotauroDer;
-	private static BufferedImage[] minotauroAbajoDer;
-	private static BufferedImage[] minotauroAbajo;
-	private static BufferedImage[] minotauroAbajoIzq;
-	// Fin NPCs minotauro
+	// Inicio NPCs 
+	private static SpriteSheet spriteNPC;
+	public static LinkedList<BufferedImage[]> npc = new LinkedList<>();
+	private static BufferedImage[] izqNPC;
+	private static BufferedImage[] arribaIzqNPC;
+	private static BufferedImage[] arribaNPC;
+	private static BufferedImage[] arribaDerNPC;
+	private static BufferedImage[] derNPC;
+	private static BufferedImage[] abajoDerNPC;
+	private static BufferedImage[] abajoNPC;
+	private static BufferedImage[] abajoIzqNPC;
+	// Fin NPCs 
 
 	// Batalla
 	public static BufferedImage barraSpells;
@@ -331,14 +342,9 @@ public class Recursos {
 		elfo.add(elfoAbajoIzq);
 
 		// Fin Elfo
-
-		// Agrego los pj al hash
-		personaje.put("Humano", humano);
-		personaje.put("Orco", orco);
-		personaje.put("Elfo", elfo);
-
-		// inicio Minotauro
-
+		
+		//Inicio Minotauro
+		
 		spriteMinotauro = new SpriteSheet(CargadorImagen.cargarImagen("/minotauro.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
@@ -408,11 +414,91 @@ public class Recursos {
 		minotauro.add(minotauroAbajoDer);
 		minotauro.add(minotauroAbajo);
 		minotauro.add(minotauroAbajoIzq);
+		
+		//Fin Minotauro
 
-		// fin minotauro
+		// Agrego los pj al hash
+		personaje.put("Humano", humano);
+		personaje.put("Orco", orco);
+		personaje.put("Elfo", elfo);
+		personaje.put("Minotauro", minotauro);
+
+		// inicio npc
+
+		spriteNPC = new SpriteSheet(CargadorImagen.cargarImagen("/minotauro.png"));
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		izqNPC = new BufferedImage[4];
+		arribaIzqNPC = new BufferedImage[4];
+		arribaNPC = new BufferedImage[4];
+		arribaDerNPC = new BufferedImage[4];
+		derNPC = new BufferedImage[4];
+		abajoDerNPC = new BufferedImage[4];
+		abajoNPC = new BufferedImage[4];
+		abajoIzqNPC = new BufferedImage[4];
+
+		for (int i = 0; i < 4; i++) {
+			izqNPC[i] = spriteNPC.getTile(ANCHO * i, 0, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			arribaIzqNPC[i] = spriteNPC.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			arribaNPC[i] = spriteNPC.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			arribaDerNPC[i] = spriteNPC.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			derNPC[i] = spriteNPC.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			abajoDerNPC[i] = spriteNPC.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			abajoNPC[i] = spriteNPC.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			abajoIzqNPC[i] = spriteNPC.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		npc.add(izqNPC);
+		npc.add(arribaIzqNPC);
+		npc.add(arribaNPC);
+		npc.add(arribaDerNPC);
+		npc.add(derNPC);
+		npc.add(abajoDerNPC);
+		npc.add(abajoNPC);
+		npc.add(abajoIzqNPC);
+
+		// fin npc
 
 		// Agrego los npcs al hash
-		npcsMap.put("Minotauro", minotauro);
+		npcsMap.put("npc", npc);
 
 		// Inicio Entorno
 		cesped = CargadorImagen.cargarImagen("/Cesped.png");
