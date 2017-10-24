@@ -31,7 +31,6 @@ import mundo.Mundo;
 import recursos.Recursos;
 
 public class EstadoBatalla extends Estado {
-
 	private Mundo mundo;
 	private Personaje personaje;
 	private Personaje enemigo;
