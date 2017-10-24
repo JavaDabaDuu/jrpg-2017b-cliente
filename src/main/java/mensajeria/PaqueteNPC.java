@@ -52,5 +52,9 @@ public class PaqueteNPC extends Paquete implements Serializable, Cloneable {
 	public void setNpc(NonPlayableCharacter npc) {
 		this.npc = npc;
 	}
+	
+	public boolean estaEnRango(int posxNPC, int posyNPC, int posXPersonaje, int posYPersonaje) {
+		return( Math.abs(Math.sqrt(Math.pow(posXPersonaje - posxNPC, 2)) + Math.pow(posYPersonaje - posyNPC, 2)) < 10);
+	}
 
 }
