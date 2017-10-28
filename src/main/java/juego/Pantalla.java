@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -43,8 +44,11 @@ public class Pantalla {
 	public static MenuStats menuStats;
 	public static MenuEscape menuEscp;
 	public static VentanaContactos ventContac;
-		
+	
 	private final Gson gson = new Gson();
+	
+	private Cliente cliente; // Ahora necesito tener el cliente acá porque sino no lo ven los metodos que muestran los menus
+	private HashMap<Integer, Runnable> mostradoresDeMenus = new HashMap<Integer, Runnable>(); // Nombre significativo
 
 	public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
 		pantalla = new JFrame(NOMBRE);
@@ -74,49 +78,27 @@ public class Pantalla {
 				}
 			}
 		});
+		
+		this.cliente = cliente;
+		
+		// Cargo mi hashmap de runnables con la tecla y el metodo que abre el menu que abre esa tecla
+		this.mostradoresDeMenus.put(KeyEvent.VK_I, ()->mostrarMenuInventario());
+		this.mostradoresDeMenus.put(KeyEvent.VK_A, ()->mostrarMenuAsignarSkills());
+		this.mostradoresDeMenus.put(KeyEvent.VK_S, ()->mostrarMenuStats());
+		this.mostradoresDeMenus.put(KeyEvent.VK_ESCAPE, ()->mostrarMenuEscape());
+		this.mostradoresDeMenus.put(KeyEvent.VK_C, ()->mostrarVentanaContactos());
+		
 		pantalla.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_I) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuInventario == null) {
-							menuInventario = new MenuInventario(cliente);
-							menuInventario.setVisible(true);
-						}
+				if (mostradoresDeMenus.get(e.getKeyCode()) != null) {
+					if (Estado.getEstado().esEstadoDeJuego()) {
+						mostradoresDeMenus.get(e.getKeyCode()).run();
 					}
-				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuAsignar == null) {
-							menuAsignar = new MenuAsignarSkills(cliente);
-							menuAsignar.setVisible(true);
-						}
-					} 
-				} else if (e.getKeyCode() == KeyEvent.VK_S) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuStats == null) {
-							menuStats = new MenuStats(cliente);
-							menuStats.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuEscp == null) {
-							menuEscp = new MenuEscape(cliente);
-							menuEscp.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_C) {
-//					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (ventContac == null) {
-							ventContac = new VentanaContactos(cliente.getJuego());
-							ventContac.setVisible(true);
-						}
-//					}
 				}
 			}
 		});
-
-
+		
 		pantalla.setLocationRelativeTo(null);
 		pantalla.setVisible(false);
 
@@ -128,6 +110,41 @@ public class Pantalla {
 
 		pantalla.add(canvas);
 		pantalla.pack();
+	}
+
+	private void mostrarMenuInventario() {
+		if (menuInventario == null) {
+			menuInventario = new MenuInventario(cliente);
+			menuInventario.setVisible(true);
+		}
+	}
+
+	private void mostrarMenuAsignarSkills() {
+		if(menuAsignar == null) {
+			menuAsignar = new MenuAsignarSkills(cliente);
+			menuAsignar.setVisible(true);
+		} 
+	}
+
+	private void mostrarMenuStats() {
+		if (menuStats == null) {
+			menuStats = new MenuStats(cliente);
+			menuStats.setVisible(true);
+		}
+	}
+	
+	private void mostrarMenuEscape() {
+		if (menuEscp == null) {
+			menuEscp = new MenuEscape(cliente);
+			menuEscp.setVisible(true);
+		}
+	}
+	
+	private void mostrarVentanaContactos() {
+		if (ventContac == null) {
+			ventContac = new VentanaContactos(cliente.getJuego());
+			ventContac.setVisible(true);
+		}
 	}
 
 	public Canvas getCanvas() {
@@ -156,4 +173,50 @@ public class Pantalla {
 
 	    g.drawString(s, r.x + a, r.y + b);
 	}
+	
+	// Dejo esto acá por las dudas
+	
+	/*
+	pantalla.addKeyListener(new KeyAdapter() {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_I) {
+				if(Estado.getEstado().esEstadoDeJuego()) {
+					if (menuInventario == null) {
+						menuInventario = new MenuInventario(cliente);
+						menuInventario.setVisible(true);
+					}
+				}
+			} else if (e.getKeyCode() == KeyEvent.VK_A) {
+				if(Estado.getEstado().esEstadoDeJuego()) {
+					if (menuAsignar == null) {
+						menuAsignar = new MenuAsignarSkills(cliente);
+						menuAsignar.setVisible(true);
+					}
+				} 
+			} else if (e.getKeyCode() == KeyEvent.VK_S) {
+				if(Estado.getEstado().esEstadoDeJuego()) {
+					if (menuStats == null) {
+						menuStats = new MenuStats(cliente);
+						menuStats.setVisible(true);
+					}
+				}
+			} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				if(Estado.getEstado().esEstadoDeJuego()) {
+					if (menuEscp == null) {
+						menuEscp = new MenuEscape(cliente);
+						menuEscp.setVisible(true);
+					}
+				}
+			} else if (e.getKeyCode() == KeyEvent.VK_C) {
+				if(Estado.getEstado().esEstadoDeJuego()) {
+					if (ventContac == null) {
+						ventContac = new VentanaContactos(cliente.getJuego());
+						ventContac.setVisible(true);
+					}
+				}
+			}
+		}
+	});
+	*/
 }
