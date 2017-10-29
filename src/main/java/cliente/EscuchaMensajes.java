@@ -27,7 +27,7 @@ public class EscuchaMensajes extends Thread {
   private ObjectInputStream entrada;
   private final Gson gson = new Gson();
 
- /**Constructor de EsuchaMensaje
+  /**Constructor de EsuchaMensaje
 * @param juego juego del que se escucha el mensaje
 */
   

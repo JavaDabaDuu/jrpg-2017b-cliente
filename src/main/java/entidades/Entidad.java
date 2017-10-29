@@ -1,5 +1,14 @@
 package entidades;
 
+import chat.VentanaContactos;
+
+import com.google.gson.Gson;
+
+import estados.Estado;
+import frames.MenuEscape;
+import frames.MenuInventario;
+import interfaz.MenuInfoPersonaje;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -7,18 +16,12 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
-import com.google.gson.Gson;
-
-import chat.VentanaContactos;
-import estados.Estado;
-import frames.MenuEscape;
-import frames.MenuInventario;
-import interfaz.MenuInfoPersonaje;
 import juego.Juego;
+
 import juego.Pantalla;
 import mensajeria.PaqueteBatalla;
 import mensajeria.PaqueteComerciar;
@@ -166,8 +169,9 @@ public class Entidad {
     juego.getCamara().Centrar(this);
   }
   
-	/**Devuelve la entrada
-	 */
+  /**Devuelve la entrada
+*/
+  
   public void getEntrada() {
     posMouseRecorrido = juego.getHandlerMouse().getPosMouseRecorrido();
     posMouse = juego.getHandlerMouse().getPosMouse();
@@ -226,7 +230,7 @@ public class Entidad {
                 }
               } else {
                 JOptionPane.showMessageDialog(null, "El otro usuario se encuentra "
-                    + "dentro de la zona de comercio");	
+                    + "dentro de la zona de comercio");
               }
             } else {
               // PREGUNTO SI EL MENU EMERGENTE ES DE TIPO COMERCIO
@@ -334,293 +338,310 @@ public class Entidad {
         pilaMovimiento = caminoMasCorto(tileActual[0], tileActual[1], 
           tileMoverme[0], tileMoverme[1]);
       }
-	  // Me muevo al primero de la pila
+      // Me muevo al primero de la pila
       NodoDePila nodoActualTile = pilaMovimiento.pop();
 
-			if (nodoActualTile == null) {
-				enMovimiento = false;
-				juego.getHandlerMouse().setNuevoRecorrido(false);
-				pilaMovimiento = null;
-				tileMoverme = null;
-				return;
-			}
+      if (nodoActualTile == null) {
+        enMovimiento = false;
+        juego.getHandlerMouse().setNuevoRecorrido(false);
+        pilaMovimiento = null;
+        tileMoverme = null;
+        return;
+      }
 
-			tileFinal = new int[2];
-			tileFinal[0] = nodoActualTile.obtenerX();
-			tileFinal[1] = nodoActualTile.obtenerY();
+      tileFinal = new int[2];
+      tileFinal[0] = nodoActualTile.obtenerX();
+      tileFinal[1] = nodoActualTile.obtenerY();
 
-			xFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[0];
-			yFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[1];
+      xFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[0];
+      yFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[1];
 
-			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] - 1) {
-				movimientoHacia = verticalSup;
-			}
-			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] + 1) {
-				movimientoHacia = verticalInf;
-			}
-			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] + 1) {
-				movimientoHacia = horizontalIzq;
-			}
-			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] - 1) {
-				movimientoHacia = horizontalDer;
-			}
-			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1]) {
-				movimientoHacia = diagonalSupIzq;
-			}
-			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1]) {
-				movimientoHacia = diagonalInfDer;
-			}
-			if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] - 1) {
-				movimientoHacia = diagonalSupDer;
-			}
-			if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] + 1) {
-				movimientoHacia = diagonalInfIzq;
-			}
-			enMovimiento = true;
-		}
-	}
-	/**Mueve el personaje
-	 */
-	public void mover() {
+      if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] - 1) {
+        movimientoHacia = verticalSup;
+      }
+      if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] + 1) {
+        movimientoHacia = verticalInf;
+      }
+      if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] + 1) {
+        movimientoHacia = horizontalIzq;
+      }
+      if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] - 1) {
+        movimientoHacia = horizontalDer;
+      }
+      if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1]) {
+        movimientoHacia = diagonalSupIzq;
+      }
+      if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1]) {
+        movimientoHacia = diagonalInfDer;
+      }
+      if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] - 1) {
+        movimientoHacia = diagonalSupDer;
+      }
+      if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] + 1) {
+        movimientoHacia = diagonalInfIzq;
+      }
+      enMovimiento = true;
+    }
+  }
+ /**Mueve el personaje
+*/
+  
+  public void mover() {
+    dx = 0;
+    dy = 0;
+    double paso = 1;
+    if (enMovimiento && !(x == xFinal && y == yFinal - 32)) {
+      if (movimientoHacia == verticalSup) {
+        dy -= paso;
+      } else if (movimientoHacia == verticalInf) {
+        dy += paso;
+      } else if (movimientoHacia == horizontalDer) {
+        dx += paso;
+      } else if (movimientoHacia == horizontalIzq) {
+        dx -= paso;
+      } else if (movimientoHacia == diagonalInfDer) {
+        dx += paso;
+        dy += paso / 2;
+      } else if (movimientoHacia == diagonalInfIzq) {
+        dx -= paso;
+        dy += paso / 2;
+      } else if (movimientoHacia == diagonalSupDer) {
+        dx += paso;
+        dy -= paso / 2;
+      } else if (movimientoHacia == diagonalSupIzq) {
+        dx -= paso;
+        dy -= paso / 2;
+      }
 
-		dx = 0;
-		dy = 0;
+      x += dx;
+      y += dy;
 
-		double paso = 1;
+      // Le envio la posicion
+      if (intervaloEnvio == 2) {
+        enviarPosicion();
+        intervaloEnvio = 0;
+      }
+      intervaloEnvio++;
 
-		if (enMovimiento && !(x == xFinal && y == yFinal - 32)) {
-			if (movimientoHacia == verticalSup) {
-				dy -= paso;
-			} else if (movimientoHacia == verticalInf) {
-				dy += paso;
-			} else if (movimientoHacia == horizontalDer) {
-				dx += paso;
-			} else if (movimientoHacia == horizontalIzq) {
-				dx -= paso;
-			} else if (movimientoHacia == diagonalInfDer) {
-				dx += paso;
-				dy += paso / 2;
-			} else if (movimientoHacia == diagonalInfIzq) {
-				dx -= paso;
-				dy += paso / 2;
-			} else if (movimientoHacia == diagonalSupDer) {
-				dx += paso;
-				dy -= paso / 2;
-			} else if (movimientoHacia == diagonalSupIzq) {
-				dx -= paso;
-				dy -= paso / 2;
-			}
+      if (x == xFinal && y == yFinal - 32) {
+        enMovimiento = false;
+      }
+    }
+  }
+ /**Grafica el frame del personaje
+*/
+  
+  public void graficar(final Graphics g) {
+    drawX = (int) (x - juego.getCamara().getxOffset());
+    drawY = (int) (y - juego.getCamara().getyOffset());
+    g.drawImage(getFrameAnimacionActual(), drawX, drawY + 4, ancho, alto, null);
+  }
 
-			x += dx;
-			y += dy;
+  /**Grafica el nombre
+ */
+  
+  public void graficarNombre(final Graphics g) {
+    g.setColor(Color.WHITE);
+    g.setFont(new Font("Book Antiqua", Font.BOLD, 15));
+    Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
+  }
+ /**Obtiene el frameActual del personaje
+*/
+  
+  private BufferedImage getFrameAnimacionActual() {
+    return this.animaciones.get(movimientoHacia).getFrameActual();
+  }
+ /**Pide la direccion donde va
+* @return devuelve el movimiento hacia donde va
+*/
+  
+  private int getDireccion() {
+    return movimientoHacia;
+  }
+ /**Obtiene el frame donde esta el personaje
+*/
+  
+  private int getFrame() {
+    return this.animaciones.get(movimientoHacia).getFrame();
+  }
+ /**Envia la posicion del personaje
+*/
+  
+  private void enviarPosicion() {
+    juego.getUbicacionPersonaje().setPosX(x);
+    juego.getUbicacionPersonaje().setPosY(y);
+    juego.getUbicacionPersonaje().setDireccion(getDireccion());
+    juego.getUbicacionPersonaje().setFrame(getFrame());
+    try {
+      juego.getCliente().getSalida().writeObject(gson
+          .toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
+    } catch (IOException e) {
+      JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
+    }
+  }
+ /**Busca el camino más corto a recorrer para llegar a una posición
+* @param xInicial ubicacion en X inicial
+* @param yInicial ubicacion en Y inicial
+* @param xFinal ubicacion en X final
+* @param yFinal ubicacion en Y final
+* @return la pila de tiles a recorrer
+*/
+  
+  private PilaDeTiles caminoMasCorto(final int xInicial,
+       final int yInicial, final int xFinal, final int yFinal) {
+    Grafo grafoLibres = mundo.obtenerGrafoDeTilesNoSolidos();
+    // Transformo las coordenadas iniciales y finales en indices
+    int nodoInicial = (yInicial - grafoLibres.obtenerNodos()[0].obtenerY())
+        * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xInicial
+        - grafoLibres.obtenerNodos()[0].obtenerX();
 
-			// Le envio la posicion
-			if (intervaloEnvio == 2) {
-				enviarPosicion();
-				intervaloEnvio = 0;
-			}
-			intervaloEnvio++;
-
-			if (x == xFinal && y == yFinal - 32) {
-				enMovimiento = false;
-			}
-		}
-	}
-	/**Grafica el frame del personaje
-	 */
-	public void graficar(final Graphics g) {
-	    drawX = (int) (x - juego.getCamara().getxOffset());
-	    drawY = (int) (y - juego.getCamara().getyOffset());
-	    g.drawImage(getFrameAnimacionActual(), drawX, drawY + 4, ancho, alto, null);
-	}
-	/**Grafica el nombre
-	 */
-	public void graficarNombre(final Graphics g) {
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Book Antiqua", Font.BOLD, 15));
-	    Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
-	}
-	/**Obtiene el frameActual del personaje
-	 */
-	private BufferedImage getFrameAnimacionActual() {
-		return this.animaciones.get(movimientoHacia).getFrameActual();
-	}
-	/**Pide la direccion donde va
-	 * @return devuelve el movimiento hacia donde va
-	 */
-	private int getDireccion() {
-		return movimientoHacia;
-	}
-	/**Obtiene el frame donde esta el personaje
-	 */
-	private int getFrame() {
-		return this.animaciones.get(movimientoHacia).getFrame();
-	}
-	/**Envia la posicion del personaje
-	 */
-	private void enviarPosicion() {
-		juego.getUbicacionPersonaje().setPosX(x);
-		juego.getUbicacionPersonaje().setPosY(y);
-		juego.getUbicacionPersonaje().setDireccion(getDireccion());
-		juego.getUbicacionPersonaje().setFrame(getFrame());
-		try {
-			juego.getCliente().getSalida().writeObject(gson.toJson(juego.
-					getUbicacionPersonaje(), PaqueteMovimiento.class));
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
-		}
-	}
-	/**Busca el camino más corto a recorrer para llegar a una posición
-	 * @param xInicial ubicacion en X inicial
-	 * @param yInicial ubicacion en Y inicial
-	 * @param xFinal ubicacion en X final
-	 * @param yFinal ubicacion en Y final
-	 * @return la pila de tiles a recorrer
-	 */
-	private PilaDeTiles caminoMasCorto(final int xInicial, final int yInicial, final int xFinal, final int yFinal) {
-		Grafo grafoLibres = mundo.obtenerGrafoDeTilesNoSolidos();
-		// Transformo las coordenadas iniciales y finales en indices
-		int nodoInicial = (yInicial - grafoLibres.obtenerNodos()[0].obtenerY())
-				* (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xInicial
-				- grafoLibres.obtenerNodos()[0].obtenerX();
-
-		int nodoFinal = (yFinal - grafoLibres.obtenerNodos()[0].obtenerY())
-				* (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xFinal
-				- grafoLibres.obtenerNodos()[0].obtenerX();
+    int nodoFinal = (yFinal - grafoLibres.obtenerNodos()[0].obtenerY())
+        * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xFinal
+        - grafoLibres.obtenerNodos()[0].obtenerX();
 
 		// Hago todo
-		double[] vecCostos = new double[grafoLibres.obtenerCantidadDeNodosTotal()];
-		int[] vecPredecesores = new int[grafoLibres.obtenerCantidadDeNodosTotal()];
-		boolean[] conjSolucion = new boolean[grafoLibres.obtenerCantidadDeNodosTotal()];
-		int cantSolucion = 0;
-		// Lleno la matriz de costos de numeros grandes
-		for (int i = 0; i < grafoLibres.obtenerCantidadDeNodosTotal(); i++) {
-			vecCostos[i] = Double.MAX_VALUE;
-		}
-		// Adyacentes al nodo inicial
-		conjSolucion[nodoInicial] = true;
-		cantSolucion++;
-		vecCostos[nodoInicial] = 0;
-		Nodo[] adyacentes = grafoLibres.obtenerNodos()[nodoInicial].obtenerNodosAdyacentes();
-		for (int i = 0; i < grafoLibres.obtenerNodos()[nodoInicial].obtenerCantidadDeAdyacentes(); i++) {
-			if (estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial],
-					grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
-				vecCostos[adyacentes[i].obtenerIndice()] = 1.5;
-			} else {
-				vecCostos[adyacentes[i].obtenerIndice()] = 1;
-			}
-			vecPredecesores[adyacentes[i].obtenerIndice()] = nodoInicial;
-		}
-		// Aplico Dijkstra
-		while (cantSolucion < grafoLibres.obtenerCantidadDeNodosTotal()) {
-			// Elijo W perteneciente al conjunto restante tal que el costo de W
-			// sea minimo
-			double minimo = Double.MAX_VALUE;
-			int indiceMinimo = 0;
-			Nodo nodoW = null;
-			for (int i = 0; i < grafoLibres.obtenerCantidadDeNodosTotal(); i++) {
-				if (!conjSolucion[i] && vecCostos[i] < minimo) {
-					nodoW = grafoLibres.obtenerNodos()[i];
-					minimo = vecCostos[i];
-					indiceMinimo = i;
-				}
-			}
-			// Pongo a W en el conj solucion
-			conjSolucion[indiceMinimo] = true;
-			cantSolucion++;
-			// Por cada nodo I adyacente a W del conj restante
-			// Le sumo 1 al costo de ir hasta W y luego ir hasta su adyacente
-			adyacentes = grafoLibres.obtenerNodos()[indiceMinimo].obtenerNodosAdyacentes();
-			for (int i = 0; i < grafoLibres.obtenerNodos()[indiceMinimo].obtenerCantidadDeAdyacentes(); i++) {
-				double valorASumar = 1;
-				if (estanEnDiagonal(grafoLibres.obtenerNodos()[indiceMinimo],
-						grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
-					valorASumar = 1.5;
-				}
-				if (vecCostos[indiceMinimo] + valorASumar < vecCostos[adyacentes[i].obtenerIndice()]) {
-					vecCostos[adyacentes[i].obtenerIndice()] = vecCostos[indiceMinimo] + valorASumar;
-					vecPredecesores[adyacentes[i].obtenerIndice()] = indiceMinimo;
-				}
-			}
-		}
-		// Creo el vector de nodos hasta donde quiere llegar
-		PilaDeTiles camino = new PilaDeTiles();
-		while (nodoFinal != nodoInicial) {
-			camino.push(new NodoDePila(grafoLibres.obtenerNodos()[nodoFinal].obtenerX(),
-					grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
-			nodoFinal = vecPredecesores[nodoFinal];
-		}
+    double[] vecCostos = new double[grafoLibres.obtenerCantidadDeNodosTotal()];
+    int[] vecPredecesores = new int[grafoLibres.obtenerCantidadDeNodosTotal()];
+    boolean[] conjSolucion = new boolean[grafoLibres.obtenerCantidadDeNodosTotal()];
+    int cantSolucion = 0;
+    // Lleno la matriz de costos de numeros grandes
+    for (int i = 0; i < grafoLibres.obtenerCantidadDeNodosTotal(); i++) {
+      vecCostos[i] = Double.MAX_VALUE;
+    }
+    // Adyacentes al nodo inicial
+    conjSolucion[nodoInicial] = true;
+    cantSolucion++;
+    vecCostos[nodoInicial] = 0;
+    Nodo[] adyacentes = grafoLibres.obtenerNodos()[nodoInicial].obtenerNodosAdyacentes();
+    for (int i = 0; i < grafoLibres.obtenerNodos()[nodoInicial]
+        .obtenerCantidadDeAdyacentes(); i++) {
+      if (estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial],
+          grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
+        vecCostos[adyacentes[i].obtenerIndice()] = 1.5;
+      } else {
+        vecCostos[adyacentes[i].obtenerIndice()] = 1;
+      }
+      vecPredecesores[adyacentes[i].obtenerIndice()] = nodoInicial;
+    }
+    // Aplico Dijkstra
+    while (cantSolucion < grafoLibres.obtenerCantidadDeNodosTotal()) {
+      // Elijo W perteneciente al conjunto restante tal que el costo de W
+      // sea minimo
+      double minimo = Double.MAX_VALUE;
+      int indiceMinimo = 0;
+      Nodo nodoW = null;
+      for (int i = 0; i < grafoLibres.obtenerCantidadDeNodosTotal(); i++) {
+        if (!conjSolucion[i] && vecCostos[i] < minimo) {
+          nodoW = grafoLibres.obtenerNodos()[i];
+          minimo = vecCostos[i];
+          indiceMinimo = i;
+        }
+      }
+      // Pongo a W en el conj solucion
+      conjSolucion[indiceMinimo] = true;
+      cantSolucion++;
+      // Por cada nodo I adyacente a W del conj restante
+      // Le sumo 1 al costo de ir hasta W y luego ir hasta su adyacente
+      adyacentes = grafoLibres.obtenerNodos()[indiceMinimo].obtenerNodosAdyacentes();
+      for (int i = 0; i < grafoLibres.obtenerNodos()[indiceMinimo]
+          .obtenerCantidadDeAdyacentes(); i++) {
+        double valorASumar = 1;
+        if (estanEnDiagonal(grafoLibres.obtenerNodos()[indiceMinimo],
+            grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
+          valorASumar = 1.5;
+        }
+        if (vecCostos[indiceMinimo] + valorASumar < vecCostos[adyacentes[i].obtenerIndice()]) {
+          vecCostos[adyacentes[i].obtenerIndice()] = vecCostos[indiceMinimo] + valorASumar;
+          vecPredecesores[adyacentes[i].obtenerIndice()] = indiceMinimo;
+        }
+      }    
+    }
+    // Creo el vector de nodos hasta donde quiere llegar
+    PilaDeTiles camino = new PilaDeTiles();
+    while (nodoFinal != nodoInicial) {
+      camino.push(new NodoDePila(grafoLibres.obtenerNodos()[nodoFinal].obtenerX(),
+      grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
+      nodoFinal = vecPredecesores[nodoFinal];
+    }
+    return camino;
+  }
+ /**Pregunta si los personajes estan en diagonal
+* @param nodoUno personaje 1
+* @param nodoDos personaje 2
+* @return true or false
+*/
+  
+  private boolean estanEnDiagonal(final Nodo nodoUno, final Nodo nodoDos) {
+    return (nodoUno.obtenerX() != nodoDos.obtenerX() && nodoUno.obtenerY() != nodoDos.obtenerY());
+  }
+ /**Pide el valor de X 
+* @return devuelve la ubicacion en X
+*/
+  
+  public float getX() {
+    return x;
+  }
+ /**Setea el valor de X
+* @param x valor nuevo de la ubicacion en X
+*/
 
-		return camino;
-	}
-	/**Pregunta si los personajes estan en diagonal
-	 * @param nodoUno personaje 1
-	 * @param nodoDos personaje 2
-	 * @return true or false
-	 */
-	private boolean estanEnDiagonal(final Nodo nodoUno, final Nodo nodoDos) {
-		return (nodoUno.obtenerX() != nodoDos.obtenerX() && nodoUno.obtenerY() != nodoDos.obtenerY());
-	}
-	/**Pide el valor de X 
-	 * @return devuelve la ubicacion en X
-	 */
-	public float getX() {
-		return x;
-	}
-	/**Setea el valor de X
-	 * @param x valor nuevo de la ubicacion en X
-	 */
-	
-	public void setX(final float x) {
-		this.x = x;
-	}
-	/**Pide el valor de Y 
-	 * @return devuelve la ubicacion en Y
-	 */
-	
-	public float getY() {
-		return y;
-	}
-	/**Setea el valor de Y
-	 * @param y valor nuevo de la ubicacion en Y
-	 */
-	public void setY(final float y) {
-		this.y = y;
-	}
-	/**Pide el ancho 
-	 * @return devuelve el ancho
-	 */
-	public int getAncho() {
-		return ancho;
-	}
-	/**Setea el ancho
-	 * @param ancho nuevo ancho a setear
-	 */
-	public void setAncho(final int ancho) {
-		this.ancho = ancho;
-	}
-	/**Pide el alto 
-	 * @return devuelve el alto
-	 */
-	public int getAlto() {
-		return alto;
-	}
-	/**Setea el alto
-	 * @param alto nuevo alto a setear
-	 */
-	public void setAlto(final int alto) {
-		this.alto = alto;
-	}
-	/**Pide el offset de X
-	 * @return devuelve el offset de X
-	 */
-	public int getxOffset() {
-		return xOffset;
-	}
-	/**Pide el offset de Y 
-	 * @return devuelve el offset de Y
-	 */
-	public int getYOffset() {
-		return yOffset;
-	}
+  public void setX(final float x) {
+    this.x = x;
+  }
+ /**Pide el valor de Y 
+* @return devuelve la ubicacion en Y
+*/
+
+  public float getY() {
+    return y;
+  }
+ /**Setea el valor de Y
+* @param y valor nuevo de la ubicacion en Y
+*/
+  
+  public void setY(final float y) {
+    this.y = y;
+  }
+ /**Pide el ancho 
+* @return devuelve el ancho
+*/
+  
+  public int getAncho() {
+    return ancho;
+  }
+ /**Setea el ancho
+* @param ancho nuevo ancho a setear
+*/
+  
+  public void setAncho(final int ancho) {
+    this.ancho = ancho;
+  }
+ /**Pide el alto 
+* @return devuelve el alto
+*/
+  
+  public int getAlto() {
+    return alto;
+  }
+ /**Setea el alto
+* @param alto nuevo alto a setear
+*/
+  
+  public void setAlto(final int alto) {
+    this.alto = alto;
+  }
+ /**Pide el offset de X
+* @return devuelve el offset de X
+*/
+  
+  public int getxOffset() {
+    return xOffset;
+  }
+ /**Pide el offset de Y 
+* @return devuelve el offset de Y
+*/
+  
+  public int getYOffset() {
+    return yOffset;
+  }
 }
