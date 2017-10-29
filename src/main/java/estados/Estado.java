@@ -6,30 +6,28 @@ import juego.Juego;
 
 public abstract class Estado {
 
-	private static Estado estadoActual = null;
+  private static Estado estadoActual = null;
+  // Tipo de estados
+  public static int estadoOffline = 0;
+  public static int estadoJuego = 1;
+  public static int estadoBatalla = 2;
+  protected Juego juego;
 
-	// Tipo de estados
-	public static int estadoOffline = 0;
-	public static int estadoJuego = 1;
-	public static int estadoBatalla = 2;
+  public Estado(Juego juego) {
+    this.juego = juego;
+  }
 
-	protected Juego juego;
+  public abstract void actualizar();
 
-	public Estado(Juego juego) {
-		this.juego = juego;
-	}
+  public abstract void graficar(Graphics g);
 
-	public abstract void actualizar();
+  public static void setEstado(Estado estado) {
+    estadoActual = estado;
+  }
 
-	public abstract void graficar(Graphics g);
-
-	public static void setEstado(Estado estado) {
-		estadoActual = estado;
-	}
-
-	public static Estado getEstado() {
-		return estadoActual;
-	}
-	
-	public abstract boolean esEstadoDeJuego();
+  public static Estado getEstado() {
+    return estadoActual;
+  }
+ 
+  public abstract boolean esEstadoDeJuego();
 }
