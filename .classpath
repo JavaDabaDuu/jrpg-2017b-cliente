@@ -9,6 +9,5 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jrpg-2017b-dominio"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/jrpg-2017b-servidor"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
