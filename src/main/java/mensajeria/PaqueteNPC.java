@@ -12,6 +12,7 @@ public class PaqueteNPC extends Paquete implements Serializable, Cloneable {
 
   private int posX;
   private int posY;
+  private boolean estadoBatalla;
 
   public PaqueteNPC() {
   }
@@ -23,6 +24,7 @@ public class PaqueteNPC extends Paquete implements Serializable, Cloneable {
     this.tipo = tipo;
     this.posX = posX;
     this.posY = posY;
+    this.estadoBatalla = false;
   }
 
   public int getId() {
@@ -57,5 +59,17 @@ public class PaqueteNPC extends Paquete implements Serializable, Cloneable {
     return (Math.abs(Math.sqrt(Math.pow(posXPersonaje - posxNPC, 2)) 
         + Math.pow(posYPersonaje - posyNPC, 2)) < 10);
   }
+
+public boolean isEstadoBatalla() {
+	return estadoBatalla;
+}
+
+public void setEstadoBatalla(boolean estadoBatalla) {
+	this.estadoBatalla = estadoBatalla;
+}
+
+public boolean getEstadoBatalla() {
+	return this.estadoBatalla;
+}
 
 }

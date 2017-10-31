@@ -5,6 +5,7 @@ import chat.VentanaContactos;
 import com.google.gson.Gson;
 
 import estados.Estado;
+import estados.EstadoBatallaNPC;
 import frames.MenuEscape;
 import frames.MenuInventario;
 import interfaz.MenuInfoPersonaje;
@@ -18,6 +19,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import java.util.LinkedList;
+import java.util.Map;
+
 import javax.swing.JOptionPane;
 
 import juego.Juego;
@@ -26,6 +29,8 @@ import juego.Pantalla;
 import mensajeria.PaqueteBatalla;
 import mensajeria.PaqueteComerciar;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNPC;
+import mensajeria.PaquetePersonaje;
 import mundo.Grafo;
 import mundo.Mundo;
 import mundo.Nodo;
@@ -84,6 +89,7 @@ public class Entidad {
   private String nombre;
   private int[] tilePersonajes;
   private int idEnemigo;
+  private Map<Integer, PaqueteNPC> npcs;
   
   //Ubicacion para abrir comerciar.
   private float xComercio;
@@ -136,6 +142,8 @@ public class Entidad {
     juego.getUbicacionPersonaje().setPosY(y);
     juego.getUbicacionPersonaje().setDireccion(getDireccion());
     juego.getUbicacionPersonaje().setFrame(getFrame());
+    
+    npcs = new HashMap(juego.getNpcs());
   }
   
   /**Actualiza el personaje
@@ -418,8 +426,10 @@ public class Entidad {
 
       // Le envio la posicion
       if (intervaloEnvio == 2) {
-        enviarPosicion();
+       	medirDistanciaDeNpc();
+    	enviarPosicion();
         intervaloEnvio = 0;
+        
       }
       intervaloEnvio++;
 
@@ -643,5 +653,32 @@ public class Entidad {
   
   public int getYOffset() {
     return yOffset;
+  }
+  
+  /** Mide la distancia del cliente al npc activo, si esta cerca entra
+   * en combate
+   */
+  
+  public void medirDistanciaDeNpc() {
+	  if(npcs != null) {
+	
+		
+		  for(int i = 0; i < npcs.size(); i++) {
+			  if(npcs.get(i).estaEnRango((int)(npcs.get(i).getPosX()), (int)(npcs.get(i).getPosY()),(int) (x),(int) (y))) {
+				  npcs.get(i).setEstadoBatalla(true);
+				  System.out.println("ESTAS EN RANGO estadoBatalla = "+ npcs.get(i).getEstadoBatalla());
+				  
+//				  PaqueteBatalla paqueteBatalla = new PaqueteBatalla();
+//				  paqueteBatalla.setId(juego.getPersonaje().getId());
+//				  paqueteBatalla.setIdEnemigo(i);
+//				  juego.getPersonaje().setEstado(Estado.estadoBatallaNPC);
+//				  Estado.setEstado(null);
+//				  juego.setEstadoBatallaNPC(new EstadoBatallaNPC(juego, paqueteBatalla));
+//				  Estado.setEstado(juego.getEstadoBatallaNPC());
+//				  
+				  break;
+			  }
+		  }
+	  }
   }
 }

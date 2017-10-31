@@ -6,6 +6,7 @@ import cliente.EscuchaMensajes;
 import dominio.Personaje;
 import estados.Estado;
 import estados.EstadoBatalla;
+import estados.EstadoBatallaNPC;
 import estados.EstadoJuego;
 
 import java.awt.Font;
@@ -22,290 +23,300 @@ import mensajeria.PaqueteMovimiento;
 import mensajeria.PaqueteNPC;
 import mensajeria.PaquetePersonaje;
 
-
 public class Juego implements Runnable {
 
-  private Pantalla pantalla;
-  private final String NOMBRE;
-  private final int ANCHO;
-  private final int ALTO;
+	private Pantalla pantalla;
+	private final String NOMBRE;
+	private final int ANCHO;
+	private final int ALTO;
 
-  private Thread hilo;
-  private boolean corriendo;
+	private Thread hilo;
+	private boolean corriendo;
 
-  //Estrategia para graficar mediante buffers
-  // (Primero se "grafica" en el/los buffer/s y
-  // finalmente en el canvas)
-  private BufferStrategy bs; 
-  
-  private Graphics g;
+	// Estrategia para graficar mediante buffers
+	// (Primero se "grafica" en el/los buffer/s y
+	// finalmente en el canvas)
+	private BufferStrategy bs;
 
-  // Estados
-  private Estado estadoJuego;
-  private Estado estadoBatalla;
+	private Graphics g;
 
-  // HandlerMouse
-  private HandlerMouse handlerMouse;
+	// Estados
+	private Estado estadoJuego;
+	private Estado estadoBatalla;
 
-  // Camara
-  private Camara camara;
+	// HandlerMouse
+	private HandlerMouse handlerMouse;
 
-  // Conexion
-  private Cliente cliente;
-  private EscuchaMensajes escuchaMensajes;
-  private PaquetePersonaje paquetePersonaje;
-  private PaqueteMovimiento ubicacionPersonaje;
-  private PaqueteMovimiento ubicacionNpc;
-  private Map<Integer, PaquetePersonaje> personajesConectados;
-  private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
-  private HashMap<Integer, PaqueteNPC> npcs;
-  private Map<String, MiChat> chatsActivos = new HashMap<>();
-  private PaqueteNPC paqueteNpc;
-  private PaqueteDeNPCS paqueteDeNPCS;
-  private CargarRecursos cargarRecursos;
+	// Camara
+	private Camara camara;
 
-  public PaqueteNPC getPaqueteNpc() {
-    return paqueteNpc;
-  }
+	// Conexion
+	private Cliente cliente;
+	private EscuchaMensajes escuchaMensajes;
+	private PaquetePersonaje paquetePersonaje;
+	private PaqueteMovimiento ubicacionPersonaje;
+	private PaqueteMovimiento ubicacionNpc;
+	private Map<Integer, PaquetePersonaje> personajesConectados;
+	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+	private HashMap<Integer, PaqueteNPC> npcs;
+	private Map<String, MiChat> chatsActivos = new HashMap<>();
+	private PaqueteNPC paqueteNpc;
+	private PaqueteDeNPCS paqueteDeNPCS;
+	private CargarRecursos cargarRecursos;
+	private EstadoBatallaNPC estadoBatallaNPC;
 
-  public void setPaqueteNpc(PaqueteNPC paqueteNpc) {
-    this.paqueteNpc = paqueteNpc;
-  }
-  
-  public Juego(final String nombre, final int ancho, final int alto, Cliente cliente,
-      PaquetePersonaje pp) {
-    this.NOMBRE = nombre;
-    this.ALTO = alto;
-    this.ANCHO = ancho;
-    this.cliente = cliente;
-    this.paquetePersonaje = pp;
-    this.paqueteDeNPCS = new PaqueteDeNPCS();
+	public PaqueteNPC getPaqueteNpc() {
+		return paqueteNpc;
+	}
 
-    // Inicializo la ubicacion del personaje
-    ubicacionPersonaje = new PaqueteMovimiento();
-    ubicacionPersonaje.setIdPersonaje(paquetePersonaje.getId());
-    ubicacionPersonaje.setFrame(0);
-    ubicacionPersonaje.setDireccion(6);
+	public void setPaqueteNpc(PaqueteNPC paqueteNpc) {
+		this.paqueteNpc = paqueteNpc;
+	}
 
-    // Creo el escucha de mensajes
-    escuchaMensajes = new EscuchaMensajes(this);
-    escuchaMensajes.start();
+	public Juego(final String nombre, final int ancho, final int alto, Cliente cliente, PaquetePersonaje pp) {
+		this.NOMBRE = nombre;
+		this.ALTO = alto;
+		this.ANCHO = ancho;
+		this.cliente = cliente;
+		this.paquetePersonaje = pp;
+		this.paqueteDeNPCS = new PaqueteDeNPCS();
 
-    handlerMouse = new HandlerMouse();
+		// Inicializo la ubicacion del personaje
+		ubicacionPersonaje = new PaqueteMovimiento();
+		ubicacionPersonaje.setIdPersonaje(paquetePersonaje.getId());
+		ubicacionPersonaje.setFrame(0);
+		ubicacionPersonaje.setDireccion(6);
 
-    iniciar();
+		// Creo el escucha de mensajes
+		escuchaMensajes = new EscuchaMensajes(this);
+		escuchaMensajes.start();
 
-    cargarRecursos = new CargarRecursos(cliente);
-    cargarRecursos.start();
-  }
+		handlerMouse = new HandlerMouse();
 
-  public void iniciar() { // Carga lo necesario para iniciar el juego
-    pantalla = new Pantalla(NOMBRE, ANCHO, ALTO, cliente);
-    pantalla.getCanvas().addMouseListener(handlerMouse);
+		iniciar();
 
-    camara = new Camara(this, 0, 0);
+		cargarRecursos = new CargarRecursos(cliente);
+		cargarRecursos.start();
+	}
 
-    Personaje.cargarTablaNivel();
-  }
+	public void iniciar() { // Carga lo necesario para iniciar el juego
+		pantalla = new Pantalla(NOMBRE, ANCHO, ALTO, cliente);
+		pantalla.getCanvas().addMouseListener(handlerMouse);
 
-  private void actualizar() { // Actualiza los objetos y sus posiciones
+		camara = new Camara(this, 0, 0);
 
-    if (Estado.getEstado() != null) {
-      Estado.getEstado().actualizar();
-    }
-  }
+		Personaje.cargarTablaNivel();
+	}
 
-  private void graficar() { // Grafica los objetos y sus posiciones
+	private void actualizar() { // Actualiza los objetos y sus posiciones
 
-    // COORDENADAS DEL PERSONAJE EN EL MAPA
-    // System.out.println("X: " + ubicacionPersonaje.getPosX() + "Y: " +
-    // ubicacionPersonaje.getPosY());
+		if (Estado.getEstado() != null) {
+			Estado.getEstado().actualizar();
+		}
+	}
 
-    bs = pantalla.getCanvas().getBufferStrategy();
-    if (bs == null) { // Seteo una estrategia para el canvas en caso de que no tenga una
-      pantalla.getCanvas().createBufferStrategy(3);
-      return;
-    }
+	private void graficar() { // Grafica los objetos y sus posiciones
 
-    g = bs.getDrawGraphics(); // Permite graficar el buffer mediante g
+		// COORDENADAS DEL PERSONAJE EN EL MAPA
+		// System.out.println("X: " + ubicacionPersonaje.getPosX() + "Y: " +
+		// ubicacionPersonaje.getPosY());
 
-    g.clearRect(0, 0, ANCHO, ALTO); // Limpiamos la pantalla
+		bs = pantalla.getCanvas().getBufferStrategy();
+		if (bs == null) { // Seteo una estrategia para el canvas en caso de que
+							// no tenga una
+			pantalla.getCanvas().createBufferStrategy(3);
+			return;
+		}
 
-    // Graficado de imagenes
-    g.setFont(new Font("Book Antiqua", 1, 15));
+		g = bs.getDrawGraphics(); // Permite graficar el buffer mediante g
 
-    if (Estado.getEstado() != null) {
-      Estado.getEstado().graficar(g);
-    }
+		g.clearRect(0, 0, ANCHO, ALTO); // Limpiamos la pantalla
 
-    // Fin de graficado de imagenes
+		// Graficado de imagenes
+		g.setFont(new Font("Book Antiqua", 1, 15));
 
-    bs.show(); // Hace visible el próximo buffer disponible
-    g.dispose();
-  }
+		if (Estado.getEstado() != null) {
+			Estado.getEstado().graficar(g);
+		}
 
-  @Override
-public void run() { // Hilo principal del juego
+		// Fin de graficado de imagenes
 
-    int fps = 60; // Cantidad de actualizaciones por segundo que se desean
-  
-    //Cantidad de nanosegundos en FPS deseados
-    double tiempoPorActualizacion = 1000000000 / fps; 
-    double delta = 0;
-    long ahora;
-    long ultimoTiempo = System.nanoTime();
-    long timer = 0; // Timer para mostrar fps cada un segundo
-    
-    // Cantidad de actualizaciones que se realizan realmente
-    int actualizaciones = 0; 
+		bs.show(); // Hace visible el próximo buffer disponible
+		g.dispose();
+	}
 
-    while (corriendo) {
-      ahora = System.nanoTime();
-      
-      // Calculo para determinar cuando realizar la actualizacion y el graficado
-      delta += (ahora - ultimoTiempo) / tiempoPorActualizacion; 
+	@Override
+	public void run() { // Hilo principal del juego
 
-      //Sumo el tiempo transcurrido hasta que se acumule 1 segundo y mostrar los FPS
-      timer += ahora - ultimoTiempo; 
+		int fps = 60; // Cantidad de actualizaciones por segundo que se desean
 
-      ultimoTiempo = ahora; // Para las proximas corridas del bucle
+		// Cantidad de nanosegundos en FPS deseados
+		double tiempoPorActualizacion = 1000000000 / fps;
+		double delta = 0;
+		long ahora;
+		long ultimoTiempo = System.nanoTime();
+		long timer = 0; // Timer para mostrar fps cada un segundo
 
-      if (delta >= 1) {
-        actualizar();
-        graficar();
-        actualizaciones++;
-        delta--;
-      }
+		// Cantidad de actualizaciones que se realizan realmente
+		int actualizaciones = 0;
 
-      if (timer >= 1000000000) { // Si paso 1 segundo muestro los FPS
-        pantalla.getFrame().setTitle(NOMBRE + " | " + "FPS: " + actualizaciones);
-        actualizaciones = 0;
-        timer = 0;
-      }
-    }
+		while (corriendo) {
+			ahora = System.nanoTime();
 
-    stop();
-  }
+			// Calculo para determinar cuando realizar la actualizacion y el
+			// graficado
+			delta += (ahora - ultimoTiempo) / tiempoPorActualizacion;
 
-  public synchronized void start() { // Inicia el juego
-    if (corriendo) {
-      return;
-    }
+			// Sumo el tiempo transcurrido hasta que se acumule 1 segundo y
+			// mostrar los FPS
+			timer += ahora - ultimoTiempo;
 
-    estadoJuego = new EstadoJuego(this);
-    Estado.setEstado(estadoJuego);
-    pantalla.mostrar();
-    corriendo = true;
-    hilo = new Thread(this);
-    hilo.start();
-  }
+			ultimoTiempo = ahora; // Para las proximas corridas del bucle
 
-  public synchronized void stop() { // Detiene el juego
-    if (!corriendo) {
-      return;
-    }
-    try {
-      corriendo = false;
-      hilo.join();
-    } catch (InterruptedException e) {
-      JOptionPane.showMessageDialog(null, "Fallo al intentar detener el juego.");
-    }
-  }
+			if (delta >= 1) {
+				actualizar();
+				graficar();
+				actualizaciones++;
+				delta--;
+			}
 
-  public int getAncho() {
-    return ANCHO;
-  }
+			if (timer >= 1000000000) { // Si paso 1 segundo muestro los FPS
+				pantalla.getFrame().setTitle(NOMBRE + " | " + "FPS: " + actualizaciones);
+				actualizaciones = 0;
+				timer = 0;
+			}
+		}
 
-  public int getAlto() {
-    return ALTO;
-  }
+		stop();
+	}
 
-  public HandlerMouse getHandlerMouse() {
-    return handlerMouse;
-  }
+	public synchronized void start() { // Inicia el juego
+		if (corriendo) {
+			return;
+		}
 
-  public Camara getCamara() {
-    return camara;
-  }
+		estadoJuego = new EstadoJuego(this);
+		Estado.setEstado(estadoJuego);
+		pantalla.mostrar();
+		corriendo = true;
+		hilo = new Thread(this);
+		hilo.start();
+	}
 
-  public EstadoJuego getEstadoJuego() {
-    return (EstadoJuego) estadoJuego;
-  }
+	public synchronized void stop() { // Detiene el juego
+		if (!corriendo) {
+			return;
+		}
+		try {
+			corriendo = false;
+			hilo.join();
+		} catch (InterruptedException e) {
+			JOptionPane.showMessageDialog(null, "Fallo al intentar detener el juego.");
+		}
+	}
 
-  public EstadoBatalla getEstadoBatalla() {
-    return (EstadoBatalla) estadoBatalla;
-  }
+	public int getAncho() {
+		return ANCHO;
+	}
 
-  public void setEstadoBatalla(EstadoBatalla estadoBatalla) {
-    this.estadoBatalla = estadoBatalla;
-  }
+	public int getAlto() {
+		return ALTO;
+	}
 
-  public Cliente getCliente() {
-    return cliente;
-  }
+	public HandlerMouse getHandlerMouse() {
+		return handlerMouse;
+	}
 
-  public EscuchaMensajes getEscuchaMensajes() {
-    return escuchaMensajes;
-  }
+	public Camara getCamara() {
+		return camara;
+	}
 
-  public PaquetePersonaje getPersonaje() {
-    return paquetePersonaje;
-  }
+	public EstadoJuego getEstadoJuego() {
+		return (EstadoJuego) estadoJuego;
+	}
 
-  public PaqueteMovimiento getUbicacionPersonaje() {
-    return ubicacionPersonaje;
-  }
- 
-  public PaqueteMovimiento getUbicacionNpc() {
-    return ubicacionNpc;
-  }
+	public EstadoBatalla getEstadoBatalla() {
+		return (EstadoBatalla) estadoBatalla;
+	}
 
-  public void setPersonaje(PaquetePersonaje paquetePersonaje) {
-    this.paquetePersonaje = paquetePersonaje;
-  }
+	public void setEstadoBatalla(EstadoBatalla estadoBatalla) {
+		this.estadoBatalla = estadoBatalla;
+	}
 
-  public void actualizarPersonaje() {
-    paquetePersonaje = (PaquetePersonaje) (personajesConectados.get(paquetePersonaje
-      .getId()).clone());
-  }
-  
-  public Map<Integer, PaquetePersonaje> getPersonajesConectados() {
-    return personajesConectados;
-  }
+	public Cliente getCliente() {
+		return cliente;
+	}
 
-  public void setPersonajesConectados(Map<Integer, PaquetePersonaje> map) {
-    this.personajesConectados = map;
-  }
+	public EscuchaMensajes getEscuchaMensajes() {
+		return escuchaMensajes;
+	}
 
-  public Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
-    return ubicacionPersonajes;
-  }
+	public PaquetePersonaje getPersonaje() {
+		return paquetePersonaje;
+	}
 
-  public void setUbicacionPersonajes(Map<Integer, PaqueteMovimiento> ubicacionPersonajes) {
-    this.ubicacionPersonajes = ubicacionPersonajes;
-  }
+	public PaqueteMovimiento getUbicacionPersonaje() {
+		return ubicacionPersonaje;
+	}
 
-  public Map<String, MiChat> getChatsActivos() {
-    return chatsActivos;
-  }
+	public PaqueteMovimiento getUbicacionNpc() {
+		return ubicacionNpc;
+	}
 
-  public HashMap<Integer, PaqueteNPC> getNpcs() {
-    return npcs;
-  }
+	public void setPersonaje(PaquetePersonaje paquetePersonaje) {
+		this.paquetePersonaje = paquetePersonaje;
+	}
 
-  public void actualizarPaqueteNpc() {
-    paqueteNpc = (PaqueteNPC) (npcs.get(paqueteNpc.getId()).clone());
-  }
+	public void actualizarPersonaje() {
+		paquetePersonaje = (PaquetePersonaje) (personajesConectados.get(paquetePersonaje.getId()).clone());
+	}
 
-  public void setNpcs(HashMap<Integer, PaqueteNPC> npcs2) {
-    this.npcs = npcs2;
-  }
+	public Map<Integer, PaquetePersonaje> getPersonajesConectados() {
+		return personajesConectados;
+	}
 
-  public PaqueteDeNPCS getPaqueteDeNPCS() {
-    return paqueteDeNPCS;
-  }
+	public void setPersonajesConectados(Map<Integer, PaquetePersonaje> map) {
+		this.personajesConectados = map;
+	}
 
-  public void setPaqueteDeNPCS(PaqueteDeNPCS paqueteDeNPCS) {
-    this.paqueteDeNPCS = paqueteDeNPCS;
-  }
+	public Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
+		return ubicacionPersonajes;
+	}
+
+	public void setUbicacionPersonajes(Map<Integer, PaqueteMovimiento> ubicacionPersonajes) {
+		this.ubicacionPersonajes = ubicacionPersonajes;
+	}
+
+	public Map<String, MiChat> getChatsActivos() {
+		return chatsActivos;
+	}
+
+	public HashMap<Integer, PaqueteNPC> getNpcs() {
+		return npcs;
+	}
+
+	public void actualizarPaqueteNpc() {
+		paqueteNpc = (PaqueteNPC) (npcs.get(paqueteNpc.getId()).clone());
+	}
+
+	public void setNpcs(HashMap<Integer, PaqueteNPC> npcs2) {
+		this.npcs = npcs2;
+	}
+
+	public PaqueteDeNPCS getPaqueteDeNPCS() {
+		return paqueteDeNPCS;
+	}
+
+	public void setPaqueteDeNPCS(PaqueteDeNPCS paqueteDeNPCS) {
+		this.paqueteDeNPCS = paqueteDeNPCS;
+	}
+
+	public Estado getEstadoBatallaNPC() {
+		return estadoBatallaNPC;
+	}
+	
+	public void setEstadoBatallaNPC(EstadoBatallaNPC estadoBatallaNPC) {
+		this.estadoBatallaNPC = estadoBatallaNPC;
+
+	}
 }
