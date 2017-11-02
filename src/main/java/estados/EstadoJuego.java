@@ -177,7 +177,6 @@ public boolean esEstadoDeJuego() {
     if (juego.getNpcs() != null) {
       npcs = new HashMap<Integer, PaqueteNPC>();
       npcs = juego.getNpcs();
-      
       g.setColor(Color.WHITE);
       g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
 

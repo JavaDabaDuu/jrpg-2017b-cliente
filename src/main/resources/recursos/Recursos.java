@@ -548,4 +548,22 @@ public class Recursos {
   private static void actualizarBarraDeCarga(int elementosCargados, MenuCarga menuCarga) {
     menuCarga.setBarraCargando(elementosCargados * ANCHOBARRA / ELEMENTOS);
   }
+
+public static BufferedImage getEstadoPersonaje() {
+	return estadoPersonaje;
+}
+
+public static void setEstadoPersonaje(BufferedImage estadoPersonaje) {
+	Recursos.estadoPersonaje = estadoPersonaje;
+}
+
+public static BufferedImage getBarraSalud() {
+	return barraSalud;
+}
+
+public static void setBarraSalud(BufferedImage barraSalud) {
+	Recursos.barraSalud = barraSalud;
+}
+  
+  
 }

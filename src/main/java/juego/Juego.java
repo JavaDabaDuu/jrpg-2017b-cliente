@@ -43,6 +43,7 @@ public class Juego implements Runnable {
 	// Estados
 	private Estado estadoJuego;
 	private Estado estadoBatalla;
+	private Estado estadoBatallaNPC;
 
 	// HandlerMouse
 	private HandlerMouse handlerMouse;
@@ -63,7 +64,6 @@ public class Juego implements Runnable {
 	private PaqueteNPC paqueteNpc;
 	private PaqueteDeNPCS paqueteDeNPCS;
 	private CargarRecursos cargarRecursos;
-	private EstadoBatallaNPC estadoBatallaNPC;
 
 	public PaqueteNPC getPaqueteNpc() {
 		return paqueteNpc;

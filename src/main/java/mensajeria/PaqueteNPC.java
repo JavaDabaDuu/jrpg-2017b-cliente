@@ -73,4 +73,12 @@ public void setEstado(int estado) {
 	this.estado = estado;
 }
 
+public void setPosX(float x) {
+	this.posX = (int)(x);
+}
+
+public void setPosY(float y) {
+	this.posY = (int)(y);
+}
+
 }
