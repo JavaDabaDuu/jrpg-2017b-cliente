@@ -2,14 +2,8 @@ package estados;
 
 import com.google.gson.Gson;
 
-import dominio.Asesino;
 import dominio.Casta;
-import dominio.Elfo;
-import dominio.Guerrero;
-import dominio.Hechicero;
-import dominio.Humano;
 import dominio.NonPlayableCharacter;
-import dominio.Orco;
 import dominio.Personaje;
 import interfaz.EstadoDePersonaje;
 import interfaz.MenuBatalla;
@@ -26,7 +20,7 @@ import javax.swing.JOptionPane;
 import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.PaqueteAtacar;
-import mensajeria.PaqueteBatalla;
+import mensajeria.PaqueteBatallaNPC;
 import mensajeria.PaqueteFinalizarBatalla;
 import mensajeria.PaqueteNPC;
 import mensajeria.PaquetePersonaje;
@@ -57,7 +51,7 @@ public class EstadoBatallaNPC extends Estado {
 	private int nivelPersonaje;
 	private int nivelEnemigo;
 
-	public EstadoBatallaNPC(Juego juego, PaqueteBatalla paqueteBatalla) {
+	public EstadoBatallaNPC(Juego juego, PaqueteBatallaNPC paqueteBatalla) {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/mundoBatalla.txt", "recursos/mundoBatallaCapaDos.txt");
 

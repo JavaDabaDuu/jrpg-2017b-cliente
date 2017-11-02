@@ -1,18 +1,23 @@
 package mensajeria;
 
 import dominio.NonPlayableCharacter;
+import estados.Estado;
 
 import java.io.Serializable;
 
 public class PaqueteNPC extends Paquete implements Serializable, Cloneable {
 
-  private NonPlayableCharacter npc;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+private NonPlayableCharacter npc;
   private int id;
   private String tipo;
 
   private int posX;
   private int posY;
-  private boolean estadoBatalla;
+  private int estado;
 
   public PaqueteNPC() {
   }
@@ -24,7 +29,7 @@ public class PaqueteNPC extends Paquete implements Serializable, Cloneable {
     this.tipo = tipo;
     this.posX = posX;
     this.posY = posY;
-    this.estadoBatalla = false;
+    this.estado = Estado.estadoJuego;
   }
 
   public int getId() {
@@ -60,16 +65,12 @@ public class PaqueteNPC extends Paquete implements Serializable, Cloneable {
         + Math.pow(posYPersonaje - posyNPC, 2)) < 10);
   }
 
-public boolean isEstadoBatalla() {
-	return estadoBatalla;
+public int getEstado() {
+	return this.estado;
 }
 
-public void setEstadoBatalla(boolean estadoBatalla) {
-	this.estadoBatalla = estadoBatalla;
-}
-
-public boolean getEstadoBatalla() {
-	return this.estadoBatalla;
+public void setEstado(int estado) {
+	this.estado = estado;
 }
 
 }

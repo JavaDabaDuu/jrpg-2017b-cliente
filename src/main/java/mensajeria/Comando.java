@@ -9,13 +9,13 @@ public abstract class Comando {
     "InicioSesion", "MostrarMapas","Movimiento", "Registro", "Salir", "Batalla", "Atacar",
     "FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl",
     "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque",
-    "ActualizarTrueque", "Talk", "ActualizarPtsLvl", "ActualizarNPC", "SetearNPC", "FinalizarBatallaNPC"};
+    "ActualizarTrueque", "Talk", "ActualizarPtsLvl", "ActualizarNPC", "SetearNPC", "BatallaNPC", "FinalizarBatallaNPC"};
 
   public static final String[] CLASSNAMESBIS = { "Conexion", "CrearPersonaje", "Desconectar",
     "InicioSesionSet", "MostrarMapas","Movimiento", "RegistroSet", "SalirSet", "Batalla", "Atacar",
     "FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario",
     "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk", "ActualizarPtsLvl",
-    "ActualizarNPC", "SetearNPC", "FinalizarBatallaNPC" };
+    "ActualizarNPC", "SetearNPC", "BatallaNPC","FinalizarBatallaNPC" };
 
   public static final int CONEXION = 0;
   public static final int CREACIONPJ = 1;
@@ -39,7 +39,8 @@ public abstract class Comando {
   public static final int ACTUALIZARPTOSLVL = 19;
   public static final int ACTUALIZARNPC = 20;
   public static final int SETEARNPC = 21;
-  public static final int FINALIZARBATALLANPC = 22;
+  public static final int BATALLANPC = 22;
+  public static final int FINALIZARBATALLANPC = 23;
   
   protected final Gson gson = new Gson();
   protected String cadenaLeida;

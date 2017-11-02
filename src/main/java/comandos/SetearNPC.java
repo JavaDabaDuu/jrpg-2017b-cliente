@@ -9,7 +9,7 @@ public class SetearNPC extends ComandosEscucha {
     PaqueteDeNPCS paquete = (PaqueteDeNPCS)gson
         .fromJson(cadenaLeida,  PaqueteDeNPCS.class);
     juego.setNpcs(paquete.getNpcs());
-    System.out.println("llego set en el cliente");
+   
   }
 
 }

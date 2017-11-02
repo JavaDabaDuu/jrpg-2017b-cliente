@@ -143,7 +143,8 @@ public class Entidad {
     juego.getUbicacionPersonaje().setDireccion(getDireccion());
     juego.getUbicacionPersonaje().setFrame(getFrame());
     
-    npcs = new HashMap(juego.getNpcs());
+    npcs = new HashMap<Integer, PaqueteNPC>();
+    npcs = juego.getNpcs();
   }
   
   /**Actualiza el personaje
@@ -661,22 +662,16 @@ public class Entidad {
   
   public void medirDistanciaDeNpc() {
 	  if(npcs != null) {
-	
-		
-		  for(int i = 0; i < npcs.size(); i++) {
-			  if(npcs.get(i).estaEnRango((int)(npcs.get(i).getPosX()), (int)(npcs.get(i).getPosY()),(int) (x),(int) (y))) {
-				  npcs.get(i).setEstadoBatalla(true);
-				  System.out.println("ESTAS EN RANGO estadoBatalla = "+ npcs.get(i).getEstadoBatalla());
-				  
-//				  PaqueteBatalla paqueteBatalla = new PaqueteBatalla();
-//				  paqueteBatalla.setId(juego.getPersonaje().getId());
-//				  paqueteBatalla.setIdEnemigo(i);
-//				  juego.getPersonaje().setEstado(Estado.estadoBatallaNPC);
-//				  Estado.setEstado(null);
-//				  juego.setEstadoBatallaNPC(new EstadoBatallaNPC(juego, paqueteBatalla));
-//				  Estado.setEstado(juego.getEstadoBatallaNPC());
-//				  
-				  break;
+		  Iterator<Integer> it = npcs.keySet().iterator();
+		  int key;
+		  PaqueteNPC actual;
+		  
+		  while(it.hasNext()) {
+			  key = it.next();
+			  actual = npcs.get(key);
+			  
+			  if(actual != null && actual.getEstado() == Estado.estadoJuego) {
+				  System.out.println("Estas en rango");
 			  }
 		  }
 	  }

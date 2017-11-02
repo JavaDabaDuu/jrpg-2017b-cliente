@@ -319,4 +319,9 @@ public class Juego implements Runnable {
 		this.estadoBatallaNPC = estadoBatallaNPC;
 
 	}
+
+	public void actualizarEnemigo() {
+		this.paqueteNpc = (PaqueteNPC) (npcs.get(paqueteNpc.getId())
+                .clone());
+	}
 }
