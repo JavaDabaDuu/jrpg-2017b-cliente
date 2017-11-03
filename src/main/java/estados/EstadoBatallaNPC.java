@@ -59,6 +59,7 @@ public class EstadoBatallaNPC extends Estado {
 
 		paquetePersonaje = juego.getPersonajesConectados().get(paqueteBatalla.getId());
 		paqueteEnemigo = juego.getNpcs().get(paqueteBatalla.getIdEnemigo());
+		enemigo = paqueteEnemigo.getNpc();
 
 		crearPersonajes();
 

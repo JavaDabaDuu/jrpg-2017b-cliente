@@ -27,6 +27,7 @@ import juego.Juego;
 
 import juego.Pantalla;
 import mensajeria.PaqueteBatalla;
+import mensajeria.PaqueteBatallaNPC;
 import mensajeria.PaqueteComerciar;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaqueteNPC;
@@ -95,6 +96,8 @@ public class Entidad {
   private float xComercio;
   private float yComercio;
   private float [] comercio;
+  
+  private static final int RANGONPC = 100;
 
   /**Constructor de la clase Entidad
   * @param juego juego con el que se instancia Entidad
@@ -144,7 +147,7 @@ public class Entidad {
     juego.getUbicacionPersonaje().setFrame(getFrame());
     
     npcs = new HashMap<Integer, PaqueteNPC>();
-    npcs = juego.getNpcs();
+    npcs = ((Map<Integer, PaqueteNPC>) juego.getNpcs().clone());
   }
   
   /**Actualiza el personaje
@@ -661,17 +664,34 @@ public class Entidad {
    */
   
   public void medirDistanciaDeNpc() {
-	  if(npcs != null) {
-		  Iterator<Integer> it = npcs.keySet().iterator();
+	  
+	  Map<Integer, PaqueteNPC> aux = new HashMap<>();
+	  aux = juego.getNpcs();
+	  
+	  if(aux != null) {
+		  Iterator<Integer> it = aux.keySet().iterator();
 		  int key;
 		  PaqueteNPC actual;
 		  
 		  while(it.hasNext()) {
 			  key = it.next();
-			  actual = npcs.get(key);
+			  actual = aux.get(key);
 			  
 			  if(actual != null && actual.getEstado() == Estado.estadoJuego) {
-				  System.out.println("Estas en rango");
+				  if(Math.sqrt(Math.pow(actual.getPosX() - x, 2) + Math.pow(actual.getPosY() - y, 2) ) < RANGONPC) {
+					  PaqueteBatallaNPC paqueteBatalla = new PaqueteBatallaNPC();
+                      paqueteBatalla.setId(juego.getPersonaje().getId());
+                      paqueteBatalla.setIdEnemigo(key);
+
+                      try {
+                          juego.getCliente().getSalida()
+                                  .writeObject(gson.toJson(paqueteBatalla));
+                      } catch (IOException e) {
+                          System.out.println(
+                                  "Error al enviar paquete Batalla NPC");
+                      }
+                      	break;
+				  }
 			  }
 		  }
 	  }
