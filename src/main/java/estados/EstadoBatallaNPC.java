@@ -343,7 +343,7 @@ private void finalizarBatalla() {
   */
 
     paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
-    paqueteEnemigo.setComando(Comando.ACTUALIZARPERSONAJE);
+    paqueteEnemigo.setComando(Comando.ACTUALIZARNPC);
 
     getJuego().getCliente().getSalida()
        .writeObject(gson.toJson(paquetePersonaje));
