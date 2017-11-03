@@ -18,7 +18,7 @@ public abstract class Comando {
    "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio",
    "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk",
    "ActualizarPtsLvl", "ActualizarNPC", "SetearNPC", "BatallaNPC",
-   "FinalizarBatallaNPC"};
+   "DesaparecerNPC"};
 
   /** The Constant CLASSNAMESBIS. */
   public static final String[] CLASSNAMESBIS = {"Conexion", "CrearPersonaje",
@@ -27,7 +27,7 @@ public abstract class Comando {
     "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario",
     "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk",
     "ActualizarPtsLvl", "ActualizarNPC", "SetearNPC", "BatallaNPC",
-    "FinalizarBatallaNPC" };
+    "DesaparecerNPC" };
 
   /** The Constant CONEXION. */
   public static final int CONEXION = 0;
@@ -98,8 +98,9 @@ public abstract class Comando {
   /** The Constant BATALLANPC. */
   public static final int BATALLANPC = 22;
 
-  /** The Constant FINALIZARBATALLANPC. */
-  public static final int FINALIZARBATALLANPC = 23;
+  /** The Constant DESAPARECERNPC. */
+  
+  public static final int DESAPARECERNPC = 23;
 
   /** The gson. */
   private final Gson gson = new Gson();
