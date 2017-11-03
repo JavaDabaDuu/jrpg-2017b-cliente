@@ -181,10 +181,10 @@ public class MenuCreacionPj extends JFrame {
     energia.setForeground(Color.GREEN);
 
     JLabel lblNewLabelNombre = new JLabel("Nombre");
-    lblNewLabel_4.setBounds(207, 125, 60, 14);
-    layeredPane.add(lblNewLabel_4, new Integer(1));
-    lblNewLabel_4.setForeground(Color.WHITE);
-    lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+    lblNewLabelNombre.setBounds(207, 125, 60, 14);
+    layeredPane.add(lblNewLabelNombre, new Integer(1));
+    lblNewLabelNombre.setForeground(Color.WHITE);
+    lblNewLabelNombre.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
     nombre = new JTextField();
     nombre.addActionListener(new ActionListener() {
