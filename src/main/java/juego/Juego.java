@@ -1,5 +1,13 @@
 package juego;
 
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JOptionPane;
+
 import chat.MiChat;
 import cliente.Cliente;
 import cliente.EscuchaMensajes;
@@ -8,16 +16,6 @@ import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoBatallaNPC;
 import estados.EstadoJuego;
-
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.JOptionPane;
-
 import mensajeria.PaqueteDeNPCS;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaqueteNPC;
@@ -110,6 +108,22 @@ public class Juego implements Runnable {
   /** The cargar recursos. */
   private CargarRecursos cargarRecursos;
 
+  /** The Constant DIRECCION. */
+  private static final int DIRECCION = 6;
+
+  /** The Constant NUM_BUFFERS. */
+  private static final int NUM_BUFFERS = 3;
+
+  /** The Constant SIZE. */
+  private static final int SIZE = 15;
+
+  /** The Constant FPS. */
+  private static final int FPS = 60;
+
+  /** The Constant SEGUNDOS_EN_NANO. */
+  private static final int SEGUNDOS_EN_NANO = 1_000_000_000;
+
+
   /**
    * Gets the paquete npc.
    *
@@ -150,7 +164,7 @@ public class Juego implements Runnable {
     ubicacionPersonaje = new PaqueteMovimiento();
     ubicacionPersonaje.setIdPersonaje(paquetePersonaje.getId());
     ubicacionPersonaje.setFrame(0);
-    ubicacionPersonaje.setDireccion(6);
+    ubicacionPersonaje.setDireccion(DIRECCION);
 
     // Creo el escucha de mensajes
     escuchaMensajes = new EscuchaMensajes(this);
@@ -197,7 +211,7 @@ public class Juego implements Runnable {
     bs = pantalla.getCanvas().getBufferStrategy();
     //Seteo una estrategia para el canvas en caso de que no tenga una
     if (bs == null) {
-      pantalla.getCanvas().createBufferStrategy(3);
+      pantalla.getCanvas().createBufferStrategy(NUM_BUFFERS);
       return;
     }
 
@@ -206,7 +220,7 @@ public class Juego implements Runnable {
     g.clearRect(0, 0, ancho, alto); // Limpiamos la pantalla
 
     // Graficado de imagenes
-    g.setFont(new Font("Book Antiqua", 1, 15));
+    g.setFont(new Font("Book Antiqua", 1, SIZE));
 
     if (Estado.getEstado() != null) {
       Estado.getEstado().graficar(g);
@@ -223,11 +237,8 @@ public class Juego implements Runnable {
   @Override
   public void run() { // Hilo principal del juego
 
-    // Cantidad de actualizaciones por segundo que se desean
-    int fps = 60;
-
     // Cantidad de nanosegundos en FPS deseados
-    double tiempoPorActualizacion = 1000000000 / fps;
+    double tiempoPorActualizacion = SEGUNDOS_EN_NANO / FPS;
     double delta = 0;
     long ahora;
     long ultimoTiempo = System.nanoTime();
@@ -257,7 +268,7 @@ public class Juego implements Runnable {
       }
 
       // Si paso 1 segundo muestro los FPS
-      if (timer >= 1000000000) {
+      if (timer >= SEGUNDOS_EN_NANO) {
         pantalla.getFrame().setTitle(nombre + " | "
             + "FPS: " + actualizaciones);
         actualizaciones = 0;

@@ -35,6 +35,18 @@ public class Celda extends JPanel {
   /** The it. */
   private Item it;
 
+  /** The Constant WIDTH. */
+  private static final int WIDTH = 49;
+
+  /** The Constant HEIGHT. */
+  private static final int HEIGHT = 49;
+
+  /** The Constant WIDTH_DIMENSION. */
+  private static final int WIDTH_DIMENSION = 60;
+
+  /** The Constant HEIGHT_DIMENSION. */
+  private static final int HEIGHT_DIMENSION = 60;
+
 
   /**
    * Instantiates a new celda.
@@ -49,7 +61,7 @@ public class Celda extends JPanel {
     it = itemAux;
     this.paquetePersonaje = paquetePersonajeAux;
     label = new JLabel(new ImageIcon(
-        this.item.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+        this.item.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT)));
     actionListenersYLabel(itemAux);
   }
 
@@ -58,7 +70,7 @@ public class Celda extends JPanel {
    */
   public Celda() {
     label = new JLabel(new ImageIcon(Recursos.getNoItem()
-        .getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+        .getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT)));
     add(label);
   }
 
@@ -103,7 +115,7 @@ public class Celda extends JPanel {
    */
   protected void resetLabel() {
     label.setIcon(new ImageIcon(Recursos.getNoItem()
-        .getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+        .getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT)));
     label.setToolTipText(null);
     paquetePersonaje.removerItem(it);
     label.removeMouseListener(mouseListener);
@@ -115,7 +127,7 @@ public class Celda extends JPanel {
    */
   @Override
 public Dimension getPreferredSize() {
-    return new Dimension(60, 60);
+    return new Dimension(WIDTH_DIMENSION, HEIGHT_DIMENSION);
   }
 
   /**

@@ -1,3 +1,4 @@
+
 package entidades;
 
 import chat.VentanaContactos;
@@ -36,7 +37,6 @@ import mundo.Grafo;
 import mundo.Mundo;
 import mundo.Nodo;
 import recursos.Recursos;
-
 
 /**
  * Clase Entidad.
@@ -125,8 +125,11 @@ public class Entidad {
   /** The Constant diagonalInfIzq. */
   private static final int DIAGONALINFIZQ = 7;
 
+  /** The Constant MOV_INICIAL. */
+  private static final int MOV_INICIAL = 6;
+
   /** The movimiento hacia. */
-  private int movimientoHacia = 6;
+  private int movimientoHacia = MOV_INICIAL;
 
   /** The en movimiento. */
   private boolean enMovimiento;
@@ -183,6 +186,38 @@ public class Entidad {
   /** The Constant RANGONPC. */
   private static final int RANGONPC = 100;
 
+  /** The Constant X_SPAWN. */
+  private static final int X_SPAWN = 64;
+
+  /** The Constant Y_SPAWN. */
+  private static final int Y_SPAWN = 32;
+
+  /** The Constant Y_OFFSET. */
+  private static final int Y_OFFSET = 32;
+
+  /** The Constant DRAW_IMG_OFFSET. */
+  private static final int DRAW_IMG_OFFSET = 4;
+
+  /** The Constant X_NOMBRE. */
+  //A la hora de graficar el nombre
+  private static final int X_NOMBRE = 32;
+
+  /** The Constant Y_NOMBRE. */
+  private static final int Y_NOMBRE = 20;
+
+  /** The Constant WIDTH_NOMBRE. */
+  private static final int WIDTH_NOMBRE = 0;
+
+  /** The Constant HEIGHT_NOMBRE. */
+  private static final int HEIGHT_NOMBRE = 10;
+
+  /** The Constant SIZE_NOMBRE. */
+  private static final int SIZE_NOMBRE = 15;
+
+  /** The Constant COSTO_NODO_DIAG. */
+  //verCostos[] =1,5 si esta en diagonal
+  private static final double COSTO_NODO_DIAG = 1.5;
+
   /**
    * Constructor de la clase Entidad.
    *
@@ -208,8 +243,8 @@ public class Entidad {
     this.mundo = mundoAux;
     xOffset = anchoAux / 2;
     yOffset = altoAux / 2;
-    x = (int) (spawnXAux / 64) * 64;
-    y = (int) (spawnYAux / 32) * 32;
+    x = (int) (spawnXAux / X_SPAWN) * X_SPAWN;
+    y = (int) (spawnYAux / Y_SPAWN) * Y_SPAWN;
     this.animaciones.put(HORIZONTALIZQ,
         new Animacion(velAnimacionAux, animacionesAux.get(HORIZONTALIZQ)));
     this.animaciones.put(DIAGONALSUPIZQ,
@@ -272,7 +307,6 @@ public class Entidad {
   /**
    * Devuelve la entrada.
    *
-   * @return the entrada
    */
 
   public void getEntrada() {
@@ -539,7 +573,7 @@ public class Entidad {
     dx = 0;
     dy = 0;
     double paso = 1;
-    if (enMovimiento && !(x == xFinal && y == yFinal - 32)) {
+    if (enMovimiento && !(x == xFinal && y == yFinal - Y_OFFSET)) {
       if (movimientoHacia == VERTICALSUP) {
         dy -= paso;
       } else if (movimientoHacia == VERTICALINF) {
@@ -574,7 +608,7 @@ public class Entidad {
       }
       intervaloEnvio++;
 
-      if (x == xFinal && y == yFinal - 32) {
+      if (x == xFinal && y == yFinal - Y_OFFSET) {
         enMovimiento = false;
       }
     }
@@ -589,7 +623,8 @@ public class Entidad {
   public void graficar(final Graphics g) {
     drawX = (int) (x - juego.getCamara().getxOffset());
     drawY = (int) (y - juego.getCamara().getyOffset());
-    g.drawImage(getFrameAnimacionActual(), drawX, drawY + 4, ancho, alto, null);
+    g.drawImage(getFrameAnimacionActual(), drawX, drawY + DRAW_IMG_OFFSET,
+        ancho, alto, null);
   }
 
   /**
@@ -600,9 +635,10 @@ public class Entidad {
 
   public void graficarNombre(final Graphics g) {
     g.setColor(Color.WHITE);
-    g.setFont(new Font("Book Antiqua", Font.BOLD, 15));
+    g.setFont(new Font("Book Antiqua", Font.BOLD, SIZE_NOMBRE));
     Pantalla.centerString(g,
-        new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
+        new java.awt.Rectangle(drawX + X_NOMBRE, drawY - Y_OFFSET, WIDTH_NOMBRE,
+            HEIGHT_NOMBRE), nombre);
   }
  /**
   * Obtiene el frameActual del personaje.
@@ -693,7 +729,7 @@ public class Entidad {
         .obtenerCantidadDeAdyacentes(); i++) {
       if (estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial],
           grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
-        vecCostos[adyacentes[i].obtenerIndice()] = 1.5;
+        vecCostos[adyacentes[i].obtenerIndice()] = COSTO_NODO_DIAG;
       } else {
         vecCostos[adyacentes[i].obtenerIndice()] = 1;
       }
@@ -725,7 +761,7 @@ public class Entidad {
         double valorASumar = 1;
         if (estanEnDiagonal(grafoLibres.obtenerNodos()[indiceMinimo],
             grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
-          valorASumar = 1.5;
+          valorASumar = COSTO_NODO_DIAG;
         }
         if (vecCostos[indiceMinimo] + valorASumar
         < vecCostos[adyacentes[i].obtenerIndice()]) {
@@ -877,11 +913,11 @@ public class Entidad {
       if (actual != null && actual.getEstado() == Estado.getEstadoJuego()) {
         if (Math.sqrt(Math.pow(actual.getPosX() - x, 2)
         + Math.pow(actual.getPosY() - y, 2)) < RANGONPC) {
-        	
+
           PaqueteBatallaNPC paqueteBatalla = new PaqueteBatallaNPC();
           paqueteBatalla.setId(juego.getPersonaje().getId());
           paqueteBatalla.setIdEnemigo(key);
-          
+
           actual.setEstado(Estado.getEstadoBatallaNPC());
           juego.getPersonaje().setEstado(Estado.getEstadoBatallaNPC());
 

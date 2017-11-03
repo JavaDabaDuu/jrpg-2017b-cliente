@@ -1,3 +1,4 @@
+
 package interfaz;
 
 import dominio.NonPlayableCharacter;
@@ -33,6 +34,59 @@ public class EstadoDePersonaje {
   /** The Constant ANCHOMINIATURA. */
   private static final int ANCHOMINIATURA = 64;
 
+  /** The Constant OFFSET_X. */
+  private static final int OFFSET_X = 10;
+
+  /** The Constant OFFSET_Y. */
+  private static final int OFFSET_Y = 9;
+
+  /** The Constant SIZE1. */
+  private static final int SIZE1 = 10;
+
+  /** The Constant SIZE2. */
+  private static final int SIZE2 = 8;
+
+  /** The Constant X_BARRA_SALUD. */
+  private static final int X_BARRA_SALUD = 80;
+
+  /** The Constant Y_BARRA_SALUD. */
+  private static final int Y_BARRA_SALUD = 26;
+
+  /** The Constant X_SALUD_TOPE. */
+  private static final int X_SALUD_TOPE = 132;
+
+  /** The Constant Y_SALUD_TOPE. */
+  private static final int Y_SALUD_TOPE = 37;
+
+  /** The Constant X_BARRA_ENERIGA. */
+  private static final int X_BARRA_ENERIGA = 80;
+
+  /** The Constant Y_BARRA_ENERGIA. */
+  private static final int Y_BARRA_ENERGIA = 42;
+
+  /** The Constant X_ENERGIA_TOPE. */
+  private static final int X_ENERGIA_TOPE = 132;
+
+  /** The Constant Y_ENERGIA_TOPE. */
+  private static final int Y_ENERGIA_TOPE = 52;
+
+  /** The Constant X_BARRA_EXPERIENCIA. */
+  private static final int X_BARRA_EXPERIENCIA = 77;
+
+  /** The Constant Y_BARRA_EXPERIENCIA. */
+  private static final int Y_BARRA_EXPERIENCIA = 65;
+
+  /** The Constant X_TABLA_NIVELES. */
+  private static final int X_TABLA_NIVELES = 132;
+
+  /** The Constant Y_TABLA_NIVELES. */
+  private static final int Y_TABLA_NIVELES = 70;
+
+  /** The Constant X_NIVEL. */
+  private static final int X_NIVEL = 59;
+
+  /** The Constant Y_NIVEL. */
+  private static final int Y_NIVEL = 70;
   /**
    * Dibujar estado de personaje.
    *
@@ -48,7 +102,7 @@ public class EstadoDePersonaje {
 
     int drawBarra = 0;
     g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
-    g.drawImage(miniaturaPersonaje, x + 10, y + 9,
+    g.drawImage(miniaturaPersonaje, x + OFFSET_X, y + OFFSET_Y,
         ANCHOMINIATURA, ALTOMINIATURA, null);
 
     if (personaje.getSalud() == personaje.getSaludTope()) {
@@ -59,11 +113,11 @@ public class EstadoDePersonaje {
     }
 
     g.setColor(Color.WHITE);
-    g.setFont(new Font("Tahoma", Font.PLAIN, 10));
+    g.setFont(new Font("Tahoma", Font.PLAIN, SIZE1));
     g.drawImage(Recursos.getBarraSalud(),
-         x + 80, y + 26, drawBarra, ALTOSALUD, null);
+         x + X_BARRA_SALUD, y + Y_BARRA_SALUD, drawBarra, ALTOSALUD, null);
     g.drawString(String.valueOf(personaje.getSalud()) + " / " + String
-        .valueOf(personaje.getSaludTope()), x + 132, y + 37);
+        .valueOf(personaje.getSaludTope()), x + X_SALUD_TOPE, y + Y_SALUD_TOPE);
 
     if (personaje.getEnergia() == personaje.getEnergiaTope()) {
       drawBarra = ANCHOBARRA;
@@ -72,10 +126,12 @@ public class EstadoDePersonaje {
           * ANCHOBARRA) / personaje.getEnergiaTope();
     }
 
-    g.drawImage(Recursos.getBarraEnergia(), x + 80, y + 42, drawBarra,
+    g.drawImage(Recursos.getBarraEnergia(),
+    x + X_BARRA_ENERIGA, y + Y_BARRA_ENERGIA, drawBarra,
          ALTOENERGIA, null);
     g.drawString(String.valueOf(personaje.getEnergia()) + " / " + String
-        .valueOf(personaje.getEnergiaTope()), x + 132, y + 52);
+        .valueOf(personaje.getEnergiaTope()),
+        x + X_ENERGIA_TOPE, y + Y_ENERGIA_TOPE);
 
     if (personaje.getExperiencia()
     == Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
@@ -85,16 +141,18 @@ public class EstadoDePersonaje {
           .getTablaDeNiveles()[personaje.getNivel() + 1];
     }
 
-    g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-    g.drawImage(Recursos.getBarraExperiencia(), x + 77, y + 65,
+    g.setFont(new Font("Tahoma", Font.PLAIN, SIZE2));
+    g.drawImage(Recursos.getBarraExperiencia(),
+    x + X_BARRA_EXPERIENCIA, y + Y_BARRA_EXPERIENCIA,
         drawBarra, ALTOEXPERIENCIA, null);
     g.drawString(String.valueOf(personaje.getExperiencia())
         + " / " + String
         .valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]),
-        x + 132, y + 70);
-    g.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        x + X_TABLA_NIVELES, y + Y_TABLA_NIVELES);
+    g.setFont(new Font("Tahoma", Font.PLAIN, SIZE1));
     g.setColor(Color.GREEN);
-    g.drawString(String.valueOf(personaje.getNivel()), x + 59, y + 70);
+    g.drawString(String.valueOf(personaje.getNivel()),
+    x + X_NIVEL, y + Y_NIVEL);
 
 
   }
@@ -116,20 +174,23 @@ public class EstadoDePersonaje {
 
     g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 
-    g.drawImage(miniaturaPersonaje, x + 10, y + 9,
+    g.drawImage(miniaturaPersonaje, x + OFFSET_X, y + OFFSET_Y,
         ANCHOMINIATURA, ALTOMINIATURA, null);
 
     g.setColor(Color.WHITE);
-    g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-    g.drawImage(Recursos.getBarraSalud(), x + 80, y + 26,
+    g.setFont(new Font("Tahoma", Font.PLAIN, SIZE1));
+    g.drawImage(Recursos.getBarraSalud(), x + X_BARRA_SALUD, y + Y_BARRA_SALUD,
         ANCHOBARRA, ALTOSALUD, null);
     g.drawString(String.valueOf(personaje.getSaludTope()) + " / " + String
-         .valueOf(personaje.getSaludTope()), x + 132, y + 37);
+         .valueOf(personaje.getSaludTope()),
+         x + X_SALUD_TOPE, y + Y_SALUD_TOPE);
 
-    g.drawImage(Recursos.getBarraEnergia(), x + 80, y + 42,
+    g.drawImage(Recursos.getBarraEnergia(),
+    x + X_BARRA_ENERIGA, y + Y_BARRA_ENERGIA,
         ANCHOBARRA, ALTOENERGIA, null);
     g.drawString(String.valueOf(personaje.getEnergiaTope()) + " / " + String
-        .valueOf(personaje.getEnergiaTope()), x + 132, y + 52);
+        .valueOf(personaje.getEnergiaTope()),
+        x + X_ENERGIA_TOPE, y + Y_ENERGIA_TOPE);
 
     if (personaje.getExperiencia()
     == Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
@@ -139,15 +200,18 @@ public class EstadoDePersonaje {
           .getTablaDeNiveles()[personaje.getNivel() + 1];
     }
 
-    g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-    g.drawImage(Recursos.getBarraExperiencia(), x + 77, y + 65,
+    g.setFont(new Font("Tahoma", Font.PLAIN, SIZE2));
+    g.drawImage(Recursos.getBarraExperiencia(),
+    x + X_BARRA_EXPERIENCIA, y + Y_BARRA_EXPERIENCIA,
         drawBarra, ALTOEXPERIENCIA, null);
     g.drawString(String.valueOf(personaje.getExperiencia()) + " / " + String
         .valueOf(Personaje
-        .getTablaDeNiveles()[personaje.getNivel() + 1]), x + 132, y + 70);
-    g.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        .getTablaDeNiveles()[personaje.getNivel() + 1]),
+        x + X_TABLA_NIVELES, y + Y_TABLA_NIVELES);
+    g.setFont(new Font("Tahoma", Font.PLAIN, SIZE1));
     g.setColor(Color.GREEN);
-    g.drawString(String.valueOf(personaje.getNivel()), x + 59, y + 70);
+    g.drawString(String.valueOf(personaje.getNivel()),
+    x + X_NIVEL, y + Y_NIVEL);
   }
 
   /**
@@ -164,19 +228,19 @@ public class EstadoDePersonaje {
   final BufferedImage miniaturaEnemigo) {
     g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 
-    g.drawImage(miniaturaEnemigo, x + 10, y + 9,
+    g.drawImage(miniaturaEnemigo, x + OFFSET_X, y + OFFSET_Y,
         ANCHOMINIATURA, ALTOMINIATURA, null);
 
     g.setColor(Color.WHITE);
-    g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-    g.drawImage(Recursos.getBarraSalud(), x + 80, y + 26,
+    g.setFont(new Font("Tahoma", Font.PLAIN, SIZE1));
+    g.drawImage(Recursos.getBarraSalud(), x + X_BARRA_SALUD, y + Y_BARRA_SALUD,
         ANCHOBARRA, ALTOSALUD, null);
     g.drawString(String.valueOf(enemigo.getSalud()) + " / " + String
-        .valueOf(enemigo.getSalud()), x + 132, y + 37);
+        .valueOf(enemigo.getSalud()), x + X_SALUD_TOPE, y + Y_SALUD_TOPE);
 
-    g.setFont(new Font("Tahoma", Font.PLAIN, 8));
+    g.setFont(new Font("Tahoma", Font.PLAIN, SIZE2));
     g.setColor(Color.GREEN);
-    g.drawString(String.valueOf(enemigo.getNivel()), x + 59, y + 70);
+    g.drawString(String.valueOf(enemigo.getNivel()), x + X_NIVEL, y + Y_NIVEL);
 
   }
 }

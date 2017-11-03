@@ -1,3 +1,4 @@
+
 package mundo;
 
 /**
@@ -20,6 +21,9 @@ public class Nodo {
   /** The nodos adyacentes. */
   private Nodo[] nodosAdyacentes;
 
+  /** The Constant CANT_NODOS. */
+  private static final int CANT_NODOS = 8;
+
   /**
    * Instantiates a new nodo.
    *
@@ -32,7 +36,7 @@ public class Nodo {
     this.y = yAux;
     this.indice = indiceAux;
     cantidadDeAdyacentes = 0;
-    nodosAdyacentes = new Nodo[8];
+    nodosAdyacentes = new Nodo[CANT_NODOS];
   }
 
   /**

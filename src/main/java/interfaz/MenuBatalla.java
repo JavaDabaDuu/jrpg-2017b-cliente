@@ -1,3 +1,4 @@
+
 package interfaz;
 
 import dominio.Personaje;
@@ -24,6 +25,61 @@ public class MenuBatalla {
 
   /** The Constant anchoBoton. */
   private static final int ANCHOBOTON = 40;
+
+  /** The Constant SIZELEYENDA. */
+  private static final int SIZELEYENDA = 15;
+
+  /** The Constant WIDTH_TURNO. */
+  private static final int WIDTH_TURNO = 20;
+
+  /** The Constant Y_TURNO. */
+  private static final int Y_TURNO = 5;
+
+  /** The Constant INDICE3. */
+  private static final int INDICE3 = 3;
+
+  /** The Constant INDICE4. */
+  private static final int INDICE4 = 4;
+
+  /** The Constant INDICE5. */
+  private static final int INDICE5 = 5;
+
+  /** The Constant X1_RAZA. */
+  //OFFSETS DE HABILIDADADES
+  private static final int X1_RAZA = 95;
+
+  /** The Constant Y1_RAZA. */
+  private static final int Y1_RAZA = 94;
+
+  /** The Constant X2_RAZA. */
+  private static final int X2_RAZA = X1_RAZA;
+
+  /** The Constant Y2_RAZA. */
+  private static final int Y2_RAZA = 168;
+
+  /** The Constant X1_CASTA. */
+  private static final int X1_CASTA = 268;
+
+  /** The Constant X2_CASTA. */
+  private static final int X2_CASTA = X1_CASTA;
+
+  /** The Constant Y1_CASTA. */
+  private static final int Y1_CASTA = 94;
+
+  /** The Constant Y2_CASTA. */
+  private static final int Y2_CASTA = 168;
+
+  /** The Constant X3_CASTA. */
+  private static final int X3_CASTA = 442;
+
+  /** The Constant Y3_CASTA. */
+  private static final int Y3_CASTA = 94;
+
+  /** The Constant X4_CASTA. */
+  private static final int X4_CASTA = X3_CASTA;
+
+  /** The Constant Y4_CASTA. */
+  private static final int Y4_CASTA = 168;
 
   /** The Constant botones. */
   private static final int[][] BOTONES = {{X + 48, Y + 72}, {X + 48, Y + 146},
@@ -71,32 +127,35 @@ public class MenuBatalla {
         .getHabilidadesCasta()[0]), BOTONES[2][0], BOTONES[2][1],
         ANCHOBOTON, ANCHOBOTON, null);
     g.drawImage(Recursos.getHabilidades().get(personaje
-         .getHabilidadesCasta()[1]), BOTONES[3][0], BOTONES[3][1],
+         .getHabilidadesCasta()[1]), BOTONES[INDICE3][0], BOTONES[INDICE3][1],
          ANCHOBOTON, ANCHOBOTON, null);
     g.drawImage(Recursos.getHabilidades().get(personaje
-         .getHabilidadesCasta()[2]), BOTONES[4][0], BOTONES[4][1],
+         .getHabilidadesCasta()[2]), BOTONES[INDICE4][0], BOTONES[INDICE3][1],
          ANCHOBOTON, ANCHOBOTON, null);
     g.drawImage(Recursos.getHabilidades()
-         .get("Ser Energizado"), BOTONES[5][0], BOTONES[5][1],
+         .get("Ser Energizado"), BOTONES[INDICE5][0], BOTONES[INDICE5][1],
          ANCHOBOTON, ANCHOBOTON, null);
 
     // Dibujo las leyendas
-    g.setFont(new Font("Book Antiqua", 1, 14));
-    g.drawString(personaje.getHabilidadesRaza()[0], X + 95, Y + 94);
-    g.drawString(personaje.getHabilidadesRaza()[1], X + 95, Y + 168);
-    g.drawString(personaje.getHabilidadesCasta()[0], X + 268, Y + 94);
-    g.drawString(personaje.getHabilidadesCasta()[1], X + 268, Y + 168);
-    g.drawString(personaje.getHabilidadesCasta()[2], X + 442, Y + 94);
-    g.drawString("Ser energizado", X + 442, Y + 168);
+    g.setFont(new Font("Book Antiqua", 1, SIZELEYENDA));
+    g.drawString(personaje.getHabilidadesRaza()[0], X + X1_RAZA, Y + Y1_RAZA);
+    g.drawString(personaje.getHabilidadesRaza()[1], X + X2_RAZA, Y + Y2_RAZA);
+    g.drawString(personaje
+        .getHabilidadesCasta()[0], X + X1_CASTA, Y + Y1_CASTA);
+    g.drawString(personaje
+        .getHabilidadesCasta()[1], X + X2_CASTA, Y + Y2_CASTA);
+    g.drawString(personaje
+        .getHabilidadesCasta()[2], X + X3_CASTA, Y + Y3_CASTA);
+    g.drawString("Ser energizado", X + X4_CASTA, Y + Y4_CASTA);
 
     // Dibujo el turno de quien es
     g.setColor(Color.WHITE);
     if (habilitado) {
-      Pantalla.centerString(g, new Rectangle(X, Y + 5, Recursos
-          .getMenuBatalla().getWidth(), 20), "Mi Turno");
+      Pantalla.centerString(g, new Rectangle(X, Y + Y_TURNO, Recursos
+          .getMenuBatalla().getWidth(), WIDTH_TURNO), "Mi Turno");
     } else {
-      Pantalla.centerString(g, new Rectangle(X, Y + 5, Recursos
-           .getMenuBatalla().getWidth(), 20), "Turno Rival");
+      Pantalla.centerString(g, new Rectangle(X, Y + Y_TURNO, Recursos
+           .getMenuBatalla().getWidth(), WIDTH_TURNO), "Turno Rival");
     }
   }
 

@@ -1,3 +1,4 @@
+
 package estados;
 
 import com.google.gson.Gson;
@@ -83,6 +84,72 @@ public class EstadoBatallaNPC extends Estado {
   /** The nivel enemigo. */
   private int nivelEnemigo;
 
+  /** The Constant MINOTAURO. */
+  private static final int MINOTAURO = 5;
+
+  /** The Constant PERSONAJE. */
+  private static final int PERSONAJE = 5;
+
+  /** The Constant XOFFSET. */
+  private static final int XOFFSET = -350;
+
+  /** The Constant YOFFSET. */
+  private static final int YOFFSET = 150;
+
+  /** The Constant TRES. */
+  private static final int TRES = 3;
+
+  /** The Constant CUATRO. */
+  private static final int CUATRO = 4;
+
+  /** The Constant CINCO. */
+  private static final int CINCO = 5;
+
+  /** The Constant SEIS. */
+  private static final int SEIS = 6;
+
+  /** The Constant VALOR. */
+  private static final int VALOR = 10;
+
+  /** The Constant EXPERIENCIA. */
+  private static final int EXPERIENCIA = 40;
+
+  /** The Constant WIDTH. */
+  private static final int WIDTH = 256;
+
+  /** The Constant HEIGHT. */
+  private static final int HEIGHT = 256;
+
+  /** The Constant X_PERSONAJE. */
+  private static final int X_PERSONAJE = 0;
+
+  /** The Constant Y_PERSONAJE. */
+  private static final int Y_PERSONAJE = 170;
+
+  /** The Constant X_ENEMIGO. */
+  private static final int X_ENEMIGO = 550;
+
+  /** The Constant Y_ENEMIGO. */
+  private static final int Y_ENEMIGO = 75;
+
+  /** The Constant IMAGEN_1. */
+  private static final int IMAGEN_1 = 3;
+
+  /** The Constant IMAGEN_2. */
+  private static final int IMAGEN_2 = 7;
+
+  /** The Constant X_ESTADO_PERSONAJE. */
+  private static final int X_ESTADO_PERSONAJE = 25;
+
+  /** The Constant Y_ESTADO_PERSONAJE. */
+  private static final int Y_ESTADO_PERSONAJE = 5;
+
+  /** The Constant X_ESTADO_ENEMIGO. */
+  private static final int X_ESTADO_ENEMIGO = 550;
+
+  /** The Constant Y_ESTADO_ENEMIGO. */
+  private static final int Y_ESTADO_ENEMIGO = 5;
+
   /**
    * Instantiates a new estado batalla NPC.
    * *
@@ -107,9 +174,9 @@ public class EstadoBatallaNPC extends Estado {
     menuBatalla = new MenuBatalla(miTurno, personaje);
 
     miniaturaEnemigo = Recursos.getPersonaje()
-      .get("Minotauro").get(5)[0];
+      .get("Minotauro").get(MINOTAURO)[0];
     miniaturaPersonaje = Recursos.getPersonaje()
-      .get(personaje.getNombreRaza()).get(5)[0];
+      .get(personaje.getNombreRaza()).get(PERSONAJE)[0];
 
     paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
     paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
@@ -127,8 +194,8 @@ public class EstadoBatallaNPC extends Estado {
   */
   @Override
 public void actualizar() {
-  getJuego().getCamara().setxOffset(-350);
-  getJuego().getCamara().setyOffset(150);
+  getJuego().getCamara().setxOffset(XOFFSET);
+  getJuego().getCamara().setyOffset(YOFFSET);
 
   seRealizoAccion = false;
   haySpellSeleccionada = false;
@@ -154,7 +221,8 @@ public void actualizar() {
            haySpellSeleccionada = true;
            }
 
-           if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 3) {
+           if (menuBatalla.getBotonClickeado(
+           posMouse[0], posMouse[1]) == TRES) {
              if (personaje.puedeAtacar()) {
                seRealizoAccion = true;
                personaje.habilidadCasta1(enemigo);
@@ -163,7 +231,7 @@ public void actualizar() {
               }
 
               if (menuBatalla.getBotonClickeado(posMouse[0],
-              posMouse[1]) == 4) {
+              posMouse[1]) == CUATRO) {
                 if (personaje.puedeAtacar()) {
                   seRealizoAccion = true;
                   personaje.habilidadCasta2(enemigo);
@@ -172,7 +240,7 @@ public void actualizar() {
                 }
 
                 if (menuBatalla.getBotonClickeado(posMouse[0],
-                posMouse[1]) == 5) {
+                posMouse[1]) == CINCO) {
                   if (personaje.puedeAtacar()) {
                     seRealizoAccion = true;
                     personaje.habilidadCasta3(enemigo);
@@ -181,9 +249,9 @@ public void actualizar() {
                   }
 
                   if (menuBatalla.getBotonClickeado(posMouse[0],
-                  posMouse[1]) == 6) {
+                  posMouse[1]) == SEIS) {
                     seRealizoAccion = true;
-                    personaje.serEnergizado(10);
+                    personaje.serEnergizado(VALOR);
                     haySpellSeleccionada = true;
                   }
                 }
@@ -192,7 +260,8 @@ public void actualizar() {
                     getJuego().getEstadoJuego().setHaySolicitud(true,
                         getJuego().getPersonaje(), MenuInfoPersonaje
                             .MENUGANARBATALLA);
-                    if (personaje.ganarExperiencia(enemigo.getNivel() * 40)) {
+                    if (personaje.ganarExperiencia(
+                    enemigo.getNivel() * EXPERIENCIA)) {
                     getJuego().getPersonaje().setNivel(personaje.getNivel());
                     getJuego().getEstadoJuego().setHaySolicitud(true,
                         getJuego().getPersonaje(),
@@ -240,17 +309,21 @@ public void graficar(final Graphics gAux) {
     .getAncho(), getJuego().getAlto());
   mundo.graficar(gAux);
   gAux.drawImage(Recursos.getPersonaje().get(paquetePersonaje
-      .getRaza()).get(3)[0], 0, 175, 256, 256, null);
+      .getRaza()).get(IMAGEN_1)[0], X_PERSONAJE,
+      Y_PERSONAJE, WIDTH, HEIGHT, null);
   gAux.drawImage(Recursos.getPersonaje().get("Minotauro")
-      .get(7)[0], 550, 75, 256, 256, null);
+      .get(IMAGEN_2)[0], X_ESTADO_ENEMIGO,
+      Y_ESTADO_ENEMIGO, WIDTH, HEIGHT, null);
   mundo.graficarObstaculos(gAux);
   menuBatalla.graficar(gAux);
 
   gAux.setColor(Color.GREEN);
 
-  EstadoDePersonaje.dibujarEstadoDePersonaje(gAux, 25, 5,
+  EstadoDePersonaje.dibujarEstadoDePersonaje(
+  gAux, X_ESTADO_PERSONAJE, Y_ESTADO_PERSONAJE,
       personaje, miniaturaPersonaje);
-  EstadoDePersonaje.dibujarEstadoDePersonaje(gAux, 550, 5,
+  EstadoDePersonaje.dibujarEstadoDePersonaje(
+  gAux, X_ESTADO_ENEMIGO, Y_ESTADO_ENEMIGO,
       enemigo, miniaturaEnemigo);
 }
 

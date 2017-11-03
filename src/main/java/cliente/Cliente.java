@@ -85,6 +85,13 @@ public class Cliente extends Thread {
   /** The puerto. */
   private int puerto;
 
+  /** The Constant ANCHO_JUEGO. */
+  private static final int ANCHO_JUEGO = 800;
+
+  /** The Constant ALTO_JUEGO. */
+  private static final int ALTO_JUEGO = 600;
+
+
   /**
    * Pide la accion.
    *
@@ -240,8 +247,8 @@ public class Cliente extends Thread {
           salida.writeObject(gson.toJson(paquetePersonaje));
 
           // Instancio el juego y cargo los recursos
-          wome = new Juego("World Of the Middle Earth", 800, 600,
-              this, paquetePersonaje);
+          wome = new Juego("World Of the Middle Earth", ANCHO_JUEGO,
+              ALTO_JUEGO, this, paquetePersonaje);
 
           // Muestro el menu de carga
           menuCarga = new MenuCarga(this);

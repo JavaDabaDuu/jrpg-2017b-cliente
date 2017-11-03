@@ -1,3 +1,4 @@
+
 package interfaz;
 
 import dominio.Personaje;
@@ -58,6 +59,71 @@ public class MenuInfoPersonaje {
   /** The personaje. */
   private PaquetePersonaje personaje;
 
+  /** The Constant SIZE1. */
+  private static final int SIZE1 = 20;
+
+  /** The Constant SIZE2. */
+  private static final int SIZE2 = 14;
+
+  /** The Constant SIZE3. */
+  private static final int SIZE3 = 18;
+
+  /** The Constant SIZE4. */
+  private static final int SIZE4 = 62;
+
+  /** The Constant IMAGEN_6. */
+  private static final int IMAGEN_6 = 6;
+
+  /** The Constant OFFSET_Y. */
+  private static final int OFFSET_Y =  70;
+
+  /** The Constant Y_OFFSET. */
+  private static final int Y_OFFSET = 325;
+
+  /** The Constant WIDTH. */
+  private static final int WIDTH = 128;
+
+  /** The Constant HEIGHT. */
+  private static final int HEIGHT = 128;
+
+  /** The Constant OFFSET_Y_RECTANGULO. */
+  private static final int OFFSET_Y_RECTANGULO = 15;
+
+  /** The Constant X_BOTTON_MENU. */
+  private static final int X_BOTTON_MENU = 50;
+
+  /** The Constant Y_BOTTON_MENU. */
+  private static final int Y_BOTTON_MENU = 380;
+
+  /** The Constant WIDTH_BOTTON_MENU. */
+  private static final int WIDTH_BOTTON_MENU = 200;
+
+  /** The Constant HEIGHT_BOTTON_MENU. */
+  private static final int HEIGHT_BOTTON_MENU = 25;
+
+  /** The Constant Y_RECTAGULO_1. */
+  private static final int Y_RECTAGULO_1 = 200;
+
+  /** The Constant Y_RECTAGULO_2. */
+  private static final int Y_RECTAGULO_2 = 250;
+
+  /** The Constant Y_RECTAGULO_3. */
+  private static final int Y_RECTAGULO_3 = 270;
+
+  /** The Constant Y_RECTAGULO_4. */
+  private static final int Y_RECTAGULO_4 = 290;
+
+  /** The Constant Y_RECTAGULO_5. */
+  private static final int Y_RECTAGULO_5 = 310;
+
+  /** The Constant Y_RECTAGULO_6. */
+  private static final int Y_RECTAGULO_6 = 230;
+
+  /** The Constant Y_RECTAGULO_7. */
+  private static final int Y_RECTAGULO_7 = 330;
+
+  /** The Constant Y_RECTAGULO_8. */
+  private static final int Y_RECTAGULO_8 = 240;
   /**
    * Instantiates a new menu info personaje.
    *
@@ -85,13 +151,13 @@ public class MenuInfoPersonaje {
 
     // dibujo el personaje
     g.drawImage(Recursos.getPersonaje().get(personaje.getRaza())
-        .get(6)[0], x + MENU.getWidth() / 2
-        - ANCHOPERSONAJE / 2, y + 70, 128, 128, null);
+        .get(IMAGEN_6)[0], x + MENU.getWidth() / 2
+        - ANCHOPERSONAJE / 2, y + OFFSET_Y, WIDTH, HEIGHT, null);
 
     // muestro el nombre
     g.setColor(Color.WHITE);
-    g.setFont(new Font("Book Antiqua", 1, 20));
-    Pantalla.centerString(g, new Rectangle(x, y + 15,
+    g.setFont(new Font("Book Antiqua", 1, SIZE1));
+    Pantalla.centerString(g, new Rectangle(x, y + OFFSET_Y_RECTANGULO,
         MENU.getWidth(), 0), personaje.getNombre());
     // Grafico la leyenda segun el tipo de menu
     switch (tipoMenu) {
@@ -120,11 +186,15 @@ public class MenuInfoPersonaje {
 
 
     // muestro los botones
-    g.setFont(new Font("Book Antiqua", 1, 20));
-    g.drawImage(Recursos.getBotonMenu(), x + 50, y + 380, 200, 25, null);
+    g.setFont(new Font("Book Antiqua", 1, SIZE1));
+    g.drawImage(Recursos.getBotonMenu(), x
+    + X_BOTTON_MENU, y + Y_BOTTON_MENU, WIDTH_BOTTON_MENU,
+    HEIGHT_BOTTON_MENU, null);
     g.setColor(Color.WHITE);
     Pantalla.centerString(g,
-       new Rectangle(x + 50, y + 380, 200, 25), LEYENDABOTON[tipoMenu]);
+       new Rectangle(x + X_BOTTON_MENU,
+       y + Y_BOTTON_MENU, WIDTH_BOTTON_MENU,
+       HEIGHT_BOTTON_MENU), LEYENDABOTON[tipoMenu]);
   }
 
   /**
@@ -136,20 +206,20 @@ public class MenuInfoPersonaje {
 
     // Informo que perdio la batalla
     g.setColor(Color.BLACK);
-    Pantalla.centerString(g, new Rectangle(x, y + 200,
+    Pantalla.centerString(g, new Rectangle(x, y + Y_RECTAGULO_1,
         MENU.getWidth(), 0), "¡Has sido derrotado!");
-    g.setFont(new Font("Book Antiqua", 0, 14));
+    g.setFont(new Font("Book Antiqua", 0, SIZE2));
     Pantalla.centerString(g,
-        new Rectangle(x, y + 250, MENU.getWidth(), 0),
+        new Rectangle(x, y + Y_RECTAGULO_2, MENU.getWidth(), 0),
         "¡No te rindas! Sigue luchando");
     Pantalla.centerString(g,
-        new Rectangle(x, y + 270, MENU.getWidth(), 0),
+        new Rectangle(x, y + Y_RECTAGULO_3, MENU.getWidth(), 0),
         "contra los demás personajes");
     Pantalla.centerString(g,
-        new Rectangle(x, y + 290, MENU.getWidth(), 0),
+        new Rectangle(x, y + Y_RECTAGULO_4, MENU.getWidth(), 0),
         "para aumentar tu nivel y");
     Pantalla.centerString(g,
-        new Rectangle(x, y + 310, MENU.getWidth(), 0),
+        new Rectangle(x, y + Y_RECTAGULO_5, MENU.getWidth(), 0),
         "mejorar tus atributos.");
   }
 
@@ -162,23 +232,23 @@ public class MenuInfoPersonaje {
 
     // Informo que gano la batalla
     g.setColor(Color.BLACK);
-    Pantalla.centerString(g, new Rectangle(x, y + 200,
+    Pantalla.centerString(g, new Rectangle(x, y + Y_RECTAGULO_1,
         MENU.getWidth(), 0), "¡Has derrotado");
-    Pantalla.centerString(g, new Rectangle(x, y + 230,
+    Pantalla.centerString(g, new Rectangle(x, y + Y_RECTAGULO_6,
         MENU.getWidth(), 0), "a tu enemigo!");
 
-    g.setFont(new Font("Book Antiqua", 0, 14));
+    g.setFont(new Font("Book Antiqua", 0, SIZE2));
     Pantalla.centerString(g,
-        new Rectangle(x, y + 270, MENU.getWidth(), 0),
+        new Rectangle(x, y + Y_RECTAGULO_3, MENU.getWidth(), 0),
         "¡Felicitaciones! Has derrotado");
     Pantalla.centerString(g,
-        new Rectangle(x, y + 290, MENU.getWidth(), 0),
+        new Rectangle(x, y + Y_RECTAGULO_4, MENU.getWidth(), 0),
         "a tu oponente, sigue así");
     Pantalla.centerString(g,
-        new Rectangle(x, y + 310, MENU.getWidth(), 0),
+        new Rectangle(x, y + Y_RECTAGULO_5, MENU.getWidth(), 0),
         "para lograr subir de nivel");
     Pantalla.centerString(g,
-        new Rectangle(x, y + 330, MENU.getWidth(), 0),
+        new Rectangle(x, y + Y_RECTAGULO_6, MENU.getWidth(), 0),
         "y mejorar tus atributos.");
   }
 
@@ -191,16 +261,16 @@ public class MenuInfoPersonaje {
 
     // Informo que subio de nivel
     g.setColor(Color.BLACK);
-    Pantalla.centerString(g, new Rectangle(x, y + 200,
+    Pantalla.centerString(g, new Rectangle(x, y + Y_RECTAGULO_1,
         MENU.getWidth(), 0), "¡Has subido de nivel!");
-    g.setFont(new Font("Book Antiqua", 0, 18));
-    Pantalla.centerString(g, new Rectangle(x, y + 240,
+    g.setFont(new Font("Book Antiqua", 0, SIZE3));
+    Pantalla.centerString(g, new Rectangle(x, y + Y_RECTAGULO_8,
         MENU.getWidth(), 0), "¡Felicitaciones!");
-    Pantalla.centerString(g, new Rectangle(x, y + 270,
+    Pantalla.centerString(g, new Rectangle(x, y + Y_RECTAGULO_3,
         MENU.getWidth(), 0), "Nuevo Nivel");
-    g.setFont(new Font("Book Antiqua", 1, 62));
+    g.setFont(new Font("Book Antiqua", 1, SIZE4));
     Pantalla.centerString(g,
-         new Rectangle(x, y + 325, MENU.getWidth(), 0),
+         new Rectangle(x, y + Y_OFFSET, MENU.getWidth(), 0),
          String.valueOf(personaje.getNivel()));
   }
 

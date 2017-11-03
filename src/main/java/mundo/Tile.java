@@ -1,3 +1,4 @@
+
 package mundo;
 
 import java.awt.Graphics;
@@ -8,8 +9,11 @@ import java.awt.image.BufferedImage;
  */
 public class Tile {
 
+  /** The Constant SIZE_TITLE. */
+  private static final int SIZE_TITLE = 256;
+
   /** The tiles. */
-  private static Tile[] tiles = new Tile[256];
+  private static Tile[] tiles = new Tile[SIZE_TITLE];
 
   /** The aubenor. */
   private static Tile[] aubenor;
@@ -19,10 +23,14 @@ public class Tile {
 
   /** The aris base. */
   // es el piso de aubenor por defecto si queres llamarlo asi, es gris
-  private static int arisBase = 3;
+
+  private static final int PISO = 3;
+
+  /** The aris base. */
+  private static int arisBase = PISO;
 
   /** The aubenor base. */
-  private static int aubenorBase = 3;
+  private static int aubenorBase = PISO;
 
   /** The Constant ANCHO. */
   public static final int ANCHO = 64;

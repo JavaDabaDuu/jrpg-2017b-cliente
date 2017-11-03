@@ -1,3 +1,4 @@
+
 package inventario;
 
 import dominio.Item;
@@ -67,7 +68,8 @@ public class Inventario extends JPanel {
           }
         }
         cellPane.setBorder(border);
-        gbc.weightx = gbc.weighty = 1.0;
+        gbc.weighty = 1.0;
+        gbc.weightx = gbc.weighty;
         gbc.fill = GridBagConstraints.BOTH;
 
         add(cellPane, gbc);

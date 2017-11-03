@@ -1,3 +1,4 @@
+
 package mensajeria;
 
 import java.io.Serializable;
@@ -22,15 +23,19 @@ public class PaqueteMensaje extends Paquete implements Serializable, Cloneable {
   public PaqueteMensaje() {
   }
 
-  /* (non-Javadoc)
-   * @see mensajeria.Paquete#getMensaje()
+  /**
+   * Gets the mensaje.
+   *
+   * @return the msj
    */
   public String getMensaje() {
     return msj;
   }
 
-  /* (non-Javadoc)
-   * @see mensajeria.Paquete#setMensaje(java.lang.String)
+  /**
+   * Sets the user mensaje.
+   *
+   * @param mensaje the msj
    */
   public void setMensaje(final String mensaje) {
     this.msj = mensaje;

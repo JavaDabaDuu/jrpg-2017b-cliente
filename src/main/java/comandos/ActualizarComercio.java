@@ -1,3 +1,4 @@
+
 package comandos;
 
 import dominio.Item;
@@ -9,6 +10,9 @@ import mensajeria.PaqueteComerciar;
  * The Class ActualizarComercio.
  */
 public class ActualizarComercio extends ComandosEscucha {
+
+  /** The Constant CUENTASIZE. */
+  private static final int CUENTASIZE = 9;
 
   /* (non-Javadoc)
    * @see mensajeria.Comando#ejecutar()
@@ -25,10 +29,10 @@ public class ActualizarComercio extends ComandosEscucha {
     sizeAObtener = paqueteComerciar.getItemsADar().size();
     cuentaSize = sizeMisItems - sizeADar + sizeAObtener;
     if (sizeADar != 0) {
-      if (cuentaSize <= 9) {
+      if (cuentaSize <= CUENTASIZE) {
         getJuego().getCliente().getM1().getChckbxListo().setEnabled(true);
         getJuego().getCliente().getM1().getLeyenda().setVisible(false);
-      } else if (cuentaSize > 9) {
+      } else if (cuentaSize > CUENTASIZE) {
         getJuego().getCliente().getM1().getChckbxListo().setEnabled(false);
         getJuego().getCliente().getM1().getLeyenda().setVisible(true);
       }

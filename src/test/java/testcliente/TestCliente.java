@@ -1,4 +1,5 @@
-package testsCliente;
+
+package testcliente;
 
 import cliente.Cliente;
 import com.google.gson.Gson;
@@ -42,6 +43,12 @@ public class TestCliente {
   /** The entrada. */
   private ObjectInputStream entrada;
 
+  /** The Constant PUERTO_SOCKET. */
+  private static final int PUERTO_SOCKET = 55000;
+
+  /** The Constant SALUD_TOPE. */
+  private static final int SALUD_TOPE = 10000;
+
   // Si quiero probar la conexión del cliente
   // si o si necesito un servidor stub (lamentablemente)
   // Y para no complicarme la existencia con que el server
@@ -62,7 +69,7 @@ public class TestCliente {
         @Override
         public void run() {
             try {
-              server = new ServerSocket(55050);
+              server = new ServerSocket(PUERTO_SOCKET);
               Socket cliente = server.accept();
               salida = new ObjectOutputStream(cliente.getOutputStream());
               entrada = new ObjectInputStream(cliente.getInputStream());
@@ -106,7 +113,7 @@ public class TestCliente {
 
     queue.add(new Paquete());
     testServer(queue);
-    Cliente cliente = new Cliente("localhost", 55050);
+    Cliente cliente = new Cliente("localhost", PUERTO_SOCKET);
 
     // Pasado este punto la conexión entre
     // el cliente y el servidor resulto exitosa
@@ -145,7 +152,7 @@ public class TestCliente {
     queue.add(new Paquete());
     queue.add(pu);
     testServer(queue);
-    Cliente cliente = new Cliente("localhost", 55050);
+    Cliente cliente = new Cliente("localhost", PUERTO_SOCKET);
 
     try {
 
@@ -193,7 +200,7 @@ public class TestCliente {
     queue.add(pu);
     testServer(queue);
 
-    Cliente cliente = new Cliente("localhost", 55050);
+    Cliente cliente = new Cliente("localhost", PUERTO_SOCKET);
     try {
 
       // Envio el paquete para registrarme
@@ -250,7 +257,7 @@ public class TestCliente {
     queue.add(pu);
     queue.add(pp);
     testServer(queue);
-    Cliente cliente = new Cliente("localhost", 55050);
+    Cliente cliente = new Cliente("localhost", PUERTO_SOCKET);
     try {
 
       // Envio el paquete de registro de usuario
@@ -304,7 +311,7 @@ public class TestCliente {
     queue.add(pp);
 
     testServer(queue);
-    Cliente cliente = new Cliente("localhost", 55050);
+    Cliente cliente = new Cliente("localhost", PUERTO_SOCKET);
 
     try {
 
@@ -352,11 +359,11 @@ public class TestCliente {
     pp.setNivel(1);
     pp.setNombre("PjTest");
     pp.setRaza("Asesino");
-    pp.setSaludTope(10000);
+    pp.setSaludTope(SALUD_TOPE);
     Queue<Paquete> queue = new LinkedList<Paquete>();
     queue.add(pp);
     testServer(queue);
-    Cliente cliente = new Cliente("localhost", 55050);
+    Cliente cliente = new Cliente("localhost", PUERTO_SOCKET);
     try {
 
       // Envio el paquete de actualizacion de personaje
@@ -376,7 +383,7 @@ public class TestCliente {
       cliente.getEntrada().close();
       cliente.getSocket().close();
 
-      Assert.assertEquals(10000, paquetePersonaje.getSaludTope());
+      Assert.assertEquals(SALUD_TOPE, paquetePersonaje.getSaludTope());
       myThread.stop();
     } catch (IOException | JsonSyntaxException | ClassNotFoundException e) {
       JOptionPane.showMessageDialog(null, "Falló");

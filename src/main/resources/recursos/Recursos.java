@@ -30,8 +30,11 @@ public class Recursos {
   /** Alto del frame a obtener. */
   private static final int ALTO = 256;
 
-  /** The Constant TAMAÑOIMAGEN. */
-  private static final int TAMAÑOIMAGEN = 4;
+  /** The Constant SIZEIMAGEN. */
+  private static final int SIZEIMAGEN = 4;
+
+  /** Tamaño tile. */
+  private static final int SIZETILE = 81;
 
   // Inicio Personajes
   /** The personaje. */
@@ -255,60 +258,60 @@ public class Recursos {
     int elementosCargados = 0;
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    humanoIzq = new BufferedImage[TAMAÑOIMAGEN];
-    humanoArribaIzq = new BufferedImage[TAMAÑOIMAGEN];
-    humanoArriba = new BufferedImage[TAMAÑOIMAGEN];
-    humanoArribaDer = new BufferedImage[TAMAÑOIMAGEN];
-    humanoDer = new BufferedImage[TAMAÑOIMAGEN];
-    humanoAbajoDer = new BufferedImage[TAMAÑOIMAGEN];
-    humanoAbajo = new BufferedImage[TAMAÑOIMAGEN];
-    humanoAbajoIzq = new BufferedImage[TAMAÑOIMAGEN];
+    humanoIzq = new BufferedImage[SIZEIMAGEN];
+    humanoArribaIzq = new BufferedImage[SIZEIMAGEN];
+    humanoArriba = new BufferedImage[SIZEIMAGEN];
+    humanoArribaDer = new BufferedImage[SIZEIMAGEN];
+    humanoDer = new BufferedImage[SIZEIMAGEN];
+    humanoAbajoDer = new BufferedImage[SIZEIMAGEN];
+    humanoAbajo = new BufferedImage[SIZEIMAGEN];
+    humanoAbajoIzq = new BufferedImage[SIZEIMAGEN];
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       humanoIzq[i] = spriteHumano.getTile(ANCHO * i, 0, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       humanoArribaIzq[i] = spriteHumano.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       humanoArriba[i] = spriteHumano.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       humanoArribaDer[i] = spriteHumano.getTile(ANCHO * i,
           ALTO * 3, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       humanoDer[i] = spriteHumano.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       humanoAbajoDer[i] = spriteHumano.getTile(ANCHO * i,
           ALTO * 5, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       humanoAbajo[i] = spriteHumano.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       humanoAbajoIzq[i] = spriteHumano.getTile(ANCHO * i, ALTO * 7,
           ANCHO, ALTO);
     }
@@ -330,62 +333,62 @@ public class Recursos {
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    orcoIzq = new BufferedImage[TAMAÑOIMAGEN];
-    orcoArribaIzq = new BufferedImage[TAMAÑOIMAGEN];
-    orcoArriba = new BufferedImage[TAMAÑOIMAGEN];
-    orcoArribaDer = new BufferedImage[TAMAÑOIMAGEN];
-    orcoDer = new BufferedImage[TAMAÑOIMAGEN];
-    orcoAbajoDer = new BufferedImage[TAMAÑOIMAGEN];
-    orcoAbajo = new BufferedImage[TAMAÑOIMAGEN];
-    orcoAbajoIzq = new BufferedImage[TAMAÑOIMAGEN];
+    orcoIzq = new BufferedImage[SIZEIMAGEN];
+    orcoArribaIzq = new BufferedImage[SIZEIMAGEN];
+    orcoArriba = new BufferedImage[SIZEIMAGEN];
+    orcoArribaDer = new BufferedImage[SIZEIMAGEN];
+    orcoDer = new BufferedImage[SIZEIMAGEN];
+    orcoAbajoDer = new BufferedImage[SIZEIMAGEN];
+    orcoAbajo = new BufferedImage[SIZEIMAGEN];
+    orcoAbajoIzq = new BufferedImage[SIZEIMAGEN];
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       orcoIzq[i] = spriteOrco.getTile(ANCHO * i, 0, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       orcoArribaIzq[i] = spriteOrco.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       orcoArriba[i] = spriteOrco.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       orcoArribaDer[i] = spriteOrco.getTile(ANCHO * i, ALTO * 3,
           ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       orcoDer[i] = spriteOrco.getTile(ANCHO * i, ALTO * 4,
           ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       orcoAbajoDer[i] = spriteOrco.getTile(ANCHO * i, ALTO * 5,
          ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       orcoAbajo[i] = spriteOrco.getTile(ANCHO * i, ALTO * 6,
           ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       orcoAbajoIzq[i] = spriteOrco.getTile(ANCHO * i, ALTO * 7,
           ANCHO, ALTO);
     }
@@ -408,62 +411,62 @@ public class Recursos {
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    elfoIzq = new BufferedImage[TAMAÑOIMAGEN];
-    elfoArribaIzq = new BufferedImage[TAMAÑOIMAGEN];
-    elfoArriba = new BufferedImage[TAMAÑOIMAGEN];
-    elfoArribaDer = new BufferedImage[TAMAÑOIMAGEN];
-    elfoDer = new BufferedImage[TAMAÑOIMAGEN];
-    elfoAbajoDer = new BufferedImage[TAMAÑOIMAGEN];
-    elfoAbajo = new BufferedImage[TAMAÑOIMAGEN];
-    elfoAbajoIzq = new BufferedImage[TAMAÑOIMAGEN];
+    elfoIzq = new BufferedImage[SIZEIMAGEN];
+    elfoArribaIzq = new BufferedImage[SIZEIMAGEN];
+    elfoArriba = new BufferedImage[SIZEIMAGEN];
+    elfoArribaDer = new BufferedImage[SIZEIMAGEN];
+    elfoDer = new BufferedImage[SIZEIMAGEN];
+    elfoAbajoDer = new BufferedImage[SIZEIMAGEN];
+    elfoAbajo = new BufferedImage[SIZEIMAGEN];
+    elfoAbajoIzq = new BufferedImage[SIZEIMAGEN];
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       elfoIzq[i] = spriteElfo.getTile(ANCHO * i, 0, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       elfoArribaIzq[i] = spriteElfo.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       elfoArriba[i] = spriteElfo.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       elfoArribaDer[i] = spriteElfo.getTile(ANCHO * i, ALTO * 3,
           ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       elfoDer[i] = spriteElfo.getTile(ANCHO * i, ALTO * 4,
           ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       elfoAbajoDer[i] = spriteElfo.getTile(ANCHO * i, ALTO * 5,
           ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       elfoAbajo[i] = spriteElfo.getTile(ANCHO * i, ALTO * 6,
           ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       elfoAbajoIzq[i] = spriteElfo.getTile(ANCHO * i, ALTO * 7,
           ANCHO, ALTO);
     }
@@ -488,64 +491,64 @@ public class Recursos {
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    minotauroIzq = new BufferedImage[TAMAÑOIMAGEN];
-    minotauroArribaIzq = new BufferedImage[TAMAÑOIMAGEN];
-    minotauroArriba = new BufferedImage[TAMAÑOIMAGEN];
-    minotauroArribaDer = new BufferedImage[TAMAÑOIMAGEN];
-    minotauroDer = new BufferedImage[TAMAÑOIMAGEN];
-    minotauroAbajoDer = new BufferedImage[TAMAÑOIMAGEN];
-    minotauroAbajo = new BufferedImage[TAMAÑOIMAGEN];
-    minotauroAbajoIzq = new BufferedImage[TAMAÑOIMAGEN];
+    minotauroIzq = new BufferedImage[SIZEIMAGEN];
+    minotauroArribaIzq = new BufferedImage[SIZEIMAGEN];
+    minotauroArriba = new BufferedImage[SIZEIMAGEN];
+    minotauroArribaDer = new BufferedImage[SIZEIMAGEN];
+    minotauroDer = new BufferedImage[SIZEIMAGEN];
+    minotauroAbajoDer = new BufferedImage[SIZEIMAGEN];
+    minotauroAbajo = new BufferedImage[SIZEIMAGEN];
+    minotauroAbajoIzq = new BufferedImage[SIZEIMAGEN];
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       minotauroIzq[i] = spriteMinotauro.getTile(ANCHO * i, 0, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       minotauroArribaIzq[i] = spriteMinotauro.getTile(ANCHO * i,
           ALTO, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       minotauroArriba[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 2,
          ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       minotauroArribaDer[i] = spriteMinotauro.getTile(ANCHO * i,
           ALTO * 3, ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       minotauroDer[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 4,
           ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       minotauroAbajoDer[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 5,
           ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       minotauroAbajo[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 6,
           ANCHO, ALTO);
     }
 
     actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-    for (int i = 0; i < TAMAÑOIMAGEN; i++) {
+    for (int i = 0; i < SIZEIMAGEN; i++) {
       minotauroAbajoIzq[i] = spriteMinotauro.getTile(ANCHO * i, ALTO * 7,
           ANCHO, ALTO);
     }
@@ -595,7 +598,7 @@ public class Recursos {
     if (MenuMapas.getNumberMap() == 1) {
       SpriteSheet mapaAubenor = new SpriteSheet(
           CargadorImagen.cargarImagen("/Aubenor.png"));
-      Tile.setAubenor(new Tile[81]);
+      Tile.setAubenor(new Tile[SIZETILE]);
       boolean[][] solidezAubenor = {{true, true,
           false, true, false, true, true, true, true, true },
           {true, true, true, true, true, true, true, true, true, true},
@@ -615,7 +618,7 @@ public class Recursos {
     } else {
       SpriteSheet mapaAris = new SpriteSheet(
           CargadorImagen.cargarImagen("/Aris.png"));
-      Tile.setAris(new Tile[81]);
+      Tile.setAris(new Tile[SIZETILE]);
       boolean[][] solidezAris = {{true, false, false, false, false,
           false, false, true, true, true },
           {false, false, false, false, false, false, false, false, true, true},
