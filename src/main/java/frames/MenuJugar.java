@@ -1,6 +1,6 @@
 package frames;
 
-import cliente.*;
+import cliente.Cliente;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -24,14 +24,23 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import mensajeria.Comando;
 
+/**
+ * The Class MenuJugar.
+ */
 public class MenuJugar extends JFrame {
 
+  /** The content pane. */
   private JPanel contentPane;
 
+  /**
+   * Instantiates a new menu jugar.
+   *
+   * @param cliente the cliente
+   */
   public MenuJugar(final Cliente cliente) {
     addKeyListener(new KeyAdapter() {
       @Override
-      public void keyPressed(KeyEvent e) {
+      public void keyPressed(final KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
           MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
           menuInicioSesion.setVisible(true);
@@ -39,17 +48,18 @@ public class MenuJugar extends JFrame {
         }
       }
     });
-    setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+    setIconImage(Toolkit.getDefaultToolkit()
+        .getImage("src/main/java/frames/IconoWome.png"));
     setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
         new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-        new Point(0,0),"custom cursor"));
+        new Point(0, 0), "custom cursor"));
 
     this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     // En caso de cerrar la ventana
     addWindowListener(new WindowAdapter() {
         @Override
-        public void windowClosing(WindowEvent e) {
+        public void windowClosing(final WindowEvent e) {
           synchronized (cliente) {
             cliente.setAccion(Comando.SALIR);
             cliente.notify();
@@ -92,10 +102,11 @@ public class MenuJugar extends JFrame {
     btnRegistrar.setBounds(121, 162, 191, 23);
     layeredPane.add(btnRegistrar, new Integer(1));
     btnRegistrar.setFocusable(false);
-    btnRegistrar.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
+    btnRegistrar.setIcon(new ImageIcon(
+        MenuJugar.class.getResource("/frames/BotonMenu.png")));
     btnRegistrar.addActionListener(new ActionListener() {
       @Override
-      public void actionPerformed(ActionEvent e) {
+      public void actionPerformed(final ActionEvent e) {
         MenuRegistro menuRegistro = new MenuRegistro(cliente);
         menuRegistro.setVisible(true);
         dispose();
@@ -106,10 +117,11 @@ public class MenuJugar extends JFrame {
     btnIniciarSesion.setBounds(121, 92, 191, 23);
     layeredPane.add(btnIniciarSesion, new Integer(1));
     btnIniciarSesion.setFocusable(false);
-    btnIniciarSesion.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
+    btnIniciarSesion.setIcon(new ImageIcon(
+        MenuJugar.class.getResource("/frames/BotonMenu.png")));
     btnIniciarSesion.addActionListener(new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
           MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
           menuInicioSesion.setVisible(true);
           dispose();
@@ -118,7 +130,8 @@ public class MenuJugar extends JFrame {
 
     JLabel lblBackground = new JLabel("");
     lblBackground.setBounds(0, 0, 444, 271);
-    lblBackground.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/menuBackground.jpg")));
+    lblBackground.setIcon(new ImageIcon(
+        MenuJugar.class.getResource("/frames/menuBackground.jpg")));
     layeredPane.add(lblBackground, new Integer(0));
   }
 }

@@ -24,16 +24,26 @@ import javax.swing.border.EmptyBorder;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
 
+/**
+ * The Class MenuStats.
+ */
 public class MenuStats extends JFrame {
 
+  /** The content pane. */
   private JPanel contentPane;
+
+  /** The paquete personaje. */
   private PaquetePersonaje paquetePersonaje;
+
+  /** The mod. */
   private final double mod = 1.5;
 
   /**
- * Create the frame.
- */
-  
+   * Create the frame.
+   *
+   * @param cliente the cliente
+   */
+
   public MenuStats(final Cliente cliente) {
     paquetePersonaje = cliente.getPaquetePersonaje();
 
@@ -50,8 +60,8 @@ public class MenuStats extends JFrame {
 
     addWindowListener(new WindowAdapter() {
         @Override
-        public void windowClosing(WindowEvent e) {
-          Pantalla.menuStats = null;
+        public void windowClosing(final WindowEvent e) {
+          Pantalla.setMenuStats(null);
           dispose();
         }
       });
@@ -78,82 +88,83 @@ public class MenuStats extends JFrame {
     lblRaza.setForeground(Color.WHITE);
     lblRaza.setBounds(12, 71, 56, 16);
     contentPane.add(lblRaza);
-    
+
     JLabel lblNivel = new JLabel("Nivel");
     lblNivel.setForeground(Color.WHITE);
     lblNivel.setBounds(169, 13, 56, 16);
     contentPane.add(lblNivel);
-    
+
     JLabel lblExperiencia = new JLabel("Experiencia");
     lblExperiencia.setForeground(Color.WHITE);
     lblExperiencia.setBounds(169, 42, 72, 16);
     contentPane.add(lblExperiencia);
-    
+
     JLabel lblEnergia = new JLabel("Energia");
     lblEnergia.setForeground(Color.WHITE);
     lblEnergia.setBounds(169, 100, 48, 16);
     contentPane.add(lblEnergia);
-    
+
     JLabel lblSalud = new JLabel("Salud");
     lblSalud.setForeground(Color.WHITE);
     lblSalud.setBounds(12, 100, 56, 16);
     contentPane.add(lblSalud);
-    
+
     JLabel lblFuerza = new JLabel("Fuerza");
     lblFuerza.setForeground(Color.WHITE);
     lblFuerza.setBounds(12, 129, 48, 16);
     contentPane.add(lblFuerza);
-    
+
     JLabel lblDestreza = new JLabel("Destreza");
     lblDestreza.setForeground(Color.WHITE);
     lblDestreza.setBounds(12, 158, 56, 16);
     contentPane.add(lblDestreza);
-    
+
     JLabel lblInteligencia = new JLabel("Inteligencia");
     lblInteligencia.setForeground(Color.WHITE);
     lblInteligencia.setBounds(12, 187, 72, 16);
     contentPane.add(lblInteligencia);
-    
+
     JLabel lblAtaque = new JLabel("Ataque");
     lblAtaque.setForeground(Color.WHITE);
     lblAtaque.setBounds(169, 129, 48, 16);
     contentPane.add(lblAtaque);
-    
+
     JLabel lblDefensa = new JLabel("Defensa");
     lblDefensa.setForeground(Color.WHITE);
     lblDefensa.setBounds(169, 158, 56, 16);
     contentPane.add(lblDefensa);
-    
+
     JLabel lblMagia = new JLabel("Magia");
     lblMagia.setForeground(Color.WHITE);
     lblMagia.setBounds(169, 187, 39, 16);
     contentPane.add(lblMagia);
-    
+
     JLabel lblCantidadDeItems = new JLabel("Cantidad de Items");
     lblCantidadDeItems.setForeground(Color.WHITE);
     lblCantidadDeItems.setBounds(12, 216, 110, 16);
     contentPane.add(lblCantidadDeItems);
-    
+
     JLabel nmbPj = new JLabel(paquetePersonaje.getNombre());
     nmbPj.setForeground(Color.WHITE);
     nmbPj.setHorizontalAlignment(SwingConstants.RIGHT);
     nmbPj.setBounds(80, 13, 77, 16);
     contentPane.add(nmbPj);
-    
+
     JLabel cstPj = new JLabel(paquetePersonaje.getCasta());
     cstPj.setForeground(Color.WHITE);
     cstPj.setHorizontalAlignment(SwingConstants.RIGHT);
     cstPj.setBounds(80, 42, 77, 16);
-    
+
     contentPane.add(cstPj);
-    
+
     JLabel rzPj = new JLabel(paquetePersonaje.getRaza());
     rzPj.setForeground(Color.WHITE);
     rzPj.setHorizontalAlignment(SwingConstants.RIGHT);
     rzPj.setBounds(80, 71, 77, 16);
     contentPane.add(rzPj);
-    
-    JLabel saludPj = new JLabel(String.valueOf(paquetePersonaje.getSaludTope()));
+
+    JLabel saludPj = new JLabel(
+       String.valueOf(paquetePersonaje.getSaludTope()));
     saludPj.setForeground(Color.WHITE);
     saludPj.setHorizontalAlignment(SwingConstants.RIGHT);
     saludPj.setBounds(80, 100, 77, 16);
@@ -226,7 +237,7 @@ public class MenuStats extends JFrame {
     btnVolver.setIcon(new ImageIcon("recursos//volver.png"));
     btnVolver.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-        Pantalla.menuStats = null;
+        Pantalla.setMenuStats(null);
         dispose();
         }
         });
@@ -238,10 +249,22 @@ public class MenuStats extends JFrame {
     contentPane.add(background);
   }
 
+  /**
+   * Calcular magia.
+   *
+   * @param inteligencia the inteligencia
+   * @return the int
+   */
   private int calcularMagia(final int inteligencia) {
     return (int) (inteligencia * mod);
   }
 
+  /**
+   * Calcular ataque.
+   *
+   * @param fuerza the fuerza
+   * @return the int
+   */
   private int calcularAtaque(final int fuerza) {
     return (int) (fuerza * mod);
   }

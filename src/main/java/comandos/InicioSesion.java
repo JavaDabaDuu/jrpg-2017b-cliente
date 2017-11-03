@@ -5,26 +5,34 @@ import javax.swing.JOptionPane;
 import mensajeria.Paquete;
 import mensajeria.PaquetePersonaje;
 
+/**
+ * The Class InicioSesion.
+ */
 public class InicioSesion extends ComandosCliente {
 
+  /* (non-Javadoc)
+   * @see mensajeria.Comando#ejecutar()
+   */
   @Override
   public void ejecutar() {
-    Paquete paquete = (Paquete) gson.fromJson(cadenaLeida, Paquete.class);
-    if (paquete.getMensaje().equals(Paquete.msjExito)) {
+    Paquete paquete = (Paquete) getGson()
+       .fromJson(getCadenaLeida(), Paquete.class);
+    if (paquete.getMensaje().equals(Paquete.getMsjExito())) {
 
       // El usuario ya inicio sesi�n
-      cliente.getPaqueteUsuario().setInicioSesion(true);
+      getCliente().getPaqueteUsuario().setInicioSesion(true);
 
       // Recibo el paquete personaje con los datos
-      cliente.setPaquetePersonaje(gson.fromJson(cadenaLeida, PaquetePersonaje.class));
+      getCliente().setPaquetePersonaje(getGson().fromJson(
+          getCadenaLeida(), PaquetePersonaje.class));
 
     } else {
-      if (paquete.getMensaje().equals(Paquete.msjFracaso)) {
+      if (paquete.getMensaje().equals(Paquete.getMsjFracaso())) {
         JOptionPane.showMessageDialog(null, "Error al iniciar sesión."
                     + " Revise el usuario y la contraseña");
 
         // El usuario no pudo iniciar sesión
-        cliente.getPaqueteUsuario().setInicioSesion(false);
+        getCliente().getPaqueteUsuario().setInicioSesion(false);
       }
 
     }

@@ -7,9 +7,18 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 
+/**
+ * The Class Utilitarias.
+ */
 public class Utilitarias {
 
-  public static String archivoAString(String path) {
+  /**
+   * Archivo A string.
+   *
+   * @param path the path
+   * @return the string
+   */
+  public static String archivoAString(final String path) {
     StringBuilder builder = new StringBuilder();
 
     try {
@@ -22,13 +31,20 @@ public class Utilitarias {
 
       br.close();
     } catch (IOException e) {
-      JOptionPane.showMessageDialog(null, "Fallo al intentar cargar el mapa " + path);
+      JOptionPane.showMessageDialog(null,
+          "Fallo al intentar cargar el mapa " + path);
     }
 
     return builder.toString();
   }
 
-  public static int parseInt(String numero) {
+  /**
+   * Parses the int.
+   *
+   * @param numero the numero
+   * @return the int
+   */
+  public static int parseInt(final String numero) {
     try {
       return Integer.parseInt(numero);
     } catch (NumberFormatException e) {

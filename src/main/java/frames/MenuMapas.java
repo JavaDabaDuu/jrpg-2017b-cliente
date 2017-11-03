@@ -23,28 +23,41 @@ import javax.swing.border.EmptyBorder;
 
 import mensajeria.Comando;
 
+/**
+ * The Class MenuMapas.
+ */
 public class MenuMapas extends JFrame {
-  public static int numberMap = 0;
+
+  /** The number map. */
+  private static int numberMap = 0;
+
+  /** The content pane. */
   private JPanel contentPane;
 
+  /**
+   * Instantiates a new menu mapas.
+   *
+   * @param cliente the cliente
+   */
   public MenuMapas(final Cliente cliente) {
     addKeyListener(new KeyAdapter() {
       @Override
-      public void keyPressed(KeyEvent e) {
+      public void keyPressed(final KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
           synchronized (cliente) {
             cliente.getPaquetePersonaje().setMapa(1);
-            numberMap = 1;
+            setNumberMap(1);
             cliente.notify();
             }
             dispose();
           }
       }
     });
-    setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+    setIconImage(Toolkit.getDefaultToolkit()
+        .getImage("src/main/java/frames/IconoWome.png"));
     setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-         new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),  
-         new Point(0,0),"custom cursor"));
+         new ImageIcon(MenuJugar.class.getResource("/cursor.png"))
+         .getImage(), new Point(0, 0), "custom cursor"));
 
     setTitle("Elegir Mapa");
     setBounds(100, 100, 450, 300);
@@ -52,7 +65,7 @@ public class MenuMapas extends JFrame {
     // En caso de cerrar
     addWindowListener(new WindowAdapter() {
         @Override
-        public void windowClosing(WindowEvent e) {
+        public void windowClosing(final WindowEvent e) {
           synchronized (cliente) {
             cliente.setAccion(Comando.SALIR);
             cliente.notify();
@@ -101,17 +114,19 @@ public class MenuMapas extends JFrame {
     btnAubenor.setBounds(148, 72, 143, 23);
     layeredPane.add(btnAubenor, new Integer(1));
     btnAubenor.setFocusable(false);
-    btnAubenor.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
+    btnAubenor.setIcon(new ImageIcon(
+        MenuMapas.class.getResource("/frames/BotonMenu.png")));
 
     JButton btnEodrim = new JButton("");
     btnEodrim.setBounds(148, 192, 143, 23);
     layeredPane.add(btnEodrim, new Integer(1));
     btnEodrim.setFocusable(false);
     btnEodrim.setEnabled(false);
-    btnEodrim.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
+    btnEodrim.setIcon(new ImageIcon(
+        MenuMapas.class.getResource("/frames/BotonMenu.png")));
     btnEodrim.addActionListener(new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
           synchronized (cliente) {
             cliente.getPaquetePersonaje().setMapa(3);
             cliente.notify();
@@ -126,13 +141,14 @@ public class MenuMapas extends JFrame {
     btnAris.setBounds(148, 130, 143, 23);
     layeredPane.add(btnAris, new Integer(1));
     btnAris.setFocusable(false);
-    btnAris.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
+    btnAris.setIcon(new ImageIcon(
+        MenuMapas.class.getResource("/frames/BotonMenu.png")));
     btnAris.addActionListener(new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
           synchronized (cliente) {
             cliente.getPaquetePersonaje().setMapa(2);
-            numberMap = 2;
+            setNumberMap(2);
             cliente.notify();
           }
         dispose();
@@ -144,18 +160,37 @@ public class MenuMapas extends JFrame {
     JLabel lblBackground = new JLabel("");
     lblBackground.setBounds(0, 0, 444, 271);
     layeredPane.add(lblBackground, new Integer(0));
-    lblBackground.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/menuBackground.jpg")));
+    lblBackground.setIcon(new ImageIcon(
+        MenuMapas.class.getResource("/frames/menuBackground.jpg")));
     btnAubenor.addActionListener(new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
           synchronized (cliente) {
             cliente.getPaquetePersonaje().setMapa(1);
-            numberMap = 1;
+            setNumberMap(1);
             cliente.notify();
           }
         dispose();
       }
     });
   }
+
+/**
+ * Gets the number map.
+ *
+ * @return the number map
+ */
+public static int getNumberMap() {
+  return numberMap;
+}
+
+/**
+ * Sets the number map.
+ *
+ * @param numberMapAux the new number map
+ */
+public static void setNumberMap(final int numberMapAux) {
+  MenuMapas.numberMap = numberMapAux;
+}
 }
 

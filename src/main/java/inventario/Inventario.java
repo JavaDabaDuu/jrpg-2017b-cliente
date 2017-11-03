@@ -14,12 +14,28 @@ import javax.swing.border.MatteBorder;
 
 import mensajeria.PaquetePersonaje;
 
+/**
+ * The Class Inventario.
+ */
 public class Inventario extends JPanel {
+
+  /** The Constant CANTCOLUMNAS. */
   private static final int CANTCOLUMNAS = 3;
+
+  /** The Constant CANTFILAS. */
   private static final int CANTFILAS = 3;
+
+  /** The items. */
   private ArrayList<Item> items;
-  
-  public Inventario(PaquetePersonaje paquetePersonaje) throws IOException {
+
+  /**
+   * Instantiates a new inventario.
+   *
+   * @param paquetePersonaje the paquete personaje
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
+  public Inventario(
+  final PaquetePersonaje paquetePersonaje) throws IOException {
     setLayout(new GridBagLayout());
     items = new ArrayList<Item>(paquetePersonaje.getItems());
     GridBagConstraints gbc = new GridBagConstraints();
@@ -34,7 +50,7 @@ public class Inventario extends JPanel {
         } else {
           cellPane = new Celda();
         }
-                
+
         Border border = null;
         if (row < CANTFILAS - 1) {
           if (col < CANTCOLUMNAS - 1) {
@@ -43,7 +59,7 @@ public class Inventario extends JPanel {
             border = new MatteBorder(1, 1, 0, 1, Color.DARK_GRAY);
           }
         } else {
-        
+
           if (col < CANTCOLUMNAS - 1) {
             border = new MatteBorder(1, 1, 1, 0, Color.DARK_GRAY);
           } else {

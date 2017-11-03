@@ -25,21 +25,40 @@ import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
 
+/**
+ * The Class MiChat.
+ */
 public class MiChat extends JFrame {
 
+  /** The content pane. */
   private JPanel contentPane;
+
+  /** The texto. */
   private JTextField texto;
+
+  /** The chat. */
   private JTextArea chat;
+
+  /** The juego. */
   private Juego juego;
+
+  /** The gson. */
   private final Gson gson = new Gson();
-  private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
+
+  /** The background. */
+  private final JLabel background
+      = new JLabel(new ImageIcon("recursos//background.jpg"));
+
+  /** The caret. */
   private DefaultCaret caret;
 
   /**
- * Create the frame. 
- */
-  public MiChat(final Juego juego) {
-    this.juego = juego;
+   * Create the frame.
+   *
+   * @param juegoAux the juego
+   */
+  public MiChat(final Juego juegoAux) {
+    this.juego = juegoAux;
     setTitle("Mi Chat");
 
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -51,53 +70,55 @@ public class MiChat extends JFrame {
     contentPane.setLayout(null);
 
     JScrollPane scrollPane = new JScrollPane();
-    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    scrollPane.setVerticalScrollBarPolicy(
+        ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     scrollPane.setBounds(10, 11, 414, 201);
     contentPane.add(scrollPane);
 
     chat = new JTextArea();
     chat.setEditable(false);
     scrollPane.setViewportView(chat);
-    caret = (DefaultCaret)chat.getCaret();
+    caret = (DefaultCaret) chat.getCaret();
     caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
     texto = new JTextField();
     this.addWindowListener(new WindowAdapter() {
-      public void windowOpened(WindowEvent e) {
+      public void windowOpened(final WindowEvent e) {
         texto.requestFocus();
         }
-      
+
       @Override
-      public void windowClosing(WindowEvent e) {
+      public void windowClosing(final WindowEvent e) {
           if (getTitle() == "Sala") {
-              if (Pantalla.ventContac != null) {
+              if (Pantalla.getVentContac() != null) {
             VentanaContactos.getBotonMc().setEnabled(true);
             }
             }
-          juego.getChatsActivos().remove(getTitle());
+          juegoAux.getChatsActivos().remove(getTitle());
           }
       });
 
     //SI TOCO ENTER
     texto.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
+      public void actionPerformed(final ActionEvent e) {
         if (!texto.getText().equals("")) {
           chat.append("Me: " + texto.getText() + "\n");
 
-          juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
-          juego.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
-          juego.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
+          juegoAux.getCliente().getPaqueteMensaje()
+              .setUserEmisor(juegoAux.getPersonaje().getNombre());
+          juegoAux.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
+          juegoAux.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
 
           // MANDO EL COMANDO PARA QUE ENVIE EL MSJ
-          juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
+          juegoAux.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
           // El user receptor en espacio indica que es para todos
           if (getTitle() == "Sala") {
-                juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
+                juegoAux.getCliente().getPaqueteMensaje().setUserReceptor(null);
           }
 
           try {
-              juego.getCliente().getSalida().writeObject(
-                  gson.toJson(juego.getCliente().getPaqueteMensaje()));
+              juegoAux.getCliente().getSalida().writeObject(
+                  gson.toJson(juegoAux.getCliente().getPaqueteMensaje()));
               } catch (IOException e1) {
                 JOptionPane.showMessageDialog(null, "Error al enviar mensaje");
               }
@@ -111,24 +132,27 @@ public class MiChat extends JFrame {
     JButton enviar = new JButton("ENVIAR");
     enviar.setIcon(new ImageIcon("recursos//enviarButton.png"));
     enviar.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
             if (!texto.getText().equals("")) {
             chat.append("Me: " + texto.getText() + "\n");
 
-            juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
-            juego.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
-            juego.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
+            juegoAux.getCliente().getPaqueteMensaje()
+                .setUserEmisor(juegoAux.getPersonaje().getNombre());
+            juegoAux.getCliente().getPaqueteMensaje()
+                .setUserReceptor(getTitle());
+            juegoAux.getCliente().getPaqueteMensaje()
+                .setMensaje(texto.getText());
 
             // MANDO EL COMANDO PARA QUE ENVIE EL MSJ
-            juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
+            juegoAux.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
             // El user receptor en espacio indica que es para todos
             if (getTitle() == "Sala") {
-                juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
+                juegoAux.getCliente().getPaqueteMensaje().setUserReceptor(null);
               }
-            
+
             try {
-                juego.getCliente().getSalida().writeObject(
-                         gson.toJson(juego.getCliente().getPaqueteMensaje()));
+                juegoAux.getCliente().getSalida().writeObject(
+                    gson.toJson(juegoAux.getCliente().getPaqueteMensaje()));
             } catch (IOException e1) {
                 JOptionPane.showMessageDialog(null, "Error al enviar mensaje");
 
@@ -148,10 +172,20 @@ public class MiChat extends JFrame {
     contentPane.add(background);
   }
 
+  /**
+   * Gets the chat.
+   *
+   * @return the chat
+   */
   public JTextArea getChat() {
     return chat;
   }
 
+  /**
+   * Gets the texto.
+   *
+   * @return the texto
+   */
   public JTextField getTexto() {
     return texto;
   }

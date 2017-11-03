@@ -15,28 +15,40 @@ import mensajeria.PaqueteMovimiento;
 import mensajeria.PaqueteNPC;
 import mensajeria.PaquetePersonaje;
 
-/**La clase EscuchaMensajes tiene como función  
+/**La clase EscuchaMensajes tiene como función
  * esuchar los mensajes que se enviaran
  * al servidor.
  */
 
 public class EscuchaMensajes extends Thread {
 
+  /** The juego. */
   private Juego juego;
+
+  /** The cliente. */
   private Cliente cliente;
+
+  /** The entrada. */
   private ObjectInputStream entrada;
+
+  /** The gson. */
   private final Gson gson = new Gson();
 
-  /**Constructor de EsuchaMensaje
-* @param juego juego del que se escucha el mensaje
-*/
-  
-  public EscuchaMensajes(final Juego juego) {
-    this.juego = juego;
-    cliente = juego.getCliente();
+  /**
+   * Constructor de EsuchaMensaje.
+   *
+   * @param juegoAux juego del que se escucha el mensaje
+   */
+
+  public EscuchaMensajes(final Juego juegoAux) {
+    this.juego = juegoAux;
+    cliente = juegoAux.getCliente();
     entrada = cliente.getEntrada();
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Thread#run()
+   */
   @Override
   public void run() {
 
@@ -46,12 +58,12 @@ public class EscuchaMensajes extends Thread {
       ComandosEscucha comand;
       juego.setPersonajesConectados(new HashMap<Integer, PaquetePersonaje>());
       juego.setUbicacionPersonajes(new HashMap<Integer, PaqueteMovimiento>());
-      juego.setNpcs(new HashMap<Integer,PaqueteNPC>());
+      juego.setNpcs(new HashMap<Integer, PaqueteNPC>());
 
       while (true) {
         String objetoLeido = (String) entrada.readObject();
 
-        paquete = gson.fromJson(objetoLeido , Paquete.class);
+        paquete = gson.fromJson(objetoLeido, Paquete.class);
         comand = (ComandosEscucha) paquete.getObjeto(Comando.NOMBREPAQUETE);
         comand.setJuego(juego);
         comand.setCadena(objetoLeido);

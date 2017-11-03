@@ -2,19 +2,27 @@ package comandos;
 
 import mensajeria.PaqueteNPC;
 
+/**
+ * The Class ActualizarNPC.
+ */
 public class ActualizarNPC extends ComandosEscucha {
 
+  /* (non-Javadoc)
+   * @see mensajeria.Comando#ejecutar()
+   */
   @Override
   public void ejecutar() {
-    PaqueteNPC paqueteNpc = (PaqueteNPC) gson.fromJson(cadenaLeida, PaqueteNPC.class);
+    PaqueteNPC paqueteNpc = (PaqueteNPC)
+        getGson().fromJson(getCadenaLeida(), PaqueteNPC.class);
 
-    juego.getNpcs().remove(paqueteNpc.getId());
-    juego.getNpcs().put(paqueteNpc.getId(), paqueteNpc);
+    getJuego().getNpcs().remove(paqueteNpc.getId());
+    getJuego().getNpcs().put(paqueteNpc.getId(), paqueteNpc);
 
-    if (juego.getPaqueteNpc().getId() == paqueteNpc.getId()) {
-      juego.actualizarPaqueteNpc();
-      juego.getEstadoJuego().actualizarNpc();
-      juego.getCliente().actualizarNPC(juego.getNpcs().get(paqueteNpc.getId()));
+    if (getJuego().getPaqueteNpc().getId() == paqueteNpc.getId()) {
+      getJuego().actualizarPaqueteNpc();
+      getJuego().getEstadoJuego().actualizarNpc();
+      getJuego().getCliente()
+          .actualizarNPC(getJuego().getNpcs().get(paqueteNpc.getId()));
 
     }
   }

@@ -27,275 +27,387 @@ import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
 
+/**
+ * The Class EstadoBatallaNPC.
+ */
 public class EstadoBatallaNPC extends Estado {
-	private Mundo mundo;
-	private Personaje personaje;
-	private NonPlayableCharacter enemigo;
-	private int[] posMouse;
-	private PaquetePersonaje paquetePersonaje;
-	private PaqueteNPC paqueteEnemigo;
-	private PaqueteAtacar paqueteAtacar;
-	private PaqueteFinalizarBatalla paqueteFinalizarBatalla;
-	private boolean miTurno;
 
-	private boolean haySpellSeleccionada;
-	private boolean seRealizoAccion;
+  /** The mundo. */
+  private Mundo mundo;
 
-	private Gson gson = new Gson();
+  /** The personaje. */
+  private Personaje personaje;
 
-	private BufferedImage miniaturaPersonaje;
-	private BufferedImage miniaturaEnemigo;
+  /** The enemigo. */
+  private NonPlayableCharacter enemigo;
 
-	private MenuBatalla menuBatalla;
+  /** The pos mouse. */
+  private int[] posMouse;
 
-	private int nivelPersonaje;
-	private int nivelEnemigo;
+  /** The paquete personaje. */
+  private PaquetePersonaje paquetePersonaje;
 
-	public EstadoBatallaNPC(Juego juego, PaqueteBatallaNPC paqueteBatalla) {
-		super(juego);
-		mundo = new Mundo(juego, "recursos/mundoBatalla.txt", "recursos/mundoBatallaCapaDos.txt");
+  /** The paquete enemigo. */
+  private PaqueteNPC paqueteEnemigo;
 
-		miTurno = paqueteBatalla.isMiTurno();
+  /** The paquete atacar. */
+  private PaqueteAtacar paqueteAtacar;
 
-		paquetePersonaje = juego.getPersonajesConectados().get(paqueteBatalla.getId());
-		paqueteEnemigo = juego.getNpcs().get(paqueteBatalla.getIdEnemigo());
-		enemigo = paqueteEnemigo.getNpc();
+  /** The paquete finalizar batalla. */
+  private PaqueteFinalizarBatalla paqueteFinalizarBatalla;
 
-		crearPersonajes();
+  /** The mi turno. */
+  private boolean miTurno;
 
-		menuBatalla = new MenuBatalla(miTurno, personaje);
+  /** The hay spell seleccionada. */
+  private boolean haySpellSeleccionada;
 
-		miniaturaEnemigo = Recursos.personaje.get("Minotauro").get(5)[0];
-		miniaturaPersonaje = Recursos.personaje.get(personaje.getNombreRaza()).get(5)[0];
+  /** The se realizo accion. */
+  private boolean seRealizoAccion;
 
-		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
-		paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
-		paqueteFinalizarBatalla.setIdEnemigo(paqueteEnemigo.getId());
+  /** The gson. */
+  private Gson gson = new Gson();
 
-		juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
+  /** The miniatura personaje. */
+  private BufferedImage miniaturaPersonaje;
 
-		juego.getHandlerMouse().setNuevoClick(false);
+  /** The miniatura enemigo. */
+  private BufferedImage miniaturaEnemigo;
 
-	}
+  /** The menu batalla. */
+  private MenuBatalla menuBatalla;
 
-	@Override
-	public void actualizar() {
-		juego.getCamara().setxOffset(-350);
-		juego.getCamara().setyOffset(150);
+  /** The nivel personaje. */
+  private int nivelPersonaje;
 
-		seRealizoAccion = false;
-		haySpellSeleccionada = false;
+  /** The nivel enemigo. */
+  private int nivelEnemigo;
 
-		if (miTurno) {
-			if (juego.getHandlerMouse().getNuevoClick()) {
-				posMouse = juego.getHandlerMouse().getPosMouse();
+  /**
+   * Instantiates a new estado batalla NPC.
+   * *
+   * * @param juego the juego
+   * * @param paqueteBatalla the paquete batalla
+   */
+  public EstadoBatallaNPC(final Juego juego,
+  final PaqueteBatallaNPC paqueteBatalla) {
+    super(juego);
+    mundo = new Mundo(juego, "recursos/mundoBatalla.txt",
+    "recursos/mundoBatallaCapaDos.txt");
 
-				if (menuBatalla.clickEnMenu(posMouse[0], posMouse[1])) {
+    miTurno = paqueteBatalla.isMiTurno();
 
-					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 1) {
-						if (personaje.puedeAtacar()) {
-							seRealizoAccion = true;
-							personaje.habilidadRaza1(enemigo);
-						}
-						haySpellSeleccionada = true;
-					}
+    paquetePersonaje = juego.getPersonajesConectados()
+      .get(paqueteBatalla.getId());
+    paqueteEnemigo = juego.getNpcs().get(paqueteBatalla.getIdEnemigo());
+    enemigo = paqueteEnemigo.getNpc();
 
-					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 2) {
-						if (personaje.puedeAtacar()) {
-							seRealizoAccion = true;
-							personaje.habilidadRaza2(enemigo);
-						}
-						haySpellSeleccionada = true;
-					}
+    crearPersonajes();
 
-					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 3) {
-						if (personaje.puedeAtacar()) {
-							seRealizoAccion = true;
-							personaje.habilidadCasta1(enemigo);
-						}
-						haySpellSeleccionada = true;
-					}
+    menuBatalla = new MenuBatalla(miTurno, personaje);
 
-					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 4) {
-						if (personaje.puedeAtacar()) {
-							seRealizoAccion = true;
-							personaje.habilidadCasta2(enemigo);
-						}
-						haySpellSeleccionada = true;
-					}
+    miniaturaEnemigo = Recursos.getPersonaje()
+      .get("Minotauro").get(5)[0];
+    miniaturaPersonaje = Recursos.getPersonaje()
+      .get(personaje.getNombreRaza()).get(5)[0];
 
-					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 5) {
-						if (personaje.puedeAtacar()) {
-							seRealizoAccion = true;
-							personaje.habilidadCasta3(enemigo);
-						}
-						haySpellSeleccionada = true;
-					}
+    paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
+    paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
+    paqueteFinalizarBatalla.setIdEnemigo(paqueteEnemigo.getId());
 
-					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 6) {
-						seRealizoAccion = true;
-						personaje.serEnergizado(10);
-						haySpellSeleccionada = true;
-					}
-				}
+    juego.getEstadoJuego().setHaySolicitud(true,
+      juego.getPersonaje(), MenuInfoPersonaje.MENUPERDERBATALLA);
 
-				if (haySpellSeleccionada && seRealizoAccion) {
-					if (!enemigo.estaVivo()) {
-						juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
-								MenuInfoPersonaje.menuGanarBatalla);
-						if (personaje.ganarExperiencia(enemigo.getNivel() * 40)) {
-							juego.getPersonaje().setNivel(personaje.getNivel());
-							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
-									MenuInfoPersonaje.menuSubirNivel);
-						}
-						paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
-						finalizarBatalla();
-						Estado.setEstado(juego.getEstadoJuego());
+    juego.getHandlerMouse().setNuevoClick(false);
 
-					} else {
-								enemigo.atacar(personaje);
-								
-								if(!personaje.estaVivo()) {
-									juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
-									juego.getPersonaje().setEstado(Estado.estadoJuego);
-									
-									paqueteFinalizarBatalla.setGanadorBatalla(this.getPaqueteEnemigo().getId());
-									finalizarBatalla();
-									Estado.setEstado(juego.getEstadoJuego());
-								}
-						
-						miTurno = true;
-					}
-				} else if (haySpellSeleccionada && !seRealizoAccion) {
-					JOptionPane.showMessageDialog(null,
-							"No posees la energía suficiente para realizar esta habilidad.");
-				}
+  }
 
-				juego.getHandlerMouse().setNuevoClick(false);
-			}
-		}
-	}
+  /* (non-Javadoc)
+  * @see estados.Estado#actualizar()
+  */
+  @Override
+public void actualizar() {
+  getJuego().getCamara().setxOffset(-350);
+  getJuego().getCamara().setyOffset(150);
 
-	@Override
-	public void graficar(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
-		mundo.graficar(g);
-		g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(3)[0], 0, 175, 256, 256, null);
-		g.drawImage(Recursos.personaje.get("Minotauro").get(7)[0], 550, 75, 256, 256, null);
-		mundo.graficarObstaculos(g);
-		menuBatalla.graficar(g);
+  seRealizoAccion = false;
+  haySpellSeleccionada = false;
 
-		g.setColor(Color.GREEN);
+  if (miTurno) {
+    if (getJuego().getHandlerMouse().getNuevoClick()) {
+      posMouse = getJuego().getHandlerMouse().getPosMouse();
+      if (menuBatalla.clickEnMenu(posMouse[0], posMouse[1])) {
+        if (menuBatalla.getBotonClickeado(posMouse[0],
+          posMouse[1]) == 1) {
+          if (personaje.puedeAtacar()) {
+            seRealizoAccion = true;
+            personaje.habilidadRaza1(enemigo);
+          }
+          haySpellSeleccionada = true;
+          }
+        if (menuBatalla.getBotonClickeado(posMouse[0],
+        posMouse[1]) == 2) {
+          if (personaje.puedeAtacar()) {
+            seRealizoAccion = true;
+            personaje.habilidadRaza2(enemigo);
+           }
+           haySpellSeleccionada = true;
+           }
 
-		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 25, 5, personaje, miniaturaPersonaje);
-		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 550, 5, enemigo, miniaturaEnemigo);
+           if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 3) {
+             if (personaje.puedeAtacar()) {
+               seRealizoAccion = true;
+               personaje.habilidadCasta1(enemigo);
+             }
+             haySpellSeleccionada = true;
+              }
 
-	}
+              if (menuBatalla.getBotonClickeado(posMouse[0],
+              posMouse[1]) == 4) {
+                if (personaje.puedeAtacar()) {
+                  seRealizoAccion = true;
+                  personaje.habilidadCasta2(enemigo);
+                }
+                haySpellSeleccionada = true;
+                }
 
-	private void crearPersonajes() {
-		String nombre = paquetePersonaje.getNombre();
-		int salud = paquetePersonaje.getSaludTope();
-		int energia = paquetePersonaje.getEnergiaTope();
-		int fuerza = paquetePersonaje.getFuerza();
-		int destreza = paquetePersonaje.getDestreza();
-		int magia = paquetePersonaje.getInteligencia();
-		int experiencia = paquetePersonaje.getExperiencia();
-		int nivel = paquetePersonaje.getNivel();
-		int id = paquetePersonaje.getId();
+                if (menuBatalla.getBotonClickeado(posMouse[0],
+                posMouse[1]) == 5) {
+                  if (personaje.puedeAtacar()) {
+                    seRealizoAccion = true;
+                    personaje.habilidadCasta3(enemigo);
+                  }
+                  haySpellSeleccionada = true;
+                  }
 
-		// Guardo el nivel con el que empieza el Personaje la batalla
-		this.nivelPersonaje = nivel;
+                  if (menuBatalla.getBotonClickeado(posMouse[0],
+                  posMouse[1]) == 6) {
+                    seRealizoAccion = true;
+                    personaje.serEnergizado(10);
+                    haySpellSeleccionada = true;
+                  }
+                }
+                if (haySpellSeleccionada && seRealizoAccion) {
+                  if (!enemigo.estaVivo()) {
+                    getJuego().getEstadoJuego().setHaySolicitud(true,
+                        getJuego().getPersonaje(), MenuInfoPersonaje
+                            .MENUGANARBATALLA);
+                    if (personaje.ganarExperiencia(enemigo.getNivel() * 40)) {
+                    getJuego().getPersonaje().setNivel(personaje.getNivel());
+                    getJuego().getEstadoJuego().setHaySolicitud(true,
+                        getJuego().getPersonaje(),
+                        MenuInfoPersonaje.MENUSUBIRNIVEL);
+                    }
+                    paqueteFinalizarBatalla.setGanadorBatalla(getJuego()
+                        .getPersonaje().getId());
+                    finalizarBatalla();
+                    Estado.setEstado(getJuego().getEstadoJuego());
 
-		Casta casta = null;
-		try {
-			casta = (Casta) Class.forName("dominio" + "." + paquetePersonaje.getCasta()).newInstance();
-			personaje = (Personaje) Class.forName("dominio" + "." + paquetePersonaje.getRaza())
-					.getConstructor(String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE,
-							Casta.class, Integer.TYPE, Integer.TYPE, Integer.TYPE)
-					.newInstance(nombre, salud, energia, fuerza, destreza, magia, casta, experiencia, nivel, id);
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException
-				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			JOptionPane.showMessageDialog(null, "Error al crear la batalla");
-		}
+                    } else {
+                    enemigo.atacar(personaje);
+                    if (!personaje.estaVivo()) {
+                      getJuego().getEstadoJuego().setHaySolicitud(true,
+                          getJuego().getPersonaje(), MenuInfoPersonaje
+                          .MENUPERDERBATALLA);
+                       getJuego().getPersonaje()
+                           .setEstado(Estado.getEstadoJuego());
 
-		nombre = paqueteEnemigo.getNombre();
-		salud = paqueteEnemigo.getNpc().getSalud();
-		fuerza = paqueteEnemigo.getNpc().getFuerza();
-		magia = paqueteEnemigo.getNpc().getMagia();
-		nivel = paqueteEnemigo.getNpc().getNivel();
-		id = paqueteEnemigo.getId();
+                       paqueteFinalizarBatalla.setGanadorBatalla(this
+                           .getPaqueteEnemigo().getId());
+                       finalizarBatalla();
+                       Estado.setEstado(getJuego().getEstadoJuego());
+                       }
+                       miTurno = true;
+                     }
+                   } else if (haySpellSeleccionada
+                   && !seRealizoAccion) {
+                      JOptionPane.showMessageDialog(null,
+                         "No posees la energía suficiente "
+                         + "para realizar esta habilidad.");
+                   }
+                   getJuego().getHandlerMouse().setNuevoClick(false);
+    }
+  }
+}
 
-	}
+    /* (non-Javadoc)
+    * @see estados.Estado#graficar(java.awt.Graphics)
+    */
+  @Override
+public void graficar(final Graphics gAux) {
+  gAux.setColor(Color.BLACK);
+  gAux.fillRect(0, 0, getJuego()
+    .getAncho(), getJuego().getAlto());
+  mundo.graficar(gAux);
+  gAux.drawImage(Recursos.getPersonaje().get(paquetePersonaje
+      .getRaza()).get(3)[0], 0, 175, 256, 256, null);
+  gAux.drawImage(Recursos.getPersonaje().get("Minotauro")
+      .get(7)[0], 550, 75, 256, 256, null);
+  mundo.graficarObstaculos(gAux);
+  menuBatalla.graficar(gAux);
 
-	public void enviarAtaque(PaqueteAtacar paqueteAtacar) {
-		try {
-			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteAtacar));
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexion con el servidor.");
-		}
-	}
+  gAux.setColor(Color.GREEN);
 
-	private void finalizarBatalla() {
-		try {
-			paqueteFinalizarBatalla.setComando(Comando.FINALIZARBATALLANPC);
-			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
+  EstadoDePersonaje.dibujarEstadoDePersonaje(gAux, 25, 5,
+      personaje, miniaturaPersonaje);
+  EstadoDePersonaje.dibujarEstadoDePersonaje(gAux, 550, 5,
+      enemigo, miniaturaEnemigo);
+}
 
-			paquetePersonaje.setSaludTope(personaje.getSaludTope());
-			paquetePersonaje.setEnergiaTope(personaje.getEnergiaTope());
-			paquetePersonaje.setNivel(personaje.getNivel());
-			paquetePersonaje.setExperiencia(personaje.getExperiencia());
-			paquetePersonaje.setDestreza(personaje.getDestreza());
-			paquetePersonaje.setFuerza(personaje.getFuerza());
-			paquetePersonaje.setInteligencia(personaje.getInteligencia());
-			paquetePersonaje.removerBonus();
+  /**
+  * Crear personajes.
+  */
+private void crearPersonajes() {
 
-			/**
-			 * Comparo solo si subio el jugador de nivel para asignarle los 3
-			 * puntos correspondientes
-			 */
-			if (paquetePersonaje.getNivel() > this.nivelPersonaje) {
-				paquetePersonaje.actualizarPuntosPorNivel();
-			}
+  String nombre = paquetePersonaje.getNombre();
+  int salud = paquetePersonaje.getSaludTope();
+  int energia = paquetePersonaje.getEnergiaTope();
+  int fuerza = paquetePersonaje.getFuerza();
+  int destreza = paquetePersonaje.getDestreza();
+  int magia = paquetePersonaje.getInteligencia();
+  int experiencia = paquetePersonaje.getExperiencia();
+  int nivel = paquetePersonaje.getNivel();
+  int id = paquetePersonaje.getId();
 
-			/**
-			 * fin comparacion
-			 */
-			paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
-			paqueteEnemigo.setComando(Comando.ACTUALIZARPERSONAJE);
+  // Guardo el nivel con el que empieza el Personaje la batalla
+  this.nivelPersonaje = nivel;
 
-			juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
-			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteEnemigo));
+  Casta casta = null;
+  try {
+    casta = (Casta) Class.forName("dominio" + "."
+        + paquetePersonaje.getCasta()).newInstance();
+    personaje = (Personaje) Class.forName("dominio" + "."
+        + paquetePersonaje.getRaza()).getConstructor(String.class, Integer.TYPE,
+        Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE,
+        Casta.class, Integer.TYPE, Integer.TYPE, Integer.TYPE)
+        .newInstance(nombre, salud, energia, fuerza, destreza, magia, casta,
+        experiencia, nivel, id);
+   } catch (InstantiationException | IllegalAccessException
+   | ClassNotFoundException | IllegalArgumentException
+   | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+     JOptionPane.showMessageDialog(null, "Error al crear la batalla");
+   }
 
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
-		}
-	}
+  nombre = paqueteEnemigo.getNombre();
+  salud = paqueteEnemigo.getNpc().getSalud();
+  fuerza = paqueteEnemigo.getNpc().getFuerza();
+  magia = paqueteEnemigo.getNpc().getMagia();
+  nivel = paqueteEnemigo.getNpc().getNivel();
+  id = paqueteEnemigo.getId();
 
-	public PaquetePersonaje getPaquetePersonaje() {
-		return paquetePersonaje;
-	}
+  }
 
-	public PaqueteNPC getPaqueteEnemigo() {
-		return paqueteEnemigo;
-	}
+  /**
+   * Enviar ataque.
+   *
+   * @param paqueteAtacarAux the paquete atacar
+   */
+public void enviarAtaque(final PaqueteAtacar paqueteAtacarAux) {
+  try {
+    getJuego().getCliente().getSalida()
+        .writeObject(gson.toJson(paqueteAtacarAux));
+  } catch (IOException e) {
+    JOptionPane.showMessageDialog(null,
+        "Fallo la conexion con el servidor.");
+  }
+}
 
-	public void setMiTurno(boolean b) {
-		miTurno = b;
-		menuBatalla.setHabilitado(b);
-		juego.getHandlerMouse().setNuevoClick(false);
-	}
+  /**
+  * Finalizar batalla.
+   */
+private void finalizarBatalla() {
+  try {
+    paqueteFinalizarBatalla.setComando(Comando.FINALIZARBATALLANPC);
+    getJuego().getCliente().getSalida()
+        .writeObject(gson.toJson(paqueteFinalizarBatalla));
 
-	public Personaje getPersonaje() {
-		return personaje;
-	}
+    paquetePersonaje.setSaludTope(personaje.getSaludTope());
+    paquetePersonaje.setEnergiaTope(personaje.getEnergiaTope());
+    paquetePersonaje.setNivel(personaje.getNivel());
+    paquetePersonaje.setExperiencia(personaje.getExperiencia());
+    paquetePersonaje.setDestreza(personaje.getDestreza());
+    paquetePersonaje.setFuerza(personaje.getFuerza());
+    paquetePersonaje.setInteligencia(personaje.getInteligencia());
+    paquetePersonaje.removerBonus();
 
-	public NonPlayableCharacter getEnemigo() {
-		return enemigo;
-	}
+    /**
+    * Comparo solo si subio el jugador de nivel para asignarle los 3
+    * puntos correspondientes
+    */
+    if (paquetePersonaje.getNivel() > this.nivelPersonaje) {
+      paquetePersonaje.actualizarPuntosPorNivel();
+    }
 
-	@Override
-	public boolean esEstadoDeJuego() {
-		return false;
-	}
+  /**
+  * fin comparacion
+  */
+
+    paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
+    paqueteEnemigo.setComando(Comando.ACTUALIZARPERSONAJE);
+
+    getJuego().getCliente().getSalida()
+       .writeObject(gson.toJson(paquetePersonaje));
+    getJuego().getCliente().getSalida()
+        .writeObject(gson.toJson(paqueteEnemigo));
+
+    } catch (IOException e) {
+      JOptionPane.showMessageDialog(null,
+          "Fallo la conexión con el servidor");
+    }
+  }
+
+  /**
+  * Gets the paquete personaje.
+  *
+  * @return the paquete personaje
+  */
+public PaquetePersonaje getPaquetePersonaje() {
+  return paquetePersonaje;
+}
+
+  /**
+  * Gets the paquete enemigo.
+  *
+  * @return the paquete enemigo
+  */
+public PaqueteNPC getPaqueteEnemigo() {
+  return paqueteEnemigo;
+}
+
+  /**
+  * Sets the mi turno.
+  *
+  * @param bAux the new mi turno
+  */
+public void setMiTurno(final boolean bAux) {
+  miTurno = bAux;
+  menuBatalla.setHabilitado(bAux);
+  getJuego().getHandlerMouse().setNuevoClick(false);
+}
+
+  /**
+  * Gets the personaje.
+  *
+  * @return the personaje
+  */
+public Personaje getPersonaje() {
+  return personaje;
+}
+
+  /**
+  * Gets the enemigo.
+  *
+  * @return the enemigo
+  */
+public NonPlayableCharacter getEnemigo() {
+    return enemigo;
+}
+
+  /* (non-Javadoc)
+  * @see estados.Estado#esEstadoDeJuego()
+  */
+  @Override
+public boolean esEstadoDeJuego() {
+    return false;
+}
 }

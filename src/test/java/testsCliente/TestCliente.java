@@ -22,28 +22,43 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-
-
-
-
+/**
+ * The Class TestCliente.
+ */
 public class TestCliente {
 
+  /** The my thread. */
   private Thread myThread;
+
+  /** The server. */
   private ServerSocket server;
+
+  /** The gson. */
   private Gson gson = new Gson();
-  ObjectOutputStream salida;
-  ObjectInputStream entrada;
-  // Si quiero probar la conexión del cliente si o si necesito un servidor stub (lamentablemente)
+
+  /** The salida. */
+  private ObjectOutputStream salida;
+
+  /** The entrada. */
+  private ObjectInputStream entrada;
+
+  // Si quiero probar la conexión del cliente
+  // si o si necesito un servidor stub (lamentablemente)
   // Y para no complicarme la existencia con que el server
   // se quede esperando por nuevos paquetes bla bla bla
   // Paso una cola con todos los paquetes que le tengo que enviar,
   // ya que no hay forma de que recibiendo un
   // Paquete tipo "Paquete", el test de PjTest me de bien..
-  
+
+  /**
+   * Test server.
+   *
+   * @param cantPaquetes the cant paquetes
+   */
   @Test
   public void testServer(final Queue<Paquete> cantPaquetes) {
     myThread = new Thread(new Runnable() {
-   
+
         @Override
         public void run() {
             try {
@@ -55,8 +70,8 @@ public class TestCliente {
                 //Lo recibo pero no importa
                 entrada.readObject();
                 Paquete paq = cantPaquetes.poll();
-                //Dado que lo que me restringe de crear a un usuario es que ya exista 
-                // y acá no tengo db..
+                //Dado que lo que me restringe de crear a un usuario
+                // es que ya exista y acá no tengo db..
                 if (paq.getMensaje() != "0") {
                   paq.setMensaje("1");
                 }
@@ -82,15 +97,19 @@ public class TestCliente {
     myThread.start();
   }
 
+  /**
+   * Test conexion con el servidor.
+   */
   @Test
  public void testConexionConElServidor() {
     Queue<Paquete> queue = new LinkedList<Paquete>();
 
     queue.add(new Paquete());
     testServer(queue);
-    Cliente cliente = new Cliente("localhost",55050);
+    Cliente cliente = new Cliente("localhost", 55050);
 
-    // Pasado este punto la conexión entre el cliente y el servidor resulto exitosa
+    // Pasado este punto la conexión entre
+    // el cliente y el servidor resulto exitosa
     Assert.assertEquals(1, 1);
 
     try {
@@ -109,13 +128,16 @@ public class TestCliente {
     }
   }
 
+  /**
+   * Test registro.
+   */
   @Test
   public void testRegistro() {
 
 
     // Registro el usuario
     PaqueteUsuario pu = new PaqueteUsuario();
-    pu.setComando(Comando.REGISTRO); 
+    pu.setComando(Comando.REGISTRO);
     pu.setUsername("nuevoUser");
     pu.setPassword("test");
     pu.setMensaje("1");
@@ -123,7 +145,7 @@ public class TestCliente {
     queue.add(new Paquete());
     queue.add(pu);
     testServer(queue);
-    Cliente cliente = new Cliente("localhost",55050);
+    Cliente cliente = new Cliente("localhost", 55050);
 
     try {
 
@@ -136,14 +158,14 @@ public class TestCliente {
 
       // Cierro las conexiones
       Paquete p = new Paquete();
-      p.setComando(Comando.DESCONECTAR);      
+      p.setComando(Comando.DESCONECTAR);
       p.setIp(cliente.getMiIp());
       cliente.getSalida().writeObject(gson.toJson(p));
       cliente.getSalida().close();
       cliente.getEntrada().close();
       cliente.getSocket().close();
 
-      Assert.assertEquals(Paquete.msjExito, resultado.getMensaje());
+      Assert.assertEquals(Paquete.getMsjExito(), resultado.getMensaje());
       myThread.stop();
     } catch (JsonSyntaxException | ClassNotFoundException | IOException e) {
       JOptionPane.showMessageDialog(null, "Falló");
@@ -151,6 +173,9 @@ public class TestCliente {
   }
 
 
+  /**
+   * Test registro fallido.
+   */
   @Test
 
  public void testRegistroFallido() {
@@ -168,7 +193,7 @@ public class TestCliente {
     queue.add(pu);
     testServer(queue);
 
-    Cliente cliente = new Cliente("localhost",55050);
+    Cliente cliente = new Cliente("localhost", 55050);
     try {
 
       // Envio el paquete para registrarme
@@ -185,13 +210,18 @@ public class TestCliente {
       cliente.getSalida().close();
       cliente.getEntrada().close();
       cliente.getSocket().close();
-      Assert.assertEquals(Paquete.msjFracaso, resultado.getMensaje());
+      Assert.assertEquals(Paquete.getMsjFracaso(), resultado.getMensaje());
       myThread.stop();
     } catch (JsonSyntaxException | ClassNotFoundException | IOException e) {
       JOptionPane.showMessageDialog(null, "Falló");
     }
   }
 
+  /**
+   * Test registrar personaje.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void testRegistrarPersonaje() throws IOException {
     Queue<Paquete> queue = new LinkedList<Paquete>();
@@ -220,7 +250,7 @@ public class TestCliente {
     queue.add(pu);
     queue.add(pp);
     testServer(queue);
-    Cliente cliente = new Cliente("localhost",55050);
+    Cliente cliente = new Cliente("localhost", 55050);
     try {
 
       // Envio el paquete de registro de usuario
@@ -254,6 +284,11 @@ public class TestCliente {
     }
   }
 
+  /**
+   * Test iniciar sesion.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void testIniciarSesion() throws IOException {
 
@@ -267,9 +302,9 @@ public class TestCliente {
     pu.setPassword("test");
     Queue<Paquete> queue = new LinkedList<Paquete>();
     queue.add(pp);
-       
+
     testServer(queue);
-    Cliente cliente = new Cliente("localhost",55050);
+    Cliente cliente = new Cliente("localhost", 55050);
 
     try {
 
@@ -277,7 +312,8 @@ public class TestCliente {
       cliente.getSalida().writeObject(gson.toJson(pu));
       // Recibo el paquete con el personaje
       PaquetePersonaje paquetePersonaje = (PaquetePersonaje) gson
-          .fromJson((String) cliente.getEntrada().readObject(), PaquetePersonaje.class);
+          .fromJson((String) cliente.getEntrada()
+          .readObject(), PaquetePersonaje.class);
 
       // Cierro las conexiones
       Paquete p = new Paquete();
@@ -295,7 +331,12 @@ public class TestCliente {
     }
   }
 
-  @Test    
+  /**
+   * Test actualizar personaje.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
+  @Test
   public void testActualizarPersonaje() throws IOException {
 
 
@@ -315,7 +356,7 @@ public class TestCliente {
     Queue<Paquete> queue = new LinkedList<Paquete>();
     queue.add(pp);
     testServer(queue);
-    Cliente cliente = new Cliente("localhost",55050);
+    Cliente cliente = new Cliente("localhost", 55050);
     try {
 
       // Envio el paquete de actualizacion de personaje
@@ -323,7 +364,8 @@ public class TestCliente {
 
       // Recibo el paquete con el personaje actualizado
       PaquetePersonaje paquetePersonaje = (PaquetePersonaje) gson
-          .fromJson((String) cliente.getEntrada().readObject(), PaquetePersonaje.class);
+          .fromJson((String) cliente.getEntrada()
+          .readObject(), PaquetePersonaje.class);
 
       // Cierro las conexiones
       Paquete p = new Paquete();

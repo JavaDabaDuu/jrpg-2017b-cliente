@@ -2,39 +2,79 @@ package mensajeria;
 
 import java.io.Serializable;
 
+/**
+ * The Class PaqueteMensaje.
+ */
 public class PaqueteMensaje extends Paquete implements Serializable, Cloneable {
- 
+
+  /** The user emisor. */
   private String userEmisor;
+
+  /** The user receptor. */
   private String userReceptor;
+
+  /** The msj. */
   private String msj;
 
-  public PaqueteMensaje(){
+  /**
+   * Instantiates a new paquete mensaje.
+   */
+  public PaqueteMensaje() {
   }
 
+  /* (non-Javadoc)
+   * @see mensajeria.Paquete#getMensaje()
+   */
   public String getMensaje() {
     return msj;
   }
 
-  public void setMensaje(String mensaje) {
+  /* (non-Javadoc)
+   * @see mensajeria.Paquete#setMensaje(java.lang.String)
+   */
+  public void setMensaje(final String mensaje) {
     this.msj = mensaje;
   }
 
+  /**
+   * Gets the user emisor.
+   *
+   * @return the user emisor
+   */
   public String getUserEmisor() {
     return userEmisor;
   }
 
-  public void setUserEmisor(String idEmisor) {
+  /**
+   * Sets the user emisor.
+   *
+   * @param idEmisor the new user emisor
+   */
+  public void setUserEmisor(final String idEmisor) {
     this.userEmisor = idEmisor;
   }
 
+  /**
+   * Gets the user receptor.
+   *
+   * @return the user receptor
+   */
   public String getUserReceptor() {
     return userReceptor;
   }
 
-  public void setUserReceptor(String idReceptor) {
+  /**
+   * Sets the user receptor.
+   *
+   * @param idReceptor the new user receptor
+   */
+  public void setUserReceptor(final String idReceptor) {
     this.userReceptor = idReceptor;
   }
-  
+
+  /* (non-Javadoc)
+   * @see mensajeria.Paquete#clone()
+   */
   @Override
 public Object clone() {
     Object obj = null;

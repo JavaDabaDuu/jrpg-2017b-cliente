@@ -2,55 +2,118 @@ package mensajeria;
 
 import java.io.Serializable;
 
+/**
+ * The Class PaqueteUsuario.
+ */
 public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
-  
-  private int idPj; 
+
+  /** The id pj. */
+  private int idPj;
+
+  /** The username. */
   private String username;
+
+  /** The password. */
   private String password;
+
+  /** The inicio sesion. */
   private boolean inicioSesion;
 
-  public PaqueteUsuario(){
+  /**
+   * Instantiates a new paquete usuario.
+   */
+  public PaqueteUsuario() {
   }
 
-  public PaqueteUsuario(int pj, String user, String pw) {
+  /**
+   * Instantiates a new paquete usuario.
+   *
+   * @param pj the pj
+   * @param user the user
+   * @param pw the pw
+   */
+  public PaqueteUsuario(final int pj, final String user, final String pw) {
     idPj = pj;
     username = user;
     password = pw;
     inicioSesion = false;
   }
 
+  /**
+   * Gets the id pj.
+   *
+   * @return the id pj
+   */
   public int getIdPj() {
     return idPj;
   }
 
-  public void setIdPj(int idPj) {
-    this.idPj = idPj;
+  /**
+   * Sets the id pj.
+   *
+   * @param idPjAux the new id pj
+   */
+  public void setIdPj(final int idPjAux) {
+    this.idPj = idPjAux;
   }
 
+  /**
+   * Gets the username.
+   *
+   * @return the username
+   */
   public String getUsername() {
     return username;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  /**
+   * Sets the username.
+   *
+   * @param usernameAux the new username
+   */
+  public void setUsername(final String usernameAux) {
+    this.username = usernameAux;
   }
 
+  /**
+   * Gets the password.
+   *
+   * @return the password
+   */
   public String getPassword() {
     return password;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
+  /**
+   * Sets the password.
+   *
+   * @param passwordAux the new password
+   */
+  public void setPassword(final String passwordAux) {
+    this.password = passwordAux;
   }
 
+  /**
+   * Checks if is inicio sesion.
+   *
+   * @return true, if is inicio sesion
+   */
   public boolean isInicioSesion() {
     return inicioSesion;
   }
 
-  public void setInicioSesion(boolean inicioSesion) {
-    this.inicioSesion = inicioSesion;
+  /**
+   * Sets the inicio sesion.
+   *
+   * @param inicioSesionAux the new inicio sesion
+   */
+  public void setInicioSesion(final boolean inicioSesionAux) {
+    this.inicioSesion = inicioSesionAux;
   }
 
+  /* (non-Javadoc)
+   * @see mensajeria.Paquete#clone()
+   */
   @Override
 public Object clone() {
     Object obj = null;

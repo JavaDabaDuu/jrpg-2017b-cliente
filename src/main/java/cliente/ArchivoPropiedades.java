@@ -7,17 +7,26 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+/**
+ * The Class ArchivoPropiedades.
+ */
 public class ArchivoPropiedades {
 
-  public static void main(String[] args) {
+  /**
+   * The main method.
+   *
+   * @param args the arguments
+   */
+  public static void main(final String[] args) {
     Properties prop = new Properties();
-    try {          
+    try {
       OutputStream output = new FileOutputStream("configCliente.properties");
       prop.setProperty("puerto", "55050");
       prop.store(output, null);
       output.close();
     } catch (IOException e) {
-      JOptionPane.showMessageDialog(null, "Error al generar archivo de propiedades.");
+      JOptionPane.showMessageDialog(null,
+          "Error al generar archivo de propiedades.");
     }
   }
 }

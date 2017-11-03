@@ -9,15 +9,18 @@ import dominio.NonPlayableCharacter;
 import mensajeria.PaqueteNPC;
 import recursos.Recursos;
 
+/**
+ * The Class EstadoNPC.
+ */
 public class EstadoNPC {
-	
-	private EstadoNPC() {
-		
-	}
-	
-	 /**
-     * The Constant ANCHOBARRA.
-     */
+  /**
+  * Instantiates a new estado NPC.
+  */
+  private EstadoNPC() {
+  }
+  /**
+  * The Constant ANCHOBARRA.
+  */
     private static final int ANCHOBARRA = 122;
 
     /**
@@ -57,8 +60,8 @@ public class EstadoNPC {
 
         g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 
-        g.drawImage(miniaturaEnemigo, x + 10, y + 9, ANCHOMINIATURA,
-                ALTOMINIATURA, null);
+        g.drawImage(miniaturaEnemigo, x + 10, y + 9,
+            ANCHOMINIATURA, ALTOMINIATURA, null);
 
         if (enemigo.getSalud() == enemigo.getSalud()) {
             drawBarra = ANCHOBARRA;
@@ -69,8 +72,8 @@ public class EstadoNPC {
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        g.drawImage(Recursos.getBarraSalud(), x + 80, y + 26, drawBarra,
-                ALTOSALUD, null);
+        g.drawImage(Recursos.getBarraSalud(), x + 80, y + 26,
+            drawBarra, ALTOSALUD, null);
         g.drawString(
                 String.valueOf(enemigo.getSalud()) + " / "
                         + String.valueOf(enemigo.getSalud()),
@@ -113,10 +116,11 @@ public class EstadoNPC {
                 ALTOSALUD, null);
         g.drawString(
                 String.valueOf(enemigo.getNpc().getSalud()) + " / "
-                        + String.valueOf(enemigo.getNpc().getSalud()),
+                + String.valueOf(enemigo.getNpc().getSalud()),
                 x + 132, y + 37);
         g.setFont(new Font("Tahoma", Font.PLAIN, 10));
         g.setColor(Color.GREEN);
-        g.drawString(String.valueOf(enemigo.getNpc().getNivel()), x + 59, y + 70);
+        g.drawString(String.valueOf(enemigo.getNpc().getNivel()),
+            x + 59, y + 70);
     }
 }

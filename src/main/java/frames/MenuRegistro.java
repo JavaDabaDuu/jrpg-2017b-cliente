@@ -25,20 +25,32 @@ import javax.swing.JTextField;
 import mensajeria.Comando;
 
 
+/**
+ * The Class MenuRegistro.
+ */
 public class MenuRegistro extends JFrame {
 
+  /** The txt usuario. */
   private JTextField txtUsuario;
+
+  /** The pw password. */
   private JPasswordField pwPassword;
 
+  /**
+   * Instantiates a new menu registro.
+   *
+   * @param cliente the cliente
+   */
   public MenuRegistro(final Cliente cliente) {
-    setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+    setIconImage(Toolkit.getDefaultToolkit()
+        .getImage("src/main/java/frames/IconoWome.png"));
     setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
         new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-        new Point(0,0),"custom cursor"));
+        new Point(0, 0), "custom cursor"));
 
     addWindowListener(new WindowAdapter() {
         @Override
-        public void windowClosing(WindowEvent e) {
+        public void windowClosing(final WindowEvent e) {
           synchronized (cliente) {
             cliente.setAccion(Comando.SALIR);
             cliente.notify();
@@ -80,12 +92,13 @@ public class MenuRegistro extends JFrame {
     btnRegistrarse.setBounds(143, 182, 153, 23);
     layeredPane.add(btnRegistrarse, new Integer(1));
     btnRegistrarse.setFocusable(false);
-    btnRegistrarse.setIcon(new ImageIcon(MenuRegistro.class.getResource("/frames/BotonMenu.png")));
+    btnRegistrarse.setIcon(new ImageIcon(
+        MenuRegistro.class.getResource("/frames/BotonMenu.png")));
 
     pwPassword = new JPasswordField();
     pwPassword.addActionListener(new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
           logIn(cliente);
           dispose();
         }
@@ -96,9 +109,9 @@ public class MenuRegistro extends JFrame {
     txtUsuario = new JTextField();
     txtUsuario.addActionListener(new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
           logIn(cliente);
-          dispose();  
+          dispose();
           }
     });
     txtUsuario.setBounds(199, 69, 118, 20);
@@ -112,33 +125,59 @@ public class MenuRegistro extends JFrame {
          .getResource("/frames/menuBackground.jpg")));
     btnRegistrarse.addActionListener(new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
           logIn(cliente);
           dispose();
         }
       });
   }
 
+  /**
+   * Gets the txt usuario.
+   *
+   * @return the txt usuario
+   */
   public JTextField gettxtUsuario() {
     return txtUsuario;
   }
 
-  public void settxtUsuario(JTextField txtUsuario) {
-    this.txtUsuario = txtUsuario; 
+  /**
+   * Sets the txt usuario.
+   *
+   * @param txtUsuarioAux the new txt usuario
+   */
+  public void settxtUsuario(final JTextField txtUsuarioAux) {
+    this.txtUsuario = txtUsuarioAux;
   }
 
+  /**
+   * Gets the password field.
+   *
+   * @return the password field
+   */
   public JPasswordField getPasswordField() {
     return pwPassword;
   }
 
-  public void setPasswordField(JPasswordField pwPassword) {
-    this.pwPassword = pwPassword;
+  /**
+   * Sets the password field.
+   *
+   * @param pwPasswordAux the new password field
+   */
+  public void setPasswordField(final JPasswordField pwPasswordAux) {
+    this.pwPassword = pwPasswordAux;
   }
 
+  /**
+   * Log in.
+   *
+   * @param cliente the cliente
+   */
   private void logIn(final Cliente cliente) {
     synchronized (cliente) {
       cliente.getPaqueteUsuario().setUsername(txtUsuario.getText());
-      cliente.getPaqueteUsuario().setPassword(String.valueOf(pwPassword.getPassword()));
+      cliente.getPaqueteUsuario()
+          .setPassword(String.valueOf(pwPassword.getPassword()));
       cliente.setAccion(Comando.REGISTRO);
       cliente.notify();
     }

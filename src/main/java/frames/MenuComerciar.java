@@ -34,24 +34,52 @@ import javax.swing.border.EmptyBorder;
 
 import mensajeria.Comando;
 
+/**
+ * The Class MenuComerciar.
+ */
 public class MenuComerciar extends JFrame {
 
+  /** The content pane. */
   private JPanel contentPane;
+
+  /** The mis items. */
   private DefaultListModel<String> misItems = new DefaultListModel<String>();
+
+  /** The dar. */
   private DefaultListModel<String> dar = new DefaultListModel<String>();
+
+  /** The obtener. */
   private DefaultListModel<String> obtener = new DefaultListModel<String>();
+
+  /** The cant listos. */
   private int cantListos = 0;
+
+  /** The cant listo. */
   private JLabel cantListo;
+
+  /** The item 1. */
   private Item item1;
+
+  /** The count. */
   private int count = 0;
+
+  /** The gson. */
   private final Gson gson = new Gson();
+
+  /** The size items. */
   private int sizeItems;
+
+  /** The chckbx listo. */
   private JCheckBox chckbxListo;
+
+  /** The leyenda. */
   private JLabel leyenda;
 
   /**
-* Create the frame.
-*/
+   * Create the frame.
+   *
+   * @param cliente the cliente
+   */
   public MenuComerciar(final Cliente cliente) {
     this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     this.setResizable(false);
@@ -66,7 +94,7 @@ public class MenuComerciar extends JFrame {
 
     addWindowListener(new WindowAdapter() {
         @Override
-        public void windowClosing(WindowEvent e) {
+        public void windowClosing(final WindowEvent e) {
           cliente.setM1(null);
         dispose();
       }
@@ -83,7 +111,7 @@ public class MenuComerciar extends JFrame {
     final JButton btnCancelar = new JButton("Cancelar");
     btnCancelar.setIcon(new ImageIcon("recursos//volver.png"));
     btnCancelar.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
           cliente.setM1(null);
           dispose();
         }
@@ -102,35 +130,35 @@ public class MenuComerciar extends JFrame {
     final JList<String> listAObtener = new JList<String>();
     listAObtener.setBounds(428, 42, 157, 162);
     contentPane.add(listAObtener);
-    
+
     final JLabel lblMisItems = new JLabel("Mis Items");
     lblMisItems.setForeground(Color.WHITE);
     lblMisItems.setHorizontalAlignment(SwingConstants.CENTER);
     lblMisItems.setBounds(12, 13, 157, 16);
     contentPane.add(lblMisItems);
-    
+
     final JLabel lblItemsAIntercambiar = new JLabel("Items a Dar");
     lblItemsAIntercambiar.setForeground(Color.WHITE);
     lblItemsAIntercambiar.setHorizontalAlignment(SwingConstants.CENTER);
     lblItemsAIntercambiar.setBounds(244, 13, 157, 16);
     contentPane.add(lblItemsAIntercambiar);
-    
+
     final JLabel lblItemsAObtener = new JLabel("Items a Obtener");
     lblItemsAObtener.setForeground(Color.WHITE);
     lblItemsAObtener.setHorizontalAlignment(SwingConstants.CENTER);
     lblItemsAObtener.setBounds(428, 13, 157, 16);
     contentPane.add(lblItemsAObtener);
-    
+
     final JLabel lblSalud = new JLabel("Salud");
     lblSalud.setForeground(Color.WHITE);
     lblSalud.setBounds(12, 217, 56, 16);
     contentPane.add(lblSalud);
-    
+
     final JLabel lblEnerga = new JLabel("Energía");
     lblEnerga.setForeground(Color.WHITE);
     lblEnerga.setBounds(12, 240, 56, 16);
     contentPane.add(lblEnerga);
-        
+
     final JLabel lblFuerza = new JLabel("Fuerza");
     lblFuerza.setForeground(Color.WHITE);
     lblFuerza.setBounds(113, 217, 56, 16);
@@ -140,37 +168,37 @@ public class MenuComerciar extends JFrame {
     lblDestreza.setForeground(Color.WHITE);
     lblDestreza.setBounds(113, 240, 56, 16);
     contentPane.add(lblDestreza);
-    
+
     final JLabel lblInteligencia = new JLabel("Inteligencia");
     lblInteligencia.setForeground(Color.WHITE);
     lblInteligencia.setBounds(12, 263, 71, 16);
     contentPane.add(lblInteligencia);
-    
+
     final JLabel lblSaludEnemy = new JLabel("Salud");
     lblSaludEnemy.setForeground(Color.WHITE);
     lblSaludEnemy.setBounds(387, 217, 56, 16);
     contentPane.add(lblSaludEnemy);
-    
+
     final JLabel lblEnergiaEnemy = new JLabel("Energía");
     lblEnergiaEnemy.setForeground(Color.WHITE);
     lblEnergiaEnemy.setBounds(387, 240, 56, 16);
     contentPane.add(lblEnergiaEnemy);
-    
+
     final JLabel lblFzaEnemy = new JLabel("Fuerza");
     lblFzaEnemy.setForeground(Color.WHITE);
     lblFzaEnemy.setBounds(497, 217, 56, 16);
     contentPane.add(lblFzaEnemy);
-    
+
     final JLabel lblDesEnemy = new JLabel("Destreza");
     lblDesEnemy.setForeground(Color.WHITE);
     lblDesEnemy.setBounds(497, 240, 56, 16);
     contentPane.add(lblDesEnemy);
-    
+
     final JLabel lblIntEnemy = new JLabel("Inteligencia");
     lblIntEnemy.setForeground(Color.WHITE);
     lblIntEnemy.setBounds(387, 263, 71, 16);
     contentPane.add(lblIntEnemy);
-    
+
     final JLabel lblListo = new JLabel("Listo");
     lblListo.setForeground(Color.WHITE);
     lblListo.setBounds(276, 279, 56, 16);
@@ -471,38 +499,83 @@ public class MenuComerciar extends JFrame {
     contentPane.add(background);
   }
 
+  /**
+   * Gets the cant listos.
+   *
+   * @return the cant listos
+   */
   public int getCantListos() {
     return cantListos;
   }
 
+  /**
+   * Sets the cant listos.
+   *
+   * @param cantListos the new cant listos
+   */
   public void setCantListos(int cantListos) {
     this.cantListos = cantListos;
   }
 
+  /**
+   * Gets the cant listo.
+   *
+   * @return the cant listo
+   */
   public JLabel getCantListo() {
     return cantListo;
   }
 
+  /**
+   * Sets the obtener.
+   *
+   * @param obtener the new obtener
+   */
   public void setObtener(DefaultListModel<String> obtener) {
     this.obtener = obtener;
   }
 
+  /**
+   * Gets the obtener.
+   *
+   * @return the obtener
+   */
   public DefaultListModel<String> getObtener() {
     return obtener; 
   }
 
+  /**
+   * Gets the dar.
+   *
+   * @return the dar
+   */
   public DefaultListModel<String> getDar() {
     return dar;
   }
 
+  /**
+   * Gets the size items.
+   *
+   * @return the size items
+   */
   public int getSizeItems() {
     return sizeItems;
   }
 
+  /**
+   * Gets the chckbx listo.
+   *
+   * @return the chckbx listo
+   */
   public JCheckBox getChckbxListo() {
     return chckbxListo;
   }
 
+  /**
+   * Gets the leyenda.
+   *
+   * @return the leyenda
+   */
   public JLabel getLeyenda() {
     return leyenda;
   }

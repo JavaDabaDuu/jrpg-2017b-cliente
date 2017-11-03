@@ -22,16 +22,31 @@ import juego.Juego;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
 
+/**
+ * The Class VentanaContactos.
+ */
 public class VentanaContactos extends JFrame {
+
+  /** The content pane. */
   private JPanel contentPane;
+
+  /** The modelo. */
   private DefaultListModel<String> modelo = new DefaultListModel<String>();
+
+  /** The list. */
   private static JList<String> list = new JList<String>();
+
+  /** The boton mc. */
   private static JButton botonMc;
+
+  /** The background. */
   private JLabel background;
 
   /**
-  * Create the frame.
-  */
+   * Create the frame.
+   *
+   * @param juego the juego
+   */
   public VentanaContactos(final Juego juego) {
     setResizable(false);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -49,10 +64,10 @@ public class VentanaContactos extends JFrame {
     contentPane.add(scrollPane);
 
     addWindowListener(new WindowAdapter() {
-    
+
         @Override
-        public void windowClosing(WindowEvent arg0) {
-            Pantalla.ventContac = null;
+        public void windowClosing(final WindowEvent arg0) {
+            Pantalla.setVentContac(null);
             dispose();
         }
         });
@@ -60,7 +75,7 @@ public class VentanaContactos extends JFrame {
     botonMc = new JButton("Multichat");
     botonMc.setIcon(new ImageIcon("recursos//multichatButton.png"));
     botonMc.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
             if (modelo.size() != 0) {
               if (!juego.getChatsActivos().containsKey("Sala")) {
                 MiChat chat = new MiChat(juego);
@@ -87,10 +102,11 @@ public class VentanaContactos extends JFrame {
     list.addMouseListener(new MouseAdapter() {
 
         @Override
-        public void mouseClicked(MouseEvent arg0) {
+        public void mouseClicked(final MouseEvent arg0) {
             if (arg0.getClickCount() == 2) {
               if (list.getSelectedValue() != null) {
-                if (!juego.getChatsActivos().containsKey(list.getSelectedValue())) {
+                if (!juego.getChatsActivos()
+                .containsKey(list.getSelectedValue())) {
                   if (juego.getCliente() != null) {
                     MiChat chat = new MiChat(juego);
                     juego.getChatsActivos().put(list.getSelectedValue(), chat);
@@ -112,12 +128,18 @@ public class VentanaContactos extends JFrame {
     contentPane.add(background);
   }
 
+  /**
+   * Actualizar lista.
+   *
+   * @param juego the juego
+   */
   private void actualizarLista(final Juego juego) {
     if (juego.getCliente() != null) {
       synchronized (juego.getCliente()) {
         modelo.removeAllElements();
         if (juego.getPersonajesConectados() != null) {
-          for (Map.Entry<Integer, PaquetePersonaje> personaje : juego.getPersonajesConectados(
+          for (Map.Entry<Integer,
+          PaquetePersonaje> personaje : juego.getPersonajesConectados(
            ).entrySet()) {
             modelo.addElement(personaje.getValue().getNombre());
           }
@@ -128,10 +150,20 @@ public class VentanaContactos extends JFrame {
     }
   }
 
+  /**
+   * Gets the list.
+   *
+   * @return the list
+   */
   public static JList<String> getList() {
     return list;
   }
 
+  /**
+   * Gets the boton mc.
+   *
+   * @return the boton mc
+   */
   public static JButton getBotonMc() {
     return botonMc;
   }

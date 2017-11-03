@@ -35,64 +35,99 @@ import javax.swing.WindowConstants;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 
+/**
+ * The Class Pantalla.
+ */
 public class Pantalla {
 
+  /** The pantalla. */
   private JFrame pantalla;
+
+  /** The canvas. */
   private Canvas canvas;
 
+  /** The menu inventario. */
   // Menus
-  public static MenuInventario menuInventario;
-  public static MenuAsignarSkills menuAsignar;
-  public static MenuStats menuStats;
-  public static MenuEscape menuEscp;
-  public static VentanaContactos ventContac;
-  private final Gson gson = new Gson();
-  //Ahora necesito tener el cliente acá porque sino no lo ven los metodos que muestran los menus
-  private Cliente cliente;
-  //Nombre significativo
-  private HashMap<Integer, Runnable> mostradoresDeMenus = new HashMap<Integer, Runnable>(); 
+  private static MenuInventario menuInventario;
 
-  public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
-    pantalla = new JFrame(NOMBRE);
+  /** The menu asignar. */
+  private static MenuAsignarSkills menuAsignar;
+
+  /** The menu stats. */
+  private static MenuStats menuStats;
+
+  /** The menu escp. */
+  private static MenuEscape menuEscp;
+
+  /** The vent contac. */
+  private static VentanaContactos ventContac;
+
+  /** The gson. */
+  private final Gson gson = new Gson();
+
+  /** The cliente. */
+  //Ahora necesito tener el cliente acá
+  //porque sino no lo ven los metodos que muestran los menus
+  private Cliente cliente;
+
+  /** The mostradores de menus. */
+  //Nombre significativo
+  private HashMap<Integer, Runnable> mostradoresDeMenus
+      = new HashMap<Integer, Runnable>();
+
+  /**
+   * Instantiates a new pantalla.
+   *
+   * @param nombre the nombre
+   * @param ancho the ancho
+   * @param alto the alto
+   * @param clienteAux the cliente
+   */
+  public Pantalla(final String nombre, final int ancho,
+  final int alto, final Cliente clienteAux) {
+    pantalla = new JFrame(nombre);
     pantalla.setIconImage(Toolkit.getDefaultToolkit()
         .getImage("src/main/java/frames/IconoWome.png"));
     pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
         new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-            new Point(0,0),"custom cursor"));
+            new Point(0, 0), "custom cursor"));
 
-    pantalla.setSize(ANCHO, ALTO);
+    pantalla.setSize(ancho, alto);
     pantalla.setResizable(false);
     pantalla.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     pantalla.addWindowListener(new WindowAdapter() {
       @Override
-    public void windowClosing(WindowEvent evt) {
+    public void windowClosing(final WindowEvent evt) {
         try {
           Paquete p = new Paquete();
           p.setComando(Comando.DESCONECTAR);
-          p.setIp(cliente.getMiIp());
-          cliente.getSalida().writeObject(gson.toJson(p));
-          cliente.getEntrada().close();
-          cliente.getSalida().close();
-          cliente.getSocket().close();
+          p.setIp(clienteAux.getMiIp());
+          clienteAux.getSalida().writeObject(gson.toJson(p));
+          clienteAux.getEntrada().close();
+          clienteAux.getSalida().close();
+          clienteAux.getSocket().close();
           System.exit(0);
           } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Fallo al intentar cerrar la aplicación.");
+            JOptionPane.showMessageDialog(null,
+                "Fallo al intentar cerrar la aplicación.");
             System.exit(1);
           }
         }
       });
 
-    this.cliente = cliente;
-    // Cargo mi hashmap de runnables con la tecla y el metodo que abre el menu que abre esa tecla
+    this.cliente = clienteAux;
+    // Cargo mi hashmap de runnables con la tecla
+    //y el metodo que abre el menu que abre esa tecla
     this.mostradoresDeMenus.put(KeyEvent.VK_I, () -> mostrarMenuInventario());
-    this.mostradoresDeMenus.put(KeyEvent.VK_A, () -> mostrarMenuAsignarSkills());
+    this.mostradoresDeMenus.put(KeyEvent.VK_A, () ->
+        mostrarMenuAsignarSkills());
     this.mostradoresDeMenus.put(KeyEvent.VK_S, () -> mostrarMenuStats());
     this.mostradoresDeMenus.put(KeyEvent.VK_ESCAPE, () -> mostrarMenuEscape());
     this.mostradoresDeMenus.put(KeyEvent.VK_C, () -> mostrarVentanaContactos());
-    
+
     pantalla.addKeyListener(new KeyAdapter() {
       @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(final KeyEvent e) {
         if (mostradoresDeMenus.get(e.getKeyCode()) != null) {
           if (Estado.getEstado().esEstadoDeJuego()) {
             mostradoresDeMenus.get(e.getKeyCode()).run();
@@ -100,68 +135,104 @@ public class Pantalla {
         }
       }
     });
-    
+
     pantalla.setLocationRelativeTo(null);
     pantalla.setVisible(false);
-    
+
     canvas = new Canvas();
-    canvas.setPreferredSize(new Dimension(ANCHO, ALTO));
-    canvas.setMaximumSize(new Dimension(ANCHO, ALTO));
-    canvas.setMinimumSize(new Dimension(ANCHO, ALTO));
+    canvas.setPreferredSize(new Dimension(ancho, alto));
+    canvas.setMaximumSize(new Dimension(ancho, alto));
+    canvas.setMinimumSize(new Dimension(ancho, alto));
     canvas.setFocusable(false);
 
     pantalla.add(canvas);
     pantalla.pack();
   }
 
+  /**
+   * Mostrar menu inventario.
+   */
   private void mostrarMenuInventario() {
-    if (menuInventario == null) {
-      menuInventario = new MenuInventario(cliente);
-      menuInventario.setVisible(true);
+    if (getMenuInventario() == null) {
+      setMenuInventario(new MenuInventario(cliente));
+      getMenuInventario().setVisible(true);
     }
   }
 
+  /**
+   * Mostrar menu asignar skills.
+   */
   private void mostrarMenuAsignarSkills() {
-    if (menuAsignar == null) {
-      menuAsignar = new MenuAsignarSkills(cliente);
-      menuAsignar.setVisible(true);
-    } 
+    if (getMenuAsignar() == null) {
+      setMenuAsignar(new MenuAsignarSkills(cliente));
+      getMenuAsignar().setVisible(true);
+    }
   }
 
+  /**
+   * Mostrar menu stats.
+   */
   private void mostrarMenuStats() {
-    if (menuStats == null) {
-      menuStats = new MenuStats(cliente);
-      menuStats.setVisible(true);
+    if (getMenuStats() == null) {
+      setMenuStats(new MenuStats(cliente));
+      getMenuStats().setVisible(true);
     }
   }
 
+  /**
+   * Mostrar menu escape.
+   */
   private void mostrarMenuEscape() {
-    if (menuEscp == null) {
-      menuEscp = new MenuEscape(cliente);
-      menuEscp.setVisible(true);
+    if (getMenuEscp() == null) {
+      setMenuEscp(new MenuEscape(cliente));
+      getMenuEscp().setVisible(true);
     }
   }
 
+  /**
+   * Mostrar ventana contactos.
+   */
   private void mostrarVentanaContactos() {
-    if (ventContac == null) {
-      ventContac = new VentanaContactos(cliente.getJuego());
-      ventContac.setVisible(true);
+    if (getVentContac() == null) {
+      setVentContac(new VentanaContactos(cliente.getJuego()));
+      getVentContac().setVisible(true);
     }
   }
 
+  /**
+   * Gets the canvas.
+   *
+   * @return the canvas
+   */
   public Canvas getCanvas() {
     return canvas;
   }
 
+  /**
+   * Gets the frame.
+   *
+   * @return the frame
+   */
   public JFrame getFrame() {
     return pantalla;
   }
 
+  /**
+   * Mostrar.
+   */
   public void mostrar() {
     pantalla.setVisible(true);
   }
 
-  public static void centerString(Graphics g, Rectangle r, String s) {
+  /**
+   * Center string.
+   *
+   * @param g the g
+   * @param r the r
+   * @param s the s
+   */
+  public static void centerString(final Graphics g,
+  final Rectangle r, final String s) {
     FontRenderContext frc = new FontRenderContext(null, true, true);
 
     Rectangle2D r2D = g.getFont().getStringBounds(s, frc);
@@ -175,6 +246,96 @@ public class Pantalla {
 
     g.drawString(s, r.x + a, r.y + b);
   }
+
+/**
+ * Gets the vent contac.
+ *
+ * @return the vent contac
+ */
+public static VentanaContactos getVentContac() {
+  return ventContac;
+}
+
+/**
+ * Sets the vent contac.
+ *
+ * @param ventContacAux the new vent contac
+ */
+public static void setVentContac(final VentanaContactos ventContacAux) {
+  Pantalla.ventContac = ventContacAux;
+}
+
+/**
+ * Gets the menu inventario.
+ *
+ * @return the menu inventario
+ */
+public static MenuInventario getMenuInventario() {
+  return menuInventario;
+}
+
+/**
+ * Sets the menu inventario.
+ *
+ * @param menuInventarioAux the new menu inventario
+ */
+public static void setMenuInventario(final MenuInventario menuInventarioAux) {
+   Pantalla.menuInventario = menuInventarioAux;
+}
+
+/**
+ * Gets the menu escp.
+ *
+ * @return the menu escp
+ */
+public static MenuEscape getMenuEscp() {
+  return menuEscp;
+}
+
+/**
+ * Sets the menu escp.
+ *
+ * @param menuEscpAux the new menu escp
+ */
+public static void setMenuEscp(final MenuEscape menuEscpAux) {
+  Pantalla.menuEscp = menuEscpAux;
+}
+
+/**
+ * Gets the menu asignar.
+ *
+ * @return the menu asignar
+ */
+public static MenuAsignarSkills getMenuAsignar() {
+  return menuAsignar;
+}
+
+/**
+ * Sets the menu asignar.
+ *
+ * @param menuAsignarAux the new menu asignar
+ */
+public static void setMenuAsignar(final MenuAsignarSkills menuAsignarAux) {
+  Pantalla.menuAsignar = menuAsignarAux;
+}
+
+/**
+ * Gets the menu stats.
+ *
+ * @return the menu stats
+ */
+public static MenuStats getMenuStats() {
+  return menuStats;
+}
+
+/**
+ * Sets the menu stats.
+ *
+ * @param menuStatsAux the new menu stats
+ */
+public static void setMenuStats(final MenuStats menuStatsAux) {
+  Pantalla.menuStats = menuStatsAux;
+}
 
   // Dejo esto acá por las dudas
   /*
@@ -194,7 +355,7 @@ public class Pantalla {
           menuAsignar = new MenuAsignarSkills(cliente);
           menuAsignar.setVisible(true);
          }
-      } 
+      }
       } else if (e.getKeyCode() == KeyEvent.VK_S) {
         if(Estado.getEstado().esEstadoDeJuego()) {
           if (menuStats == null) {

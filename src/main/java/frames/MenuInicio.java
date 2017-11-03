@@ -20,25 +20,33 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 
+/**
+ * The Class MenuInicio.
+ */
 public class MenuInicio extends JFrame {
 
+  /** The content pane. */
   private JPanel contentPane;
 
+  /**
+   * Instantiates a new menu inicio.
+   */
   public MenuInicio() {
     addKeyListener(new KeyAdapter() {
         @Override
-      public void keyPressed(KeyEvent e) {
+      public void keyPressed(final KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
               Cliente cliente = new Cliente();
               cliente.start();
               dispose();
             }
-          }    
+          }
         });
-    setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+    setIconImage(Toolkit.getDefaultToolkit()
+        .getImage("src/main/java/frames/IconoWome.png"));
     setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
         new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-        new Point(0,0),"custom cursor"));
+        new Point(0, 0), "custom cursor"));
 
     this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -53,7 +61,8 @@ public class MenuInicio extends JFrame {
     contentPane.setLayout(null);
 
     JLabel lblLogo = new JLabel("");
-    lblLogo.setIcon(new ImageIcon(MenuCarga.class.getResource("/frames/WOME.png")));
+    lblLogo.setIcon(new ImageIcon(MenuCarga
+        .class.getResource("/frames/WOME.png")));
     lblLogo.setBounds(109, 39, 216, 90);
     contentPane.add(lblLogo);
 
@@ -82,10 +91,11 @@ public class MenuInicio extends JFrame {
     btnRegistrar.setBounds(127, 162, 191, 23);
     layeredPane.add(btnRegistrar, new Integer(1));
     btnRegistrar.setFocusable(false);
-    btnRegistrar.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
+    btnRegistrar.setIcon(new ImageIcon(
+        MenuJugar.class.getResource("/frames/BotonMenu.png")));
     btnRegistrar.addActionListener(new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
             Cliente cliente = new Cliente();
             cliente.start();
             dispose();
@@ -96,10 +106,11 @@ public class MenuInicio extends JFrame {
     btnIniciarSesion.setBounds(127, 202, 191, 23);
     layeredPane.add(btnIniciarSesion, new Integer(1));
     btnIniciarSesion.setFocusable(false);
-    btnIniciarSesion.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
+    btnIniciarSesion.setIcon(
+        new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
     btnIniciarSesion.addActionListener(new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
           dispose();
         }
     });
@@ -107,11 +118,17 @@ public class MenuInicio extends JFrame {
     JLabel lblBackground = new JLabel("");
 
     lblBackground.setBounds(0, 0, 444, 271);
-    lblBackground.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/menuBackground.jpg")));
+    lblBackground.setIcon(new ImageIcon(
+        MenuJugar.class.getResource("/frames/menuBackground.jpg")));
     layeredPane.add(lblBackground, new Integer(0));
   }
 
-  public static void main(String[] args) {
+  /**
+   * The main method.
+   *
+   * @param args the arguments
+   */
+  public static void main(final String[] args) {
     new MenuInicio().setVisible(true);
   }
 

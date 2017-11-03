@@ -10,14 +10,26 @@ import javax.swing.JOptionPane;
 import mensajeria.Comando;
 import recursos.Recursos;
 
+/**
+ * The Class CargarRecursos.
+ */
 public class CargarRecursos extends Thread {
 
+  /** The cliente. */
   private Cliente cliente;
 
-  public CargarRecursos(Cliente cliente) {
-    this.cliente = cliente;
+  /**
+   * Instantiates a new cargar recursos.
+   *
+   * @param clienteAux the cliente
+   */
+  public CargarRecursos(final Cliente clienteAux) {
+    this.cliente = clienteAux;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Thread#run()
+   */
   @Override
 public void run() {
     synchronized (cliente) {
