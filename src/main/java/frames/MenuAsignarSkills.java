@@ -379,11 +379,11 @@ public class MenuAsignarSkills extends JFrame {
               buttonMinus1.setEnabled(true);
               if (puntosAsignar == 0) {
                 buttonMore.setEnabled(false);
-                buttonMore1.setEnabled(false);        
+                buttonMore1.setEnabled(false);
                 buttonMore2.setEnabled(false);
               }
               if (puntosAsignar == 0 || labelDestreza.getText().equals("200")) {
-                buttonMore1.setEnabled(false);        
+                buttonMore1.setEnabled(false);
               }
             }
           }
@@ -406,7 +406,7 @@ public class MenuAsignarSkills extends JFrame {
                 buttonMore1.setEnabled(false);
                 buttonMore2.setEnabled(false);
               }
-            if (puntosAsignar == 0 || labelInteligencia.getText().equals("200")) {        
+            if (puntosAsignar == 0 || labelInteligencia.getText().equals("200")) {
               buttonMore2.setEnabled(false);
             }
           }

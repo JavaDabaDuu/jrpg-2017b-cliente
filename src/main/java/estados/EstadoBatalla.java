@@ -282,8 +282,8 @@ public void actualizar() {
                 personaje.getEnergia(), enemigo.getSalud(),
                     enemigo.getEnergia(),
             personaje.getDefensa(), enemigo.getDefensa(),
-            personaje.getCasta().getProbabilidadEvitarDaño(),
-            enemigo.getCasta().getProbabilidadEvitarDaño());
+            personaje.getCasta().getProbabilidadEvitarDanio(),
+            enemigo.getCasta().getProbabilidadEvitarDanio());
             enviarAtaque(paqueteAtacar);
             miTurno = false;
             menuBatalla.setHabilitado(false);
