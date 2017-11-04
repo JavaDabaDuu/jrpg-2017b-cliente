@@ -87,5 +87,4 @@ public class PaqueteFinalizarBatallaNPC extends Paquete
     public void setGanadorBatalla(final int ganadorBatallaParam) {
         this.ganadorBatalla = ganadorBatallaParam;
     }
-    
 }

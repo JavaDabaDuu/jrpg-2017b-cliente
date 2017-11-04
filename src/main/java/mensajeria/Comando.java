@@ -99,9 +99,9 @@ public abstract class Comando {
   public static final int BATALLANPC = 22;
 
   /** The Constant DESAPARECERNPC. */
-  
+
   public static final int DESAPARECERNPC = 23;
-  
+
   public static final int  FINALIZARBATALLANPC = 23;
 
   /** The gson. */

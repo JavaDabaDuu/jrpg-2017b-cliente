@@ -42,6 +42,66 @@ public class VentanaContactos extends JFrame {
   /** The background. */
   private JLabel background;
 
+  /** Constant X_BORDER. */
+  private static final int X_BOR = 5;
+
+  /** Constant Y_BORDER. */
+  private static final int Y_BOR = 5;
+
+  /** Constant HEIGHT_BORDER. */
+  private static final int HEIGHT_BOR = 5;
+
+  /** Constant WIDTH_BORDER. */
+  private static final int WIDTH_BOR = 5;
+
+  /** Constant X_SCROLL .*/
+  private static final int X_SCROLL = 10;
+
+  /** Constant Y_SCROLL .*/
+  private static final int Y_SCROLL = 11;
+
+  /** Constant HEIGHT_SCROLL .*/
+  private static final int HEIGHT_SCROLL = 299;
+
+  /** Constant WIDTH_SCROLL .*/
+  private static final int WIDTH_SCROLL = 188;
+
+  /** Constant X_FONDO. */
+  private static final int X_FONDO = -16;
+
+  /** Constant Y_FONDO. */
+  private static final int Y_FONDO = 0;
+
+  /** Constant HEIGHT_FONDO. */
+  private static final int HEIGHT_FONDO = 352;
+
+  /** Constant WIDTH_FONDO. */
+  private static final int WIDTH_FONDO = 254;
+
+  /** Constant X_MC. */
+  private static final int X_MC = 119;
+
+  /** Constant Y_MC. */
+  private static final int Y_MC = 208;
+
+ /** Constant WIDTH_MC. */
+  private static final int WIDTH_MC = 89;
+
+  /** Constant HEIGHT_MC. */
+  private static final int HEIGHT_MC = 23;
+
+  /** Constant X_CONTACT. */
+  private static final int X_CONTACT = 100;
+
+  /** Constant Y_CONTACT. */
+  private static final int Y_CONTACT = 100;
+
+ /** Constant WIDTH_CONTACT. */
+  private static final int WIDTH_CONTACT = 327;
+
+  /** Constant HEIGHT_CONTACT. */
+  private static final int HEIGHT_CONTACT = 273;
+
   /**
    * Create the frame.
    *
@@ -50,17 +110,17 @@ public class VentanaContactos extends JFrame {
   public VentanaContactos(final Juego juego) {
     setResizable(false);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    setBounds(100, 100, 327, 273);
+    setBounds(X_CONTACT, Y_CONTACT, HEIGHT_CONTACT, WIDTH_CONTACT);
     setLocationRelativeTo(null);
     setTitle("Usuarios");
 
     contentPane = new JPanel();
-    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    contentPane.setBorder(new EmptyBorder(X_BOR, Y_BOR, HEIGHT_BOR, WIDTH_BOR));
     setContentPane(contentPane);
     contentPane.setLayout(null);
 
     JScrollPane scrollPane = new JScrollPane();
-    scrollPane.setBounds(10, 11, 299, 188);
+    scrollPane.setBounds(X_SCROLL, Y_SCROLL, HEIGHT_SCROLL, WIDTH_SCROLL);
     contentPane.add(scrollPane);
 
     addWindowListener(new WindowAdapter() {
@@ -87,7 +147,7 @@ public class VentanaContactos extends JFrame {
             }
           }
         });
-    botonMc.setBounds(119, 208, 89, 23);
+    botonMc.setBounds(X_MC, Y_MC, HEIGHT_MC, WIDTH_MC);
     contentPane.add(botonMc);
 
     // Cargo la lista de contactos
@@ -124,7 +184,7 @@ public class VentanaContactos extends JFrame {
     scrollPane.setViewportView(list);
 
     background = new JLabel(new ImageIcon("recursos//background.jpg"));
-    background.setBounds(-16, 0, 352, 254);
+    background.setBounds(X_FONDO, Y_FONDO, HEIGHT_FONDO, WIDTH_FONDO);
     contentPane.add(background);
   }
 

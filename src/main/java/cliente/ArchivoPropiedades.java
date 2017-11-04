@@ -30,5 +30,5 @@ public class ArchivoPropiedades {
           "Error al generar archivo de propiedades.");
     }
   }
-}
 
+}

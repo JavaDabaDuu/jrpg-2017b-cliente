@@ -10,9 +10,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.JOptionPane;
-
-
-import dominio.Item;
 /**
  * The Class PaquetePersonaje.
  */

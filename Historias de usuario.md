@@ -1,4 +1,4 @@
-#  Historias de usuario
+﻿#  Historias de usuario
 
 ## 01 Items:
 Como `jugador` quiero que el `juego` posea una serie de `items`, y con estos aumentar las stats de los personajes, de manera tal que sea
@@ -38,3 +38,17 @@ Como `jugador` quiero poseer la habilidad de comunicarme con otros `jugadores` m
 2. Al enviar un mensaje en la `Sala` todos los jugadores deben recibir el mensaje instantáneamente.
 3. Se debe poder batallar y hablar al mismo tiempo.
 4. Se debe poder comerciar y hablar al mismo tiempo.
+
+## 06 Skills:
+Como `jugador` quiero tener la posibilidad de aumentar puntos a los `stats` de mi `personaje`. Para ello se deben acumular los puntos a medida que mi `personaje` aumenta de nivel.
+### Condiciones de aceptación:
+1. Al aumentar de nivel se deben acumular 3 puntos.
+2. Se deben poder asignar los puntos a los stats que desee (siempre que alcancen mis puntos acumulados).
+3. Se deben poder resetear los puntos de los stats, volviendo a su estado original (momento en el que se creo el personaje), y volver a asignarlos como desee.
+
+## 07 NPC:
+Como `jugador` quiero tener la posibilidad de pelear en contra de enemigos sin la necesidad de estar conectado con otros jugadores.
+### Condiciones de aceptación:
+1. Al acercarse al enemigo se comienza una batalla con el jugador, una vez derrotados estos deben desaparecer del mapa.
+2. No debera haber mas de 10 enemigos al mismo tiempo.
+3. Los enemigos solo puede luchar contra un jugador a la vez.

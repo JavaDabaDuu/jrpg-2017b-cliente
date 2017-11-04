@@ -25,7 +25,6 @@ import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
 
-
 /**
  * The Class MiChat.
  */
@@ -53,6 +52,82 @@ public class MiChat extends JFrame {
   /** The caret. */
   private DefaultCaret caret;
 
+  /** Constant X_CHAT. */
+  private static final int X_CHAT = 100;
+
+  /** Constant Y_CHAT. */
+  private static final int Y_CHAT = 100;
+
+ /** Constant WIDTH_CHAT. */
+  private static final int WIDTH_CHAT = 450;
+
+  /** Constant HEIGHT_CHAT. */
+  private static final int HEIGHT_CHAT = 300;
+
+  /** Constant X_BORDER. */
+  private static final int X_BOR = 5;
+
+  /** Constant Y_BORDER. */
+  private static final int Y_BOR = 5;
+
+  /** Constant HEIGHT_BORDER. */
+  private static final int HEIGHT_BOR = 5;
+
+  /** Constant WIDTH_BORDER. */
+  private static final int WIDTH_BOR = 5;
+
+  /** Constant X_SCROLL .*/
+  private static final int X_SCROLL = 10;
+
+  /** Constant Y_SCROLL .*/
+  private static final int Y_SCROLL = 11;
+
+  /** Constant HEIGHT_SCROLL .*/
+  private static final int HEIGHT_SCROLL = 414;
+
+  /** Constant WIDTH_SCROLL .*/
+  private static final int WIDTH_SCROLL = 201;
+
+  /** Constant X_ENVIAR .*/
+  private static final int X_ENVIAR = 334;
+
+  /** Constant Y_ENVIAR.*/
+  private static final int Y_ENVIAR = 225;
+
+  /** Constant HEIGHT_ENVIAR.*/
+  private static final int HEIGHT_ENVIAR = 81;
+
+  /** Constant WIDTH_ENVIAR.*/
+  private static final int WIDTH_ENVIAR = 23;
+
+  /** Constant X_TEXTO .*/
+  private static final int X_TEXTO = 10;
+
+  /** Constant Y_TEXTO.*/
+  private static final int Y_TEXTO = 223;
+
+  /** Constant HEIGHT_TEXTO.*/
+  private static final int HEIGHT_TEXTO = 314;
+
+  /** Constant WIDTH_TEXTO.*/
+  private static final int WIDTH_TEXTO = 27;
+
+  /** Constant COLUMNA_TEXTO. */
+  private static final int COLUMNA_TEXTO = 10;
+
+  /** Constant X_FONDO. */
+  private static final int X_FONDO = -20;
+
+  /** Constant Y_FONDO. */
+  private static final int Y_FONDO = 0;
+
+  /** Constant HEIGHT_FONDO. */
+  private static final int HEIGHT_FONDO = 480;
+
+  /** Constant WIDTH_FONDO. */
+  private static final int WIDTH_FONDO = 283;
+
+
   /**
    * Create the frame.
    *
@@ -63,17 +138,17 @@ public class MiChat extends JFrame {
     setTitle("Mi Chat");
 
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    setBounds(100, 100, 450, 300);
+    setBounds(X_CHAT, Y_CHAT, WIDTH_CHAT, HEIGHT_CHAT);
     setResizable(false);
     contentPane = new JPanel();
-    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    contentPane.setBorder(new EmptyBorder(X_BOR, Y_BOR, HEIGHT_BOR, WIDTH_BOR));
     setContentPane(contentPane);
     contentPane.setLayout(null);
 
     JScrollPane scrollPane = new JScrollPane();
     scrollPane.setVerticalScrollBarPolicy(
         ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    scrollPane.setBounds(10, 11, 414, 201);
+    scrollPane.setBounds(X_SCROLL, Y_SCROLL, HEIGHT_SCROLL, WIDTH_SCROLL);
     contentPane.add(scrollPane);
 
     chat = new JTextArea();
@@ -163,13 +238,13 @@ public class MiChat extends JFrame {
             texto.requestFocus();
           }
     });
-    enviar.setBounds(334, 225, 81, 23);
+    enviar.setBounds(X_ENVIAR, Y_ENVIAR, HEIGHT_ENVIAR, WIDTH_ENVIAR);
     contentPane.add(enviar);
 
-    texto.setBounds(10, 223, 314, 27);
+    texto.setBounds(X_TEXTO, Y_TEXTO, HEIGHT_TEXTO, WIDTH_TEXTO);
     contentPane.add(texto);
-    texto.setColumns(10);
-    background.setBounds(-20, 0, 480, 283);
+    texto.setColumns(COLUMNA_TEXTO);
+    background.setBounds(X_FONDO, Y_FONDO, HEIGHT_FONDO, WIDTH_FONDO);
     contentPane.add(background);
   }
 
