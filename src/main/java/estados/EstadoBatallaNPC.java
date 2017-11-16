@@ -331,7 +331,6 @@ public void graficar(final Graphics gAux) {
   * Crear personajes.
   */
 private void crearPersonajes() {
-
   String nombre = paquetePersonaje.getNombre();
   int salud = paquetePersonaje.getSaludTope();
   int energia = paquetePersonaje.getEnergiaTope();
@@ -367,7 +366,8 @@ private void crearPersonajes() {
   magia = paqueteEnemigo.getNpc().getMagia();
   nivel = paqueteEnemigo.getNpc().getNivel();
   id = paqueteEnemigo.getId();
-
+  
+  enemigo = new NonPlayableCharacter(nombre, nivel, 1);
   }
 
   /**
