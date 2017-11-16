@@ -371,26 +371,11 @@ private void crearPersonajes() {
   }
 
   /**
-   * Enviar ataque.
-   *
-   * @param paqueteAtacarAux the paquete atacar
-   */
-public void enviarAtaque(final PaqueteAtacar paqueteAtacarAux) {
-  try {
-    getJuego().getCliente().getSalida()
-        .writeObject(gson.toJson(paqueteAtacarAux));
-  } catch (IOException e) {
-    JOptionPane.showMessageDialog(null,
-        "Fallo la conexion con el servidor.");
-  }
-}
-
-  /**
   * Finalizar batalla.
    */
 private void finalizarBatalla() {
   try {
-    paqueteFinalizarBatalla.setComando(Comando.FINALIZARBATALLANPC);
+    paqueteFinalizarBatalla.setComando(Comando.FINALIZARBATALLA);
     getJuego().getCliente().getSalida()
         .writeObject(gson.toJson(paqueteFinalizarBatalla));
 
