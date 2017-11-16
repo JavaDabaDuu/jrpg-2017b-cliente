@@ -51,8 +51,28 @@ Cloneable {
 
   /** The nivel. */
   private int nivel = 1;
+  
+  private int idInventario;
+  
+  private int idMochila;
 
-  /** The experiencia. */
+  public int getIdInventario() {
+	return idInventario;
+}
+
+public void setIdInventario(int idInventario) {
+	this.idInventario = idInventario;
+}
+
+public int getIdMochila() {
+	return idMochila;
+}
+
+public void setIdMochila(int idMochila) {
+	this.idMochila = idMochila;
+}
+
+/** The experiencia. */
   private int experiencia;
 
   /** The items. */
