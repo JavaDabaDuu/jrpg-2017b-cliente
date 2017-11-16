@@ -380,6 +380,7 @@ public boolean esEstadoDeJuego() {
    * @param g the g
    */
   private void graficarNPC(final Graphics g) {
+	  
     if (getJuego().getNpcs() != null) {
       npcs = new HashMap<Integer, PaqueteNPC>();
       npcs = getJuego().getNpcs();
@@ -387,13 +388,15 @@ public boolean esEstadoDeJuego() {
       g.setFont(new Font("Book Antiqua", Font.PLAIN, SIZE));
 
       for (int i = 0; i < this.npcs.size(); i++) {
+    	  if(npcs.get(i).getEstado() == getEstadoJuego()){
         g.drawImage(Recursos.getPersonaje().get("Minotauro")
             .get(IMAGEN_6)[0], (int) (npcs.get(i).getPosX()
             - getJuego().getCamara().getxOffset()),
             (int) (npcs.get(i).getPosY()
             - getJuego().getCamara().getyOffset()),
             WIDTH_MINOTAURO, HEIGHT_MINOTAURO, null);
-      }
+    	  }
+    }
     }
   }
 

@@ -271,6 +271,7 @@ public void actualizar() {
                         .getPersonaje().getId());
                     finalizarBatalla();
                     Estado.setEstado(getJuego().getEstadoJuego());
+                    paqueteEnemigo.setEstado(getEstadoBatallaNPC());
 
                     } else {
                     enemigo.atacar(personaje);
