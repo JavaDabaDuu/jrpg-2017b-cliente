@@ -55,6 +55,10 @@ Cloneable {
   private int idInventario;
   
   private int idMochila;
+  
+  private boolean fuerzaAumentada;
+  
+  private boolean fuerzaReducida;
 
   public int getIdInventario() {
 	return idInventario;
@@ -88,6 +92,7 @@ public void setIdMochila(int idMochila) {
    */
   public PaquetePersonaje() throws IOException {
     estado = Estado.getEstadoOffline();
+    fuerzaAumentada = false;
   }
 
   /**
@@ -650,4 +655,34 @@ public Object clone() {
     this.inteligencia += updates.get("inteligencia").intValue();
     this.energiaTope += updates.get("energia").intValue();
   }
+/***
+ * Devuelve si la fuerza ya fue aumentada o no
+ * @return
+ */
+  public boolean getFuerzaAumentada() {
+	return fuerzaAumentada;
+  }
+  
+  public void setFuerzaAumentada(boolean param) {
+	  this.fuerzaAumentada = param;
+  }
+  
+  /***
+   * Aumenta la fuerza cuando el cliente tipea bigdaddy
+   */
+  public void aumentarFuerza() {
+	fuerza*=2;	
+  }
+
+public void reducirFuerza() {
+	fuerza = fuerza/2;
+}
+
+public boolean getFuerzaReducida() {
+	return this.fuerzaReducida;
+}
+
+public void setFuerzaReducida(boolean b) {
+	this.fuerzaReducida = b;
+}
 }

@@ -31,6 +31,9 @@ private NonPlayableCharacter npc;
   /** The estado. */
   private int estado;
 
+  /** Dificultad del NPC*/
+  private int dificultad;
+  
   /**
    * Instantiates a new paquete NPC.
    */
@@ -57,6 +60,7 @@ private NonPlayableCharacter npc;
     this.posX = posXAux;
     this.posY = posYAux;
     this.estado = Estado.getEstadoJuego();
+    this.dificultad = dificultadAux;
   }
 
   /**
@@ -184,4 +188,10 @@ public void setPosY(final float y) {
   this.posY = (int) (y);
 }
 
+/**
+ * Se obtiene la dificultad del NPC
+ */
+public int getDificultad() {
+	return this.dificultad;
+}
 }

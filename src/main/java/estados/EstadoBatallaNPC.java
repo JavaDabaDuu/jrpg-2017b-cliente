@@ -368,7 +368,7 @@ private void crearPersonajes() {
   nivel = paqueteEnemigo.getNpc().getNivel();
   id = paqueteEnemigo.getId();
   
-  enemigo = new NonPlayableCharacter(nombre, nivel, 1);
+  enemigo = new NonPlayableCharacter(nombre, nivel, paqueteEnemigo.getDificultad());
   }
 
   /**
