@@ -82,16 +82,16 @@ public class MenuCreacionPj extends JFrame {
   private static final int Y_DEFAULT = 100;
 
  /** Constant WIDTH_DEFAULT. */
-  private static final int WIDTH_DEFAULT = 450;
+  private static final int WIDTH_DEFAULT = 300;
 
   /** Constant HEIGHT_DEFAULT. */
-  private static final int HEIGHT_DEFAULT = 300;
+  private static final int HEIGHT_DEFAULT = 450;
 
   /** Constant WIDTH_PANE. */
-  private static final int WIDTH_PANE = 444;
+  private static final int WIDTH_PANE = 271;
 
   /** Constant HEIGHT_PANE. */
-  private static final int HEIGHT_PANE = 271;
+  private static final int HEIGHT_PANE = 444;
 
   /** Constant X_FUERZA. */
   private static final int X_FUERZA = 33;

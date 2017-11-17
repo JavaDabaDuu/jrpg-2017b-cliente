@@ -85,10 +85,10 @@ public class VentanaContactos extends JFrame {
   private static final int Y_MC = 208;
 
  /** Constant WIDTH_MC. */
-  private static final int WIDTH_MC = 89;
+  private static final int WIDTH_MC = 23;
 
   /** Constant HEIGHT_MC. */
-  private static final int HEIGHT_MC = 23;
+  private static final int HEIGHT_MC = 89;
 
   /** Constant X_CONTACT. */
   private static final int X_CONTACT = 100;
@@ -97,10 +97,10 @@ public class VentanaContactos extends JFrame {
   private static final int Y_CONTACT = 100;
 
  /** Constant WIDTH_CONTACT. */
-  private static final int WIDTH_CONTACT = 327;
+  private static final int WIDTH_CONTACT = 273;
 
   /** Constant HEIGHT_CONTACT. */
-  private static final int HEIGHT_CONTACT = 273;
+  private static final int HEIGHT_CONTACT = 327;
 
   /**
    * Create the frame.
