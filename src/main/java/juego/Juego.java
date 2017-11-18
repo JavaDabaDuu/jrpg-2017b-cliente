@@ -107,6 +107,9 @@ public class Juego implements Runnable {
 
   /** The cargar recursos. */
   private CargarRecursos cargarRecursos;
+  
+  /** The noClipActivado. */
+  private boolean noClipActivado = false;
 
   /** The Constant DIRECCION. */
   private static final int DIRECCION = 6;
@@ -548,5 +551,26 @@ public class Juego implements Runnable {
   */
   public void actualizarEnemigo() {
     this.paqueteNpc = (PaqueteNPC) (npcs.get(paqueteNpc.getId()).clone());
+  }
+  
+  /**
+   * Activar noclip.
+   */
+  public void activarNoClip() {
+	  this.noClipActivado = true;
+  }
+  
+  /**
+   * Desactivar noclip.
+   */
+  public void desactivarNoClip() {
+	  this.noClipActivado = false;
+  }
+  
+  /**
+   * Devuelve si esta o no activo el cheat noclip
+   */
+  public boolean estaNoClipActivado() {
+	  return this.noClipActivado;
   }
 }

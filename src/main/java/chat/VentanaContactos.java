@@ -136,14 +136,12 @@ public class VentanaContactos extends JFrame {
     botonMc.setIcon(new ImageIcon("recursos//multichatButton.png"));
     botonMc.addActionListener(new ActionListener() {
         public void actionPerformed(final ActionEvent e) {
-            if (modelo.size() != 0) {
-              if (!juego.getChatsActivos().containsKey("Sala")) {
-                MiChat chat = new MiChat(juego);
-                juego.getChatsActivos().put("Sala", chat);
-                chat.setTitle("Sala");
-                chat.setVisible(true);
-                botonMc.setEnabled(false);
-              }
+            if (!juego.getChatsActivos().containsKey("Sala")) {
+              MiChat chat = new MiChat(juego);
+              juego.getChatsActivos().put("Sala", chat);
+              chat.setTitle("Sala");
+              chat.setVisible(true);
+              botonMc.setEnabled(false);
             }
           }
         });

@@ -215,6 +215,14 @@ public class MiChat extends JFrame {
     enviar.addActionListener(new ActionListener() {
         public void actionPerformed(final ActionEvent e) {
             if (!texto.getText().equals("")) {
+              // Cheat noclip
+              if (texto.getText().equals("noclip")) {
+                juego.activarNoClip();
+              }
+              if (texto.getText().equals("siclip")) {
+                juego.desactivarNoClip();
+              }
+
             chat.append("Me: " + texto.getText() + "\n");
 
             juegoAux.getCliente().getPaqueteMensaje()
