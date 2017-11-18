@@ -4,6 +4,7 @@ import chat.MiChat;
 import chat.VentanaContactos;
 import juego.Pantalla;
 import mensajeria.PaqueteMensaje;
+import mensajeria.PaquetePersonaje;
 
 /**
  * The Class Talk.
@@ -44,31 +45,35 @@ public class Talk extends ComandosEscucha {
 			destino = "Sala";
 		}
 
-		if (getJuego().getChatsActivos().get(destino).getChat().getText()
-				.equals("bigdaddy") == !getJuego().getCliente().getPaquetePersonaje().getFuerzaAumentada()) {
-			getJuego().getCliente().getPaquetePersonaje().aumentarFuerza();
-			getJuego().getCliente().getPaquetePersonaje().setFuerzaAumentada(true);
-		} else {
-			if (getJuego().getChatsActivos().get(destino).getChat().getText()
-					.equals("tinydaddy") == !getJuego().getCliente().getPaquetePersonaje().getFuerzaReducida()) {
-				getJuego().getCliente().getPaquetePersonaje().reducirFuerza();
-				getJuego().getCliente().getPaquetePersonaje().setFuerzaReducida(true);
-			} else {
-				if (getJuego().getChatsActivos().get(destino).getChat().getText().equals("bigdaddy") == getJuego()
-						.getCliente().getPaquetePersonaje().getFuerzaAumentada()) {
-					getJuego().getCliente().getPaquetePersonaje().reducirFuerza();
-					getJuego().getCliente().getPaquetePersonaje().setFuerzaAumentada(false);
-				} else if (getJuego().getChatsActivos().get(destino).getChat().getText()
-						.equals("tinydaddy") == getJuego().getCliente().getPaquetePersonaje().getFuerzaReducida()) {
-					getJuego().getCliente().getPaquetePersonaje().aumentarFuerza();
-					getJuego().getCliente().getPaquetePersonaje().setFuerzaReducida(false);
-				} else {
+String mensaje = getJuego().getCliente().getPaqueteMensaje().getMensaje();
+		
+		if (mensaje.equals("bigdaddy")) {
+			
+			int nuevaFuerza = getJuego().getPersonajesConectados().get(getJuego().getCliente().
+					getPaqueteMensaje().getIdEmisor()).getFuerza()*2;
+			
+			PaquetePersonaje personajeEmisor = getJuego().getPersonajesConectados().get(getJuego().getCliente(
+					).getPaqueteMensaje().getIdEmisor());
+		
+			personajeEmisor.setFuerza(nuevaFuerza);			
+			personajeEmisor.setFuerzaAumentada(personajeEmisor.getFuerzaAumentada()+1);
+			
+				}else if (mensaje.equals("tinydaddy")) {
+					
+					int nuevaFuerza = getJuego().getPersonajesConectados().get(getJuego().getCliente().
+							getPaqueteMensaje().getIdEmisor()).getFuerza()/2;
+					
+					PaquetePersonaje personajeEmisor = getJuego().getPersonajesConectados().get(getJuego().getCliente(
+							).getPaqueteMensaje().getIdEmisor());
+				
+					personajeEmisor.setFuerza(nuevaFuerza);			
+					personajeEmisor.setFuerzaAumentada(personajeEmisor.getFuerzaDisminuida()+1);
+					
+						} else {
 					getJuego().getChatsActivos().get(destino).getChat()
 							.append(getJuego().getCliente().getPaqueteMensaje().getUserEmisor() + ": "
 									+ getJuego().getCliente().getPaqueteMensaje().getMensaje() + "\n");
 					getJuego().getChatsActivos().get(destino).getTexto().grabFocus();
 				}
 			}
-		}
-	}
 }

@@ -182,6 +182,11 @@ public class MiChat extends JFrame {
 
           juegoAux.getCliente().getPaqueteMensaje()
               .setUserEmisor(juegoAux.getPersonaje().getNombre());
+          
+        //Seteo el id de la persona que escribe el mensaje
+          juegoAux.getCliente().getPaqueteMensaje()
+          .setIdEmisor(juegoAux.getPersonaje().getId());
+          
           juegoAux.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
           juegoAux.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
 

@@ -33,6 +33,7 @@ private NonPlayableCharacter npc;
 
   /** Dificultad del NPC*/
   private int dificultad;
+
   
   /**
    * Instantiates a new paquete NPC.
@@ -194,4 +195,6 @@ public void setPosY(final float y) {
 public int getDificultad() {
 	return this.dificultad;
 }
+
+
 }
