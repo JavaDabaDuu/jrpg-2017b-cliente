@@ -498,8 +498,9 @@ public class Entidad {
         return;
       }
 
+      // Si la posición actual es igual a la que me quiero mover, o la posición a moverme es un obstáculo y no está activado noclip.
       if (tileMoverme[0] == tileActual[0] && tileMoverme[1] == tileActual[1]
-          || mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido()) {
+          || (!juego.estaNoClipActivado() && mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido())) {
         tileMoverme = null;
         enMovimiento = false;
         juego.getHandlerMouse().setNuevoRecorrido(false);
@@ -508,9 +509,16 @@ public class Entidad {
       }
 
       if (pilaMovimiento == null) {
-        pilaMovimiento = caminoMasCorto(
+        if (juego.estaNoClipActivado()) {
+          pilaMovimiento = caminoNoClip(
+           tileActual[0], tileActual[1],
+           tileMoverme[0], tileMoverme[1]);
+        } else {
+          pilaMovimiento = caminoMasCorto(
             tileActual[0], tileActual[1],
             tileMoverme[0], tileMoverme[1]);
+        }
+        
       }
       // Me muevo al primero de la pila
       NodoDePila nodoActualTile = pilaMovimiento.pop();
@@ -782,6 +790,57 @@ public class Entidad {
     return camino;
   }
 
+  /**
+   * Busca el camino más corto a recorrer en caso de tener noclip activado.
+   *
+   * @param xInicial ubicacion en X inicial
+   * @param yInicial ubicacion en Y inicial
+   * @param xFinal ubicacion en X final
+   * @param yFinal ubicacion en Y final
+   * @return la pila de tiles a recorrer
+   */
+
+  private PilaDeTiles caminoNoClip( final int xInicial, final int yInicial, final int xFinal, final int yFinal) {
+    PilaDeTiles camino = new PilaDeTiles();
+    int xActual = xFinal; // Posicion en X actual.
+    int yActual = yFinal; // Posicion en Y actual.
+    int sentidoX = -1; // Sentido en cual me voy a desplazar en X.
+    int sentidoY = -1; // Sentido en cual me voy a desplazar en Y.
+    
+    
+    if (xActual < xInicial) { // Defino si me tengo que mover hacia la derecha, sino me muevo hacia la izquierda.
+    	sentidoX = 1;
+    }
+    if (yActual < yInicial) { // Defino si me tengo que mover hacia arriba, sino me muevo hacia abajo.
+    	sentidoY = 1;
+    }
+    
+    camino.push( new NodoDePila(xFinal, yFinal)); // La posicion final va al final de la pila.
+    
+  	while( xActual != xInicial && yActual != yInicial){ // Avanzo todo lo que pueda en diagonal.
+  		xActual = xActual + sentidoX;
+  		yActual = yActual + sentidoY;
+  		
+  		camino.push( new NodoDePila(xActual, yActual));
+  	}
+  	
+  	// Despues avanzo en X, o en Y.
+  	
+  	while( xActual != xInicial ) {
+  		xActual = xActual + sentidoX;
+  		camino.push( new NodoDePila(xActual, yActual));
+  	}
+  	
+  	while( yActual != yInicial ) {
+  		yActual = yActual + sentidoY;
+  		camino.push( new NodoDePila(xActual, yActual));
+  	}
+  	
+  	camino.pop(); // Quito la primera posicion ya que ya estoy parado ahí.
+  	return camino;
+  }
+  
+  
  /**
   * Pregunta si los personajes estan en diagonal.
   *
