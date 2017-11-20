@@ -277,9 +277,9 @@ public void graficar(final Graphics g) {
         key = it.next();
         actual = ubicacionPersonajes.get(key);
         
-        boolean soyInvisible = paquetePersonaje.getInvisibilidad();
-        //boolean soyInvisible = personajesConectados.get(juego.getPersonaje().getId()).esInvisible();
-        boolean actualVisible= !personajesConectados.get(actual.getIdPersonaje()).getInvisibilidad();
+        //boolean soyInvisible = paquetePersonaje.getInvisibilidad();
+        boolean soyInvisible = personajesConectados.get(getJuego().getPersonaje().getId()).getInvisibilidad();
+        boolean actualVisible= !(personajesConectados.get(actual.getIdPersonaje()).getInvisibilidad());
         
         if (actual != null && actual.getIdPersonaje()
         != getJuego().getPersonaje().getId()
