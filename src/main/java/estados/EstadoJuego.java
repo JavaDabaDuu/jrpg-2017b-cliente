@@ -267,16 +267,24 @@ public void graficar(final Graphics g) {
 
       Iterator<Integer> it = personajesConectados.keySet().iterator();
       int key;
+      
       PaqueteMovimiento actual;
+      
       g.setColor(Color.WHITE);
       g.setFont(new Font("Book Antiqua", Font.PLAIN, SIZE));
       while (it.hasNext()) {
         key = it.next();
         actual = ubicacionPersonajes.get(key);
+        
+        boolean soyInvisible = paquetePersonaje.getInvisibilidad();
+        //boolean soyInvisible = personajesConectados.get(juego.getPersonaje().getId()).esInvisible();
+        boolean actualVisible= !personajesConectados.get(actual.getIdPersonaje()).getInvisibilidad();
+        
         if (actual != null && actual.getIdPersonaje()
         != getJuego().getPersonaje().getId()
         && personajesConectados.get(actual.getIdPersonaje()).getEstado()
-        == Estado.getEstadoJuego()) {
+        == Estado.getEstadoJuego() 
+        && (soyInvisible || actualVisible) ) {
 
           Pantalla.centerString(g,
               new Rectangle((int) (actual.getPosX()

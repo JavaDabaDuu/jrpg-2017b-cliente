@@ -45,7 +45,7 @@ public class Talk extends ComandosEscucha {
 			destino = "Sala";
 		}
 
-String mensaje = getJuego().getCliente().getPaqueteMensaje().getMensaje();
+        String mensaje = getJuego().getCliente().getPaqueteMensaje().getMensaje();
 		
 		if (mensaje.equals("bigdaddy")) {
 			
@@ -58,22 +58,30 @@ String mensaje = getJuego().getCliente().getPaqueteMensaje().getMensaje();
 			personajeEmisor.setFuerza(nuevaFuerza);			
 			personajeEmisor.setFuerzaAumentada(personajeEmisor.getFuerzaAumentada()+1);
 			
-				}else if (mensaje.equals("tinydaddy")) {
+		}else if (mensaje.equals("tinydaddy")) {
 					
-					int nuevaFuerza = getJuego().getPersonajesConectados().get(getJuego().getCliente().
-							getPaqueteMensaje().getIdEmisor()).getFuerza()/2;
+		  int nuevaFuerza = getJuego().getPersonajesConectados().get(getJuego().getCliente().
+		      getPaqueteMensaje().getIdEmisor()).getFuerza()/2;
 					
-					PaquetePersonaje personajeEmisor = getJuego().getPersonajesConectados().get(getJuego().getCliente(
-							).getPaqueteMensaje().getIdEmisor());
+		  PaquetePersonaje personajeEmisor = getJuego().getPersonajesConectados().get(getJuego().getCliente(
+		      ).getPaqueteMensaje().getIdEmisor());
 				
-					personajeEmisor.setFuerza(nuevaFuerza);			
-					personajeEmisor.setFuerzaAumentada(personajeEmisor.getFuerzaDisminuida()+1);
+		  personajeEmisor.setFuerza(nuevaFuerza);			
+		  personajeEmisor.setFuerzaAumentada(personajeEmisor.getFuerzaDisminuida()+1);
 					
-						} else {
+		} else if (mensaje.equals("invisible")) {
+							
+		    PaquetePersonaje personajeEmisor = getJuego().getPersonajesConectados().get(getJuego().getCliente(
+			  ).getPaqueteMensaje().getIdEmisor());
+							
+			personajeEmisor.setInvisibilidad();
+							
+		}  else {
 					getJuego().getChatsActivos().get(destino).getChat()
 							.append(getJuego().getCliente().getPaqueteMensaje().getUserEmisor() + ": "
 									+ getJuego().getCliente().getPaqueteMensaje().getMensaje() + "\n");
 					getJuego().getChatsActivos().get(destino).getTexto().grabFocus();
-				}
-			}
-}
+		}
+		
+	}
+ }

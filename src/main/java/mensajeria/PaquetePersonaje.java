@@ -52,6 +52,8 @@ Cloneable {
   /** The nivel. */
   private int nivel = 1;
   
+  private boolean invisible = false;
+  
   private int idInventario;
   
   private int idMochila;
@@ -677,5 +679,13 @@ public int getFuerzaDisminuida() {
 
 public void setFuerzaDisminuida(int fuerzaDisminuida) {
 	this.fuerzaDisminuida = fuerzaDisminuida;
+}
+
+public boolean getInvisibilidad() {
+	return this.invisible;
+}
+
+public void setInvisibilidad() {
+    this.invisible = !(this.invisible);
 }
 }
