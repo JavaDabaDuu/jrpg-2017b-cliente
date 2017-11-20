@@ -207,6 +207,7 @@ public class EstadoJuego extends Estado {
           gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
       juego.getCliente().getSalida().writeObject(
           gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
+      
       juego.getPaqueteDeNPCS().setComando(Comando.SETEARNPC);
       juego.getCliente().getSalida().writeObject(
           gson.toJson(juego.getPaqueteDeNPCS(), PaqueteDeNPCS.class));
@@ -387,7 +388,7 @@ public boolean esEstadoDeJuego() {
    *
    * @param g the g
    */
-  private void graficarNPC(final Graphics g) {
+  public void graficarNPC(final Graphics g) {
 	  
     if (getJuego().getNpcs() != null) {
       npcs = new HashMap<Integer, PaqueteNPC>();

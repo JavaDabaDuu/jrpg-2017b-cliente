@@ -248,7 +248,7 @@ public class MenuInfoPersonaje {
         new Rectangle(x, y + Y_RECTAGULO_5, MENU.getWidth(), 0),
         "para lograr subir de nivel");
     Pantalla.centerString(g,
-        new Rectangle(x, y + Y_RECTAGULO_6, MENU.getWidth(), 0),
+        new Rectangle(x, y + Y_RECTAGULO_7, MENU.getWidth(), 0),
         "y mejorar tus atributos.");
   }
 

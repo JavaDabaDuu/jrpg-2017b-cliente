@@ -326,6 +326,7 @@ public void graficar(final Graphics gAux) {
   EstadoDePersonaje.dibujarEstadoDePersonaje(
   gAux, X_ESTADO_ENEMIGO, Y_ESTADO_ENEMIGO,
       enemigo, miniaturaEnemigo);
+  
 }
 
   /**
@@ -406,6 +407,7 @@ private void finalizarBatalla() {
 
     getJuego().getCliente().getSalida()
        .writeObject(gson.toJson(paquetePersonaje));
+    
     getJuego().getCliente().getSalida()
         .writeObject(gson.toJson(paqueteEnemigo));
 
