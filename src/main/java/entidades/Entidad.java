@@ -580,7 +580,7 @@ public class Entidad {
   public void mover() {
     dx = 0;
     dy = 0;
-    double paso = 1;
+    double paso = 2;
     if (enMovimiento && !(x == xFinal && y == yFinal - Y_OFFSET)) {
       if (movimientoHacia == VERTICALSUP) {
         dy -= paso;
