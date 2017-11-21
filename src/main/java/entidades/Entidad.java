@@ -184,7 +184,7 @@ public class Entidad {
   private float[] comercio;
 
   /** The Constant RANGONPC. */
-  private static final int RANGONPC = 100;
+  private static int RANGONPC = 100;
 
   /** The Constant X_SPAWN. */
   private static final int X_SPAWN = 64;
@@ -982,17 +982,23 @@ public class Entidad {
           paqueteBatalla.setIdEnemigo(key);
         
           //ACA TENGO QUE PONER UN CARTEL DE CONFIRMACION, CUANDO PIERDO ENTRO EN UN BUCLE SIN FIN
-        
-          actual.setEstado(Estado.getEstadoBatallaNPC());
-          juego.getPersonaje().setEstado(Estado.getEstadoBatallaNPC());
+          int rta = JOptionPane.showConfirmDialog(null,"¿Pelear con Minotauro?", "Pelear con NPC", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+  
+          if(rta == 0) {
+        	  actual.setEstado(Estado.getEstadoBatallaNPC());
+        	  juego.getPersonaje().setEstado(Estado.getEstadoBatallaNPC());
 
-          try {
-          juego.getCliente().getSalida()
-              .writeObject(gson.toJson(paqueteBatalla));
-          } catch (IOException e) {
-            System.out.println(
-                "Error al enviar paquete Batalla NPC");
+        	  try {
+        		  juego.getCliente().getSalida()
+        		  .writeObject(gson.toJson(paqueteBatalla));
+        	  } catch (IOException e) {
+        		  System.out.println(
+        				  "Error al enviar paquete Batalla NPC");
+        	  }
+          } else {
+
           }
+          
             break;
           }
         }
