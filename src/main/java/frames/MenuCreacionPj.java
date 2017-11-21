@@ -448,6 +448,7 @@ public class MenuCreacionPj extends JFrame {
     personaje.setNombre(nombre.getText());
     if (nombre.getText().equals("")) {
       personaje.setNombre("nameless");
+    }
       personaje.setRaza((String) cbxRaza.getSelectedItem());
       personaje.setSaludTope(Integer.
       parseInt(vecSalud[cbxRaza.getSelectedIndex()]));
@@ -472,5 +473,5 @@ public class MenuCreacionPj extends JFrame {
       }
     }
   }
-}
+
 
