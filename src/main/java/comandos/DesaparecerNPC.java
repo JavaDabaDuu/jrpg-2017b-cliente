@@ -7,7 +7,6 @@ public class DesaparecerNPC extends ComandosEscucha {
 
   @Override
 public void ejecutar() {
-	  
 	  //Aca llega el npc que tiene que desaparecer
   PaqueteNPC paqueteNPC = (PaqueteNPC)
       getGson().fromJson(getCadenaLeida(), PaqueteNPC.class);
