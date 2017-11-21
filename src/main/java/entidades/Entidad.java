@@ -976,11 +976,13 @@ public class Entidad {
       if (actual != null && actual.getEstado() == Estado.getEstadoJuego()) {
         if (Math.sqrt(Math.pow(actual.getPosX() - x, 2)
         + Math.pow(actual.getPosY() - y, 2)) < RANGONPC) {
-
+        	
           PaqueteBatallaNPC paqueteBatalla = new PaqueteBatallaNPC();
           paqueteBatalla.setId(juego.getPersonaje().getId());
           paqueteBatalla.setIdEnemigo(key);
-
+        
+          //ACA TENGO QUE PONER UN CARTEL DE CONFIRMACION, CUANDO PIERDO ENTRO EN UN BUCLE SIN FIN
+        
           actual.setEstado(Estado.getEstadoBatallaNPC());
           juego.getPersonaje().setEstado(Estado.getEstadoBatallaNPC());
 

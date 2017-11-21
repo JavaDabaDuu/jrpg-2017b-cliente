@@ -282,6 +282,8 @@ public void actualizar() {
                        getJuego().getPersonaje()
                            .setEstado(Estado.getEstadoJuego());
 
+                       getJuego().getNpcs().get(this.getPaqueteEnemigo().
+                    		   getId()).setEstado(Estado.getEstadoJuego());
                        paqueteFinalizarBatalla.setGanadorBatalla(this
                            .getPaqueteEnemigo().getId());
                        finalizarBatalla();
