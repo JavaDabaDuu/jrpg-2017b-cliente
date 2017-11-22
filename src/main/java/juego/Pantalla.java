@@ -337,48 +337,4 @@ public static void setMenuStats(final MenuStats menuStatsAux) {
   Pantalla.menuStats = menuStatsAux;
 }
 
-  // Dejo esto acá por las dudas
-  /*
-  pantalla.addKeyListener(new KeyAdapter() {
-    @Override
-  public void keyReleased(KeyEvent e) {
-    if (e.getKeyCode() == KeyEvent.VK_I) {
-      if(Estado.getEstado().esEstadoDeJuego()) {
-        if (menuInventario == null) {
-          menuInventario = new MenuInventario(cliente);
-            menuInventario.setVisible(true);
-          }
-        }
-      } else if (e.getKeyCode() == KeyEvent.VK_A) {
-      if(Estado.getEstado().esEstadoDeJuego()) {
-        if (menuAsignar == null) {
-          menuAsignar = new MenuAsignarSkills(cliente);
-          menuAsignar.setVisible(true);
-         }
-      }
-      } else if (e.getKeyCode() == KeyEvent.VK_S) {
-        if(Estado.getEstado().esEstadoDeJuego()) {
-          if (menuStats == null) {
-            menuStats = new MenuStats(cliente);
-            menuStats.setVisible(true);
-          }
-        }
-      } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-        if(Estado.getEstado().esEstadoDeJuego()) {
-          if (menuEscp == null) {
-            menuEscp = new MenuEscape(cliente);
-            menuEscp.setVisible(true);
-          }
-        }
-      } else if (e.getKeyCode() == KeyEvent.VK_C) {
-        if(Estado.getEstado().esEstadoDeJuego()) {
-          if (ventContac == null) {
-            ventContac = new VentanaContactos(cliente.getJuego());
-            ventContac.setVisible(true);
-            }
-          }
-        }
-      }
-    });
-  */
 }
