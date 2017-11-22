@@ -63,6 +63,8 @@ Cloneable {
   
   /**cantidad de veces que se uso "TinyDaddy"*/
   private int fuerzaDisminuida;
+  
+  private boolean [] npcsPeleados;
 
   public int getIdInventario() {
 	return idInventario;
@@ -98,6 +100,10 @@ public void setIdMochila(int idMochila) {
     estado = Estado.getEstadoOffline();
     fuerzaAumentada = 0;
     fuerzaDisminuida = 0;
+    npcsPeleados = new boolean [10];
+    for (int i = 0; i < npcsPeleados.length; i++) {
+		npcsPeleados[i] = false;
+	}
   }
 
   /**
@@ -688,4 +694,14 @@ public boolean getInvisibilidad() {
 public void setInvisibilidad() {
     this.invisible = !(this.invisible);
 }
+
+public boolean getNpcsPeleados(int i) {
+	return npcsPeleados[i];
+}
+
+public void setNpcsPeleados(int i) {
+	this.npcsPeleados[i] = true;
+}
+
+
 }
