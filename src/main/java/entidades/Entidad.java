@@ -437,7 +437,7 @@ public class Entidad {
           actual = juego.getUbicacionPersonajes().get(key);
           tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
           
-          boolean actualVisible= !juego.getPersonajesConectados().get(actual.getIdPersonaje()).getInvisibilidad();
+          //boolean actualVisible= !(juego.getPersonajesConectados().get(actual.getIdPersonaje()).getInvisibilidad());
           
           if (actual != null && actual.getIdPersonaje()
           != juego.getPersonaje().getId()
@@ -445,7 +445,7 @@ public class Entidad {
           .get(actual.getIdPersonaje()) != null
           && juego.getPersonajesConectados()
           .get(actual.getIdPersonaje()).getEstado()
-          == Estado.getEstadoJuego() && actualVisible ) {
+          == Estado.getEstadoJuego() && esVisible(actual) ) {
         	  
             if (tileMovermeAux[0] == tilePersonajes[0]
             && tileMovermeAux[1] == tilePersonajes[1]) {
@@ -576,6 +576,10 @@ public class Entidad {
       enMovimiento = true;
     }
   }
+
+public boolean esVisible(PaqueteMovimiento actual) {
+	return !(juego.getPersonajesConectados().get(actual.getIdPersonaje()).getInvisibilidad());
+}
 
  /**
   * Mueve el personaje.

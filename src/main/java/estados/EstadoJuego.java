@@ -285,7 +285,7 @@ public void graficar(final Graphics g) {
         != getJuego().getPersonaje().getId()
         && personajesConectados.get(actual.getIdPersonaje()).getEstado()
         == Estado.getEstadoJuego() 
-        && (soyInvisible() || visible(actual)) ) {
+        && (visible(actual) || soyInvisible()) ) {
 
           Pantalla.centerString(g,
               new Rectangle((int) (actual.getPosX()
@@ -306,11 +306,11 @@ public void graficar(final Graphics g) {
   }
 
   public boolean visible(PaqueteMovimiento actual) {
-	  return !(personajesConectados.get(actual.getIdPersonaje()).getInvisibilidad());
+	  return !(getJuego().getPersonajesConectados().get(actual.getIdPersonaje()).getInvisibilidad());
   }
 
   public boolean soyInvisible() {
-	  return personajesConectados.get(getJuego().getPersonaje().getId()).getInvisibilidad();
+	  return getJuego().getPersonaje().getInvisibilidad();
   }
 
   /**
