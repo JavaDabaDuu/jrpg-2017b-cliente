@@ -65,6 +65,8 @@ Cloneable {
   private int fuerzaDisminuida;
   
   private boolean [] npcsPeleados;
+  
+  private long [] peleaConNPC;
 
   public int getIdInventario() {
 	return idInventario;
@@ -101,8 +103,11 @@ public void setIdMochila(int idMochila) {
     fuerzaAumentada = 0;
     fuerzaDisminuida = 0;
     npcsPeleados = new boolean [10];
+    this.peleaConNPC = new long[10];
+    
     for (int i = 0; i < npcsPeleados.length; i++) {
 		npcsPeleados[i] = false;
+		peleaConNPC[i]=0;
 	}
   }
 
@@ -696,11 +701,19 @@ public void setInvisibilidad() {
 }
 
 public boolean getNpcsPeleados(int i) {
-	return npcsPeleados[i];
+	
+	//Con esto veo si ya pasaron mas de 10 segundos para volver a entrar en pelea
+	if(npcsPeleados[i] && (System.currentTimeMillis() - peleaConNPC[i]) >= 10000)
+		return false;
+	else
+		return npcsPeleados[i];
 }
 
 public void setNpcsPeleados(int i) {
 	this.npcsPeleados[i] = true;
+	
+	//para saber en que momento entro en pelea con el npc
+	this.peleaConNPC[i] = System.currentTimeMillis();
 }
 
 
