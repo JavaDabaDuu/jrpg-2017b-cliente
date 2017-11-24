@@ -182,6 +182,9 @@ public class Entidad {
 
   /** The comercio. */
   private float[] comercio;
+  
+  /** The paso al que se mueve */
+  private int paso;
 
   /** The Constant RANGONPC. */
   private static int RANGONPC = 100;
@@ -588,7 +591,12 @@ public boolean esVisible(PaqueteMovimiento actual) {
   public void mover() {
     dx = 0;
     dy = 0;
-    double paso = 2;
+    double paso;
+    if (juego.pjIsRunnig()) {
+    	paso = 8;
+    } else {
+    	paso = 4;
+    }
     if (enMovimiento && !(x == xFinal && y == yFinal - Y_OFFSET)) {
       if (movimientoHacia == VERTICALSUP) {
         dy -= paso;
@@ -1002,5 +1010,13 @@ public boolean esVisible(PaqueteMovimiento actual) {
         }
       }
     }
+  }
+  
+  public void running() {
+	  this.paso = 4;
+  }
+	
+  public void walking() {
+	this.paso = 2;
   }
 }

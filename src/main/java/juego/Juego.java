@@ -111,6 +111,9 @@ public class Juego implements Runnable {
   /** The noClipActivado. */
   private boolean noClipActivado = false;
 
+  /** El personaje corre */
+  private boolean run;
+
   /** The Constant DIRECCION. */
   private static final int DIRECCION = 6;
 
@@ -162,6 +165,7 @@ public class Juego implements Runnable {
     this.cliente = clienteAux;
     this.paquetePersonaje = ppAux;
     this.paqueteDeNPCS = new PaqueteDeNPCS();
+    this.run = false;
 
     // Inicializo la ubicacion del personaje
     ubicacionPersonaje = new PaqueteMovimiento();
@@ -573,4 +577,17 @@ public class Juego implements Runnable {
   public boolean estaNoClipActivado() {
 	  return this.noClipActivado;
   }
+
+  public void running() {
+	  this.run = true;
+  }
+
+  public void walking() {
+	  this.run = false;
+  }
+  
+  public boolean pjIsRunnig() {
+	  return this.run;
+  }
+
 }

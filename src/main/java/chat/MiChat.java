@@ -127,7 +127,6 @@ public class MiChat extends JFrame {
   /** Constant WIDTH_FONDO. */
   private static final int WIDTH_FONDO = 283;
 
-
   /**
    * Create the frame.
    *
@@ -186,6 +185,13 @@ public class MiChat extends JFrame {
             juego.desactivarNoClip();
           }
           
+          if (texto.getText().equals("run")) {
+        	  juego.running();
+          }
+          if (texto.getText().equals("walk")) {
+        	  juego.walking();
+          }
+          
           chat.append("Me: " + texto.getText() + "\n");
 
           juegoAux.getCliente().getPaqueteMensaje()
@@ -229,6 +235,13 @@ public class MiChat extends JFrame {
               }
               if (texto.getText().equals("siclip")) {
                 juego.desactivarNoClip();
+              }
+              
+              if (texto.getText().equals("run")) {
+            	  juego.running();
+              }
+              if (texto.getText().equals("walk")) {
+            	  juego.walking();
               }
 
             chat.append("Me: " + texto.getText() + "\n");
