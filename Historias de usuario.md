@@ -52,3 +52,12 @@ Como `jugador` quiero tener la posibilidad de pelear en contra de enemigos sin l
 1. Al acercarse al enemigo se comienza una batalla con el jugador, una vez derrotados estos deben desaparecer del mapa.
 2. No debera haber mas de 10 enemigos al mismo tiempo.
 3. Los enemigos solo puede luchar contra un jugador a la vez.
+
+## 08 Cheats:
+Como `jugador` quiero tener la posibilidad de obtener una ventaja sobre el resto.
+### Condiciones de aceptación:
+1. Al enviar el mensaje "war aint what it used to be" por el chat, mi personaje se vuelve invisible para el resto, exceptuando que haya otro invisible el cual me podria ver. Pudiendo sacarse el cheat enviando de nuevo la misma palabra.
+2. Al enviar el mensaje "iddqd" por el chat, mi personaje se vuelve invulnerable a ataques del resto, exceptuando que haya otro invulnerable. En ese caso, los dos pelearan como si no tuvieran el cheat. Pudiendo sacarse el cheat enviando de nuevo la misma palabra.
+3. Al enviar el mensaje "bigdaddy" por el chat, mi personaje tendra el doble de fuerza. En caso de enviar "tinydaddy", mi personaje tendra la mitad de la fuerza. Pudiendo sacarse el cheat enviando la palabra "bigdaddyoff" o "tinydaddyoff" segun sea el caso.
+4. Al enviar el mensaje "noclip" por el chat, mi personaje podra atravesar paredes. Pudiendo sacarse el cheat enviando la palabra "siclip"
+5. Al enviar el mensaje "run" por el chat, mi personaje podra correr dentro del juego moviendose mas rapido. Pudiendo sacarse el cheat enviando la palabra "walk"
