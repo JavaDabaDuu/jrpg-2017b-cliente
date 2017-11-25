@@ -67,6 +67,8 @@ Cloneable {
   private boolean [] npcsPeleados;
   
   private long [] peleaConNPC;
+  
+  private boolean modoDios;
 
   public int getIdInventario() {
 	return idInventario;
@@ -696,10 +698,6 @@ public void setNpcsPeleados(int i) {
 	this.peleaConNPC[i] = System.currentTimeMillis();
 }
 
-public void activarModoDios() {
-	// TODO Auto-generated method stub
-	
-}
 
 public void bigdaddyON(){
 	this.fuerza = fuerza*2;
@@ -726,6 +724,14 @@ public void bigdaddyOFF() {
 
 public void invisibilidadOFF() {
 	this.invisible = false;
+}
+
+public boolean modoDiosActivado() {
+	return modoDios;
+}
+
+public void activarModoDios() {
+	this.modoDios = !this.modoDios;
 }
 
 

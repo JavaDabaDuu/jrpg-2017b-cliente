@@ -209,7 +209,17 @@ public class MiChat extends JFrame {
           if(texto.getText().equals("invisibleoff")) {
         	  juego.getPersonaje().invisibilidadOFF();
           }
-          
+          if (texto.equals("iddqd")) {
+            juego.getPersonaje().activarModoDios();
+          	juego.getCliente().getPaquetePersonaje().setComando(Comando.MODODIOS);
+                     	try {
+  							juego.getCliente().getSalida().writeObject(gson.toJson(
+  									juego.getCliente().getPaquetePersonaje()));
+  						} catch (IOException e1) {
+  	                        JOptionPane.showMessageDialog(null,
+  	                                "Error al enviar paquetePersonaje");
+  						}
+  		 } 
           chat.append("Me: " + texto.getText() + "\n");
 
           juegoAux.getCliente().getPaqueteMensaje()

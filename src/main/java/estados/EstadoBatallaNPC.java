@@ -274,7 +274,9 @@ public void actualizar() {
                     paqueteEnemigo.setEstado(getEstadoBatallaNPC());
 
                     } else {
-                    enemigo.atacar(personaje);
+                    if(!personaje.modoDiosActivado()) {
+                        enemigo.atacar(personaje);
+                    }                    
                     if (!personaje.estaVivo()) {
                       getJuego().getEstadoJuego().setHaySolicitud(true,
                           getJuego().getPersonaje(), MenuInfoPersonaje

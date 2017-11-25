@@ -157,6 +157,8 @@ public class EstadoBatalla extends Estado {
   /** The Constant Y_ESTADO_ENEMIGO. */
   private static final int Y_ESTADO_ENEMIGO = 5;
 
+ private static final int ENERGIA_MINIMA = 10;
+
   /**
    * Instantiates a new estado batalla.
    *
@@ -215,7 +217,11 @@ public void actualizar() {
           if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == UNO) {
             if (personaje.puedeAtacar()) {
               seRealizoAccion = true;
-              personaje.habilidadRaza1(enemigo);
+              if( enemigo.modoDiosActivado() == false || (enemigo.modoDiosActivado() && personaje.modoDiosActivado()) ){
+                  personaje.habilidadRaza1(enemigo);
+              } else if(personaje.getEnergia() >= ENERGIA_MINIMA ) {
+            	  personaje.reducirEnergia(ENERGIA_MINIMA);
+              }
             }
             haySpellSeleccionada = true;
           }
@@ -223,7 +229,11 @@ public void actualizar() {
           if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == DOS) {
             if (personaje.puedeAtacar()) {
               seRealizoAccion = true;
-              personaje.habilidadRaza2(enemigo);
+              if( enemigo.modoDiosActivado() == false || (enemigo.modoDiosActivado() && personaje.modoDiosActivado()) ){
+                  personaje.habilidadRaza2(enemigo);
+              } else if(personaje.getEnergia() >= ENERGIA_MINIMA ) {
+            	  personaje.reducirEnergia(ENERGIA_MINIMA);
+              }
             }
             haySpellSeleccionada = true;
           }
@@ -231,7 +241,11 @@ public void actualizar() {
           if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == TRES) {
             if (personaje.puedeAtacar()) {
               seRealizoAccion = true;
-              personaje.habilidadCasta1(enemigo);
+              if( enemigo.modoDiosActivado() == false || (enemigo.modoDiosActivado() && personaje.modoDiosActivado()) ){
+                  personaje.habilidadCasta1(enemigo);
+              } else if(personaje.getEnergia() >= ENERGIA_MINIMA ) {
+            	  personaje.reducirEnergia(ENERGIA_MINIMA);
+              }
             }
             haySpellSeleccionada = true;
           }
@@ -240,7 +254,11 @@ public void actualizar() {
           posMouse[0], posMouse[1]) == CUATRO) {
             if (personaje.puedeAtacar()) {
               seRealizoAccion = true;
-              personaje.habilidadCasta2(enemigo);
+              if( enemigo.modoDiosActivado() == false || (enemigo.modoDiosActivado() && personaje.modoDiosActivado()) ){
+                  personaje.habilidadCasta2(enemigo);
+              } else if(personaje.getEnergia() >= ENERGIA_MINIMA ) {
+            	  personaje.reducirEnergia(ENERGIA_MINIMA);
+              }
             }
             haySpellSeleccionada = true;
           }
@@ -249,7 +267,11 @@ public void actualizar() {
           posMouse[0], posMouse[1]) == CINCO) {
             if (personaje.puedeAtacar()) {
               seRealizoAccion = true;
-              personaje.habilidadCasta3(enemigo);
+              if( enemigo.modoDiosActivado() == false || (enemigo.modoDiosActivado() && personaje.modoDiosActivado()) ){
+                  personaje.habilidadCasta3(enemigo);
+              } else if(personaje.getEnergia() >= ENERGIA_MINIMA ) {
+            	  personaje.reducirEnergia(ENERGIA_MINIMA);
+              }
             }
             haySpellSeleccionada = true;
           }
@@ -354,6 +376,9 @@ public void graficar(final Graphics gAux) {
           Casta.class, Integer.TYPE, Integer.TYPE, Integer.TYPE)
           .newInstance(nombre, salud, energia, fuerza, destreza, inteligencia,
           casta, experiencia, nivel, id);
+          if(paquetePersonaje.modoDiosActivado()) {
+        	  personaje.activarModoDios();
+          }
     } catch (InstantiationException | IllegalAccessException
        | ClassNotFoundException | IllegalArgumentException
        | InvocationTargetException | NoSuchMethodException
@@ -391,6 +416,9 @@ public void graficar(final Graphics gAux) {
     } else if (paqueteEnemigo.getRaza().equals("Elfo")) {
       enemigo = new Elfo(nombre, salud, energia, fuerza, destreza, inteligencia,
         casta, experiencia, nivel, id);
+    }
+    if(paqueteEnemigo.modoDiosActivado()) {
+    	enemigo.activarModoDios();
     }
   }
 
