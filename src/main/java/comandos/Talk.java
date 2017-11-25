@@ -44,21 +44,9 @@ public class Talk extends ComandosEscucha {
 			}
 			destino = "Sala";
 		}
-
-        String mensaje = getJuego().getCliente().getPaqueteMensaje().getMensaje();
-	        	
-        if (mensaje.equals("invisible")) {
-							
-		    PaquetePersonaje personajeEmisor = getJuego().getPersonajesConectados().get(getJuego().getCliente(
-			  ).getPaqueteMensaje().getIdEmisor());
-							
-			personajeEmisor.setInvisibilidad();
-							
-		}  else {
-					getJuego().getChatsActivos().get(destino).getChat()
+			getJuego().getChatsActivos().get(destino).getChat()
 							.append(getJuego().getCliente().getPaqueteMensaje().getUserEmisor() + ": "
 									+ getJuego().getCliente().getPaqueteMensaje().getMensaje() + "\n");
 					getJuego().getChatsActivos().get(destino).getTexto().grabFocus();
 		}
-	}
  }

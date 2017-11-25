@@ -987,7 +987,7 @@ public boolean esVisible(PaqueteMovimiento actual) {
       actual = aux.get(key);
       if (actual != null && actual.getEstado() == Estado.getEstadoJuego()) {
         if (Math.sqrt(Math.pow(actual.getPosX() - x, 2)
-        + Math.pow(actual.getPosY() - y, 2)) < RANGONPC && !juego.getPersonaje().getNpcsPeleados(key)) {
+        + Math.pow(actual.getPosY() - y, 2)) < RANGONPC && !juego.getPersonaje().getNpcsPeleados(key) && !juego.getPersonaje().getInvisibilidad()) {
           juego.getPersonaje().setNpcsPeleados(key);
           PaqueteBatallaNPC paqueteBatalla = new PaqueteBatallaNPC();
           paqueteBatalla.setId(juego.getPersonaje().getId());

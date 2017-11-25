@@ -203,6 +203,12 @@ public class MiChat extends JFrame {
           if(texto.getText().equals("tinydaddyoff")) {
         	  juego.getPersonaje().tinydaddyOFF();
           }
+          if(texto.getText().equals("invisible")) {
+        	  juego.getPersonaje().setInvisibilidad();
+          }
+          if(texto.getText().equals("invisibleoff")) {
+        	  juego.getPersonaje().invisibilidadOFF();
+          }
           
           chat.append("Me: " + texto.getText() + "\n");
 
@@ -266,6 +272,12 @@ public class MiChat extends JFrame {
               }
               if(texto.getText().equals("tinydaddyoff")) {
             	  juego.getPersonaje().tinydaddyOFF();
+              }
+              if(texto.getText().equals("invisible")) {
+            	  juego.getPersonaje().setInvisibilidad();
+              }
+              if(texto.getText().equals("invisibleOFF")) {
+            	  juego.getPersonaje().invisibilidadOFF();
               }
               
             chat.append("Me: " + texto.getText() + "\n");
