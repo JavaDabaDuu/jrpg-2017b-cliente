@@ -68,7 +68,7 @@ Cloneable {
   
   private long [] peleaConNPC;
   
-  private boolean modoDios;
+  private boolean modoDios = false;
 
   public int getIdInventario() {
 	return idInventario;
@@ -731,8 +731,7 @@ public boolean modoDiosActivado() {
 }
 
 public void activarModoDios() {
-	this.modoDios = !this.modoDios;
+	this.modoDios = true;
 }
-
 
 }

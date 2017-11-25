@@ -274,7 +274,7 @@ public void actualizar() {
                     paqueteEnemigo.setEstado(getEstadoBatallaNPC());
 
                     } else {
-                    if(!personaje.modoDiosActivado()) {
+                    if(personaje.modoDiosActivado() == false) {
                         enemigo.atacar(personaje);
                     }                    
                     if (!personaje.estaVivo()) {
@@ -360,6 +360,9 @@ private void crearPersonajes() {
         Casta.class, Integer.TYPE, Integer.TYPE, Integer.TYPE)
         .newInstance(nombre, salud, energia, fuerza, destreza, magia, casta,
         experiencia, nivel, id);
+    if( paquetePersonaje.modoDiosActivado() ) {
+    	personaje.activarModoDios();
+    }
    } catch (InstantiationException | IllegalAccessException
    | ClassNotFoundException | IllegalArgumentException
    | InvocationTargetException | NoSuchMethodException | SecurityException e) {
