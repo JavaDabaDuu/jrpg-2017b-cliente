@@ -205,9 +205,14 @@ public class MiChat extends JFrame {
           }
           if(texto.getText().equals("invisible")) {
         	  juego.getPersonaje().setInvisibilidad();
-          }
-          if(texto.getText().equals("invisibleoff")) {
-        	  juego.getPersonaje().invisibilidadOFF();
+        	  juego.getCliente().getPaquetePersonaje().setComando(Comando.MODOINVISIBLE);
+        	  try {
+					juego.getCliente().getSalida().writeObject(gson.toJson(
+							juego.getCliente().getPaquetePersonaje()));
+				} catch (IOException e1) {
+                    JOptionPane.showMessageDialog(null,
+                            "Error al enviar paquetePersonaje");
+				}
           }
           if (texto.equals("iddqd")) {
             juego.getPersonaje().activarModoDios();
@@ -257,39 +262,7 @@ public class MiChat extends JFrame {
     enviar.addActionListener(new ActionListener() {
         public void actionPerformed(final ActionEvent e) {
             if (!texto.getText().equals("")) {
-              // Cheat noclip
-              if (texto.getText().equals("noclip")) {
-                juego.activarNoClip();
-              }
-              if (texto.getText().equals("siclip")) {
-                juego.desactivarNoClip();
-              }
-              
-              if (texto.getText().equals("run")) {
-            	  juego.running();
-              }
-              if (texto.getText().equals("walk")) {
-            	  juego.walking();
-              }
-              if(texto.getText().equals("bigdaddy")) {
-            	  juego.getPersonaje().bigdaddyON();
-              }
-              if(texto.getText().equals("tinydaddy")) {
-            	  juego.getPersonaje().tinydaddyON();
-              }          
-              if(texto.getText().equals("bigdaddyoff")) {
-            	  juego.getPersonaje().bigdaddyOFF();
-              }
-              if(texto.getText().equals("tinydaddyoff")) {
-            	  juego.getPersonaje().tinydaddyOFF();
-              }
-              if(texto.getText().equals("invisible")) {
-            	  juego.getPersonaje().setInvisibilidad();
-              }
-              if(texto.getText().equals("invisibleOFF")) {
-            	  juego.getPersonaje().invisibilidadOFF();
-              }
-              
+            	
             chat.append("Me: " + texto.getText() + "\n");
 
             juegoAux.getCliente().getPaqueteMensaje()
