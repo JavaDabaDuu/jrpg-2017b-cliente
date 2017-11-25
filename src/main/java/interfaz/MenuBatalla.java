@@ -129,7 +129,8 @@ public class MenuBatalla {
     g.drawImage(Recursos.getHabilidades().get(personaje
          .getHabilidadesCasta()[1]), BOTONES[INDICE3][0], BOTONES[INDICE3][1],
          ANCHOBOTON, ANCHOBOTON, null);
-    g.drawImage(Recursos.getHabilidades().get("Ignorar Defensa"), BOTONES[INDICE4][0], BOTONES[0][1],
+    g.drawImage(Recursos.getHabilidades().get(personaje
+    		.getHabilidadesCasta()[2]), BOTONES[INDICE4][0], BOTONES[0][1],
          ANCHOBOTON, ANCHOBOTON, null);
     g.drawImage(Recursos.getHabilidades()
          .get("Ser Energizado"), BOTONES[INDICE5][0], BOTONES[INDICE5][1],

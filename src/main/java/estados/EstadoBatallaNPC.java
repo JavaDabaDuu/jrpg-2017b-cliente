@@ -194,7 +194,7 @@ public class EstadoBatallaNPC extends Estado {
   */
   @Override
 public void actualizar() {
-  getJuego().getCamara().setxOffset(XOFFSET);
+  getJuego().getCamara().setxOffset(-XOFFSET);
   getJuego().getCamara().setyOffset(YOFFSET);
 
   seRealizoAccion = false;

@@ -46,30 +46,8 @@ public class Talk extends ComandosEscucha {
 		}
 
         String mensaje = getJuego().getCliente().getPaqueteMensaje().getMensaje();
-		
-		if (mensaje.equals("bigdaddy")) {
-			
-			int nuevaFuerza = getJuego().getPersonajesConectados().get(getJuego().getCliente().
-					getPaqueteMensaje().getIdEmisor()).getFuerza()*2;
-			
-			PaquetePersonaje personajeEmisor = getJuego().getPersonajesConectados().get(getJuego().getCliente(
-					).getPaqueteMensaje().getIdEmisor());
-		
-			personajeEmisor.setFuerza(nuevaFuerza);			
-			personajeEmisor.setFuerzaAumentada(personajeEmisor.getFuerzaAumentada()+1);
-			
-		}else if (mensaje.equals("tinydaddy")) {
-					
-		  int nuevaFuerza = getJuego().getPersonajesConectados().get(getJuego().getCliente().
-		      getPaqueteMensaje().getIdEmisor()).getFuerza()/2;
-					
-		  PaquetePersonaje personajeEmisor = getJuego().getPersonajesConectados().get(getJuego().getCliente(
-		      ).getPaqueteMensaje().getIdEmisor());
-				
-		  personajeEmisor.setFuerza(nuevaFuerza);			
-		  personajeEmisor.setFuerzaAumentada(personajeEmisor.getFuerzaDisminuida()+1);
-					
-		} else if (mensaje.equals("invisible")) {
+	        	
+        if (mensaje.equals("invisible")) {
 							
 		    PaquetePersonaje personajeEmisor = getJuego().getPersonajesConectados().get(getJuego().getCliente(
 			  ).getPaqueteMensaje().getIdEmisor());

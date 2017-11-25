@@ -191,6 +191,18 @@ public class MiChat extends JFrame {
           if (texto.getText().equals("walk")) {
         	  juego.walking();
           }
+          if(texto.getText().equals("bigdaddy")) {
+        	  juego.getPersonaje().bigdaddyON();
+          }
+          if(texto.getText().equals("tinydaddy")) {
+        	  juego.getPersonaje().tinydaddyON();
+          }
+          if(texto.getText().equals("bigdaddyoff")) {
+        	  juego.getPersonaje().bigdaddyOFF();
+          }
+          if(texto.getText().equals("tinydaddyoff")) {
+        	  juego.getPersonaje().tinydaddyOFF();
+          }
           
           chat.append("Me: " + texto.getText() + "\n");
 
@@ -243,7 +255,19 @@ public class MiChat extends JFrame {
               if (texto.getText().equals("walk")) {
             	  juego.walking();
               }
-
+              if(texto.getText().equals("bigdaddy")) {
+            	  juego.getPersonaje().bigdaddyON();
+              }
+              if(texto.getText().equals("tinydaddy")) {
+            	  juego.getPersonaje().tinydaddyON();
+              }          
+              if(texto.getText().equals("bigdaddyoff")) {
+            	  juego.getPersonaje().bigdaddyOFF();
+              }
+              if(texto.getText().equals("tinydaddyoff")) {
+            	  juego.getPersonaje().tinydaddyOFF();
+              }
+              
             chat.append("Me: " + texto.getText() + "\n");
 
             juegoAux.getCliente().getPaqueteMensaje()

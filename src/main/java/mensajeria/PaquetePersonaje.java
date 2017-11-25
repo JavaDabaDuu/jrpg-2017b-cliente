@@ -671,26 +671,6 @@ public Object clone() {
     this.inteligencia += updates.get("inteligencia").intValue();
     this.energiaTope += updates.get("energia").intValue();
   }
-/***
- * Devuelve si la fuerza ya fue aumentada o no
- * @return
- */
-
-public int getFuerzaAumentada() {
-	return fuerzaAumentada;
-}
-
-public void setFuerzaAumentada(int fuerzaAumentada) {
-	this.fuerzaAumentada = fuerzaAumentada;
-}
-
-public int getFuerzaDisminuida() {
-	return fuerzaDisminuida;
-}
-
-public void setFuerzaDisminuida(int fuerzaDisminuida) {
-	this.fuerzaDisminuida = fuerzaDisminuida;
-}
 
 public boolean getInvisibilidad() {
 	return this.invisible;
@@ -714,6 +694,34 @@ public void setNpcsPeleados(int i) {
 	
 	//para saber en que momento entro en pelea con el npc
 	this.peleaConNPC[i] = System.currentTimeMillis();
+}
+
+public void activarModoDios() {
+	// TODO Auto-generated method stub
+	
+}
+
+public void bigdaddyON(){
+	this.fuerza = fuerza*2;
+	fuerzaAumentada++;
+}
+
+public void tinydaddyON(){
+	this.fuerza = fuerza/2;
+	fuerzaDisminuida++;
+}
+
+public void tinydaddyOFF(){
+	for(int i=0; i<this.fuerzaDisminuida; i++){
+		this.fuerza = fuerza * 2;
+	}
+	
+}
+
+public void bigdaddyOFF() {
+	for(int i=0; i<this.fuerzaAumentada; i++){
+		this.fuerza = fuerza /2;
+	}
 }
 
 
