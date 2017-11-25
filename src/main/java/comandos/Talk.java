@@ -60,6 +60,5 @@ public class Talk extends ComandosEscucha {
 									+ getJuego().getCliente().getPaqueteMensaje().getMensaje() + "\n");
 					getJuego().getChatsActivos().get(destino).getTexto().grabFocus();
 		}
-		
 	}
  }
