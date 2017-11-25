@@ -679,7 +679,7 @@ public boolean getInvisibilidad() {
 }
 
 public void setInvisibilidad() {
-    this.invisible = true;
+    this.invisible = !(this.invisible);
 }
 
 public boolean getNpcsPeleados(int i) {
@@ -720,10 +720,6 @@ public void bigdaddyOFF() {
 	for(int i=0; i<this.fuerzaAumentada; i++){
 		this.fuerza = fuerza /2;
 	}
-}
-
-public void invisibilidadOFF() {
-	this.invisible = false;
 }
 
 public boolean modoDiosActivado() {

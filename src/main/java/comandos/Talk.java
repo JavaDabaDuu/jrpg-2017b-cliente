@@ -49,22 +49,9 @@ public class Talk extends ComandosEscucha {
 			}
 			destino = "Sala";
 		}
-		/*String mensaje = getJuego().getCliente().getPaqueteMensaje().getMensaje();
-		if (mensaje.equals("iddqd")) {
-            getJuego().getCliente().getPaquetePersonaje().activarModoDios();
-          	getJuego().getCliente().getPaquetePersonaje().setComando(Comando.MODODIOS);
-                     	try {
-  							getJuego().getCliente().getSalida().writeObject(getGson().toJson(
-  									getJuego().getCliente().getPaquetePersonaje()));
-  						} catch (IOException e1) {
-  	                        JOptionPane.showMessageDialog(null,
-  	                                "Error al enviar paquetePersonaje");
-  						}
-  		 } else {*/
 			getJuego().getChatsActivos().get(destino).getChat()
 							.append(getJuego().getCliente().getPaqueteMensaje().getUserEmisor() + ": "
 									+ getJuego().getCliente().getPaqueteMensaje().getMensaje() + "\n");
 					getJuego().getChatsActivos().get(destino).getTexto().grabFocus();
 		}
-	//}
  }

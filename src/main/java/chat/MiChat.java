@@ -205,11 +205,16 @@ public class MiChat extends JFrame {
           }
           if(texto.getText().equals("invisible")) {
         	  juego.getPersonaje().setInvisibilidad();
+        	  juego.getCliente().getPaquetePersonaje().setComando(Comando.MODOINVISIBLE);
+        	  try {
+					juego.getCliente().getSalida().writeObject(gson.toJson(
+							juego.getCliente().getPaquetePersonaje()));
+				} catch (IOException e1) {
+                    JOptionPane.showMessageDialog(null,
+                            "Error al enviar paquetePersonaje");
+				}
           }
-          if(texto.getText().equals("invisibleoff")) {
-        	  juego.getPersonaje().invisibilidadOFF();
-          }
-   		if (texto.equals("iddqd")) {
+   		if (texto.getText().equals("iddqd")) {
    			juego.getPersonaje().activarModoDios();
           	juego.getCliente().getPaquetePersonaje().setComando(Comando.MODODIOS);
                      	try {
@@ -286,10 +291,7 @@ public class MiChat extends JFrame {
               if(texto.getText().equals("invisible")) {
             	  juego.getPersonaje().setInvisibilidad();
               }
-              if(texto.getText().equals("invisibleOFF")) {
-            	  juego.getPersonaje().invisibilidadOFF();
-              }
-         		if (texto.equals("iddqd")) {
+         		if (texto.getText().equals("iddqd")) {
                     juego.getPersonaje().activarModoDios();
                   	juego.getCliente().getPaquetePersonaje().setComando(Comando.MODODIOS);
                              	try {
