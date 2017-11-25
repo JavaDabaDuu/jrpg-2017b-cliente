@@ -448,7 +448,7 @@ public class Entidad {
           .get(actual.getIdPersonaje()) != null
           && juego.getPersonajesConectados()
           .get(actual.getIdPersonaje()).getEstado()
-          == Estado.getEstadoJuego() && esVisible(actual) ) {
+          == Estado.getEstadoJuego() && ( esVisible(actual) || soyInvisible()) ) {
         	  
             if (tileMovermeAux[0] == tilePersonajes[0]
             && tileMovermeAux[1] == tilePersonajes[1]) {
@@ -579,6 +579,10 @@ public class Entidad {
       enMovimiento = true;
     }
   }
+
+private boolean soyInvisible() {
+	return juego.getPersonaje().getInvisibilidad();
+}
 
 public boolean esVisible(PaqueteMovimiento actual) {
 	return !(juego.getPersonajesConectados().get(actual.getIdPersonaje()).getInvisibilidad());
