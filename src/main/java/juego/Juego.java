@@ -107,11 +107,11 @@ public class Juego implements Runnable {
 
   /** The cargar recursos. */
   private CargarRecursos cargarRecursos;
-  
+
   /** The noClipActivado. */
   private boolean noClipActivado = false;
 
-  /** El personaje corre */
+  /** El personaje corre. */
   private boolean run;
 
   /** The Constant DIRECCION. */
@@ -556,38 +556,39 @@ public class Juego implements Runnable {
   public void actualizarEnemigo() {
     this.paqueteNpc = (PaqueteNPC) (npcs.get(paqueteNpc.getId()).clone());
   }
-  
+
   /**
    * Activar noclip.
    */
   public void activarNoClip() {
-	  this.noClipActivado = true;
+    this.noClipActivado = true;
   }
-  
+
   /**
    * Desactivar noclip.
    */
   public void desactivarNoClip() {
-	  this.noClipActivado = false;
+    this.noClipActivado = false;
   }
-  
+
   /**
-   * Devuelve si esta o no activo el cheat noclip
+   * Devuelve si esta o no activo el cheat noclip.
+   * @return
    */
   public boolean estaNoClipActivado() {
-	  return this.noClipActivado;
+    return this.noClipActivado;
   }
 
   public void running() {
-	  this.run = true;
+    this.run = true;
   }
 
   public void walking() {
-	  this.run = false;
+    this.run = false;
   }
-  
+
   public boolean pjIsRunnig() {
-	  return this.run;
+     return this.run;
   }
 
 }

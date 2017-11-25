@@ -6,7 +6,6 @@ import chat.VentanaContactos;
 import com.google.gson.Gson;
 
 import estados.Estado;
-import estados.EstadoBatallaNPC;
 import frames.MenuEscape;
 import frames.MenuInventario;
 import interfaz.MenuInfoPersonaje;
@@ -32,11 +31,10 @@ import mensajeria.PaqueteBatallaNPC;
 import mensajeria.PaqueteComerciar;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaqueteNPC;
-import mensajeria.PaquetePersonaje;
 import mundo.Grafo;
 import mundo.Mundo;
 import mundo.Nodo;
-import recursos.Recursos;
+
 
 /**
  * Clase Entidad.
@@ -182,8 +180,8 @@ public class Entidad {
 
   /** The comercio. */
   private float[] comercio;
-  
-  /** The paso al que se mueve */
+
+  /** The paso al que se mueve. */
   private int paso;
 
   /** The Constant RANGONPC. */
@@ -439,17 +437,15 @@ public class Entidad {
           key = it.next();
           actual = juego.getUbicacionPersonajes().get(key);
           tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
-          
-          //boolean actualVisible= !(juego.getPersonajesConectados().get(actual.getIdPersonaje()).getInvisibilidad());
-          
+
           if (actual != null && actual.getIdPersonaje()
           != juego.getPersonaje().getId()
           && juego.getPersonajesConectados()
           .get(actual.getIdPersonaje()) != null
           && juego.getPersonajesConectados()
           .get(actual.getIdPersonaje()).getEstado()
-          == Estado.getEstadoJuego() && ( esVisible(actual) || soyInvisible()) ) {
-        	  
+          == Estado.getEstadoJuego() && (esVisible(actual) || soyInvisible())) {
+
             if (tileMovermeAux[0] == tilePersonajes[0]
             && tileMovermeAux[1] == tilePersonajes[1]) {
               idEnemigo = actual.getIdPersonaje();
@@ -525,7 +521,7 @@ public class Entidad {
             tileActual[0], tileActual[1],
             tileMoverme[0], tileMoverme[1]);
         }
-        
+
       }
       // Me muevo al primero de la pila
       NodoDePila nodoActualTile = pilaMovimiento.pop();
@@ -581,11 +577,11 @@ public class Entidad {
   }
 
 private boolean soyInvisible() {
-	return juego.getPersonaje().getInvisibilidad();
+    return juego.getPersonaje().getInvisibilidad();
 }
 
 public boolean esVisible(PaqueteMovimiento actual) {
-	return !(juego.getPersonajesConectados().get(actual.getIdPersonaje()).getInvisibilidad());
+    return !(juego.getPersonajesConectados().get(actual.getIdPersonaje()).getInvisibilidad());
 }
 
  /**
@@ -597,9 +593,9 @@ public boolean esVisible(PaqueteMovimiento actual) {
     dy = 0;
     double paso;
     if (juego.pjIsRunnig()) {
-    	paso = 8;
+       paso = 8;
     } else {
-    	paso = 4;
+       paso = 4;
     }
     if (enMovimiento && !(x == xFinal && y == yFinal - Y_OFFSET)) {
       if (movimientoHacia == VERTICALSUP) {
@@ -820,47 +816,46 @@ public boolean esVisible(PaqueteMovimiento actual) {
    * @return la pila de tiles a recorrer
    */
 
-  private PilaDeTiles caminoNoClip( final int xInicial, final int yInicial, final int xFinal, final int yFinal) {
+  private PilaDeTiles caminoNoClip(final int xInicial, final int yInicial,
+        final int xFinal, final int yFinal) {
     PilaDeTiles camino = new PilaDeTiles();
     int xActual = xFinal; // Posicion en X actual.
     int yActual = yFinal; // Posicion en Y actual.
     int sentidoX = -1; // Sentido en cual me voy a desplazar en X.
     int sentidoY = -1; // Sentido en cual me voy a desplazar en Y.
-    
-    
-    if (xActual < xInicial) { // Defino si me tengo que mover hacia la derecha, sino me muevo hacia la izquierda.
-    	sentidoX = 1;
+
+
+     if (xActual < xInicial) { // Defino si me tengo que mover hacia la derecha, sino me muevo hacia la izquierda.
+        sentidoX = 1;
     }
     if (yActual < yInicial) { // Defino si me tengo que mover hacia arriba, sino me muevo hacia abajo.
-    	sentidoY = 1;
+       sentidoY = 1;
     }
-    
-    camino.push( new NodoDePila(xFinal, yFinal)); // La posicion final va al final de la pila.
-    
-  	while( xActual != xInicial && yActual != yInicial){ // Avanzo todo lo que pueda en diagonal.
-  		xActual = xActual + sentidoX;
-  		yActual = yActual + sentidoY;
-  		
-  		camino.push( new NodoDePila(xActual, yActual));
-  	}
-  	
-  	// Despues avanzo en X, o en Y.
-  	
-  	while( xActual != xInicial ) {
-  		xActual = xActual + sentidoX;
-  		camino.push( new NodoDePila(xActual, yActual));
-  	}
-  	
-  	while( yActual != yInicial ) {
-  		yActual = yActual + sentidoY;
-  		camino.push( new NodoDePila(xActual, yActual));
-  	}
-  	
-  	camino.pop(); // Quito la primera posicion ya que ya estoy parado ahí.
-  	return camino;
+
+    camino.push(new NodoDePila(xFinal, yFinal)); // La posicion final va al final de la pila.
+
+    while (xActual != xInicial && yActual != yInicial) { // Avanzo todo lo que pueda en diagonal.
+      xActual = xActual + sentidoX;
+      yActual = yActual + sentidoY;
+      camino.push(new NodoDePila(xActual, yActual));
+    }
+  // Despues avanzo en X, o en Y.
+
+    while (xActual != xInicial) {
+      xActual = xActual + sentidoX;
+      camino.push(new NodoDePila(xActual, yActual));
+    }
+
+    while (yActual != yInicial) {
+       yActual = yActual + sentidoY;
+       camino.push(new NodoDePila(xActual, yActual));
+    }
+
+    camino.pop(); // Quito la primera posicion ya que ya estoy parado ahí.
+    return camino;
   }
-  
-  
+
+
  /**
   * Pregunta si los personajes estan en diagonal.
   *
@@ -996,31 +991,30 @@ public boolean esVisible(PaqueteMovimiento actual) {
           PaqueteBatallaNPC paqueteBatalla = new PaqueteBatallaNPC();
           paqueteBatalla.setId(juego.getPersonaje().getId());
           paqueteBatalla.setIdEnemigo(key);
-              
+
           actual.setEstado(Estado.getEstadoBatallaNPC());
           juego.getPersonaje().setEstado(Estado.getEstadoBatallaNPC());
-         
+
           try {
-        		juego.getCliente().getSalida()
-        		.writeObject(gson.toJson(paqueteBatalla));
-        	  } catch (IOException e) {
-        		  System.out.println(
-        				  "Error al enviar paquete Batalla NPC");
-        	  }
-        
-          
+                juego.getCliente().getSalida()
+                .writeObject(gson.toJson(paqueteBatalla));
+              } catch (IOException e) {
+                   System.out.println(
+                    "Error al enviar paquete Batalla NPC");
+                }
+
+
             break;
           }
         }
       }
     }
   }
-  
+
   public void running() {
-	  this.paso = 4;
+     this.paso = 4;
   }
-	
   public void walking() {
-	this.paso = 2;
+    this.paso = 2;
   }
 }

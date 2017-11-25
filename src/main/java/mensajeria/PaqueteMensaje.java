@@ -16,8 +16,8 @@ public class PaqueteMensaje extends Paquete implements Serializable, Cloneable {
 
   /** The msj. */
   private String msj;
-  
-  /** Id del Emisor*/
+
+  /** Id del Emisor. */
   private int idEmisor;
 
   /**
@@ -91,10 +91,10 @@ public Object clone() {
   }
 
 public void setIdEmisor(int id) {
-	this.idEmisor = id;
+    this.idEmisor = id;
 }
 
-public int getIdEmisor(){
-	return this.idEmisor;
+public int getIdEmisor() {
+    return this.idEmisor;
 }
 }

@@ -1,3 +1,4 @@
+
 package comandos;
 
 import mensajeria.PaquetePersonaje;
@@ -30,3 +31,4 @@ public class ActualizarPersonaje extends ComandosEscucha {
   }
 
 }
+

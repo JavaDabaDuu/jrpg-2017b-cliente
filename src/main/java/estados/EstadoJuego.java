@@ -10,16 +10,12 @@ import interfaz.MenuInfoPersonaje;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import juego.Juego;
@@ -207,7 +203,7 @@ public class EstadoJuego extends Estado {
           gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
       juego.getCliente().getSalida().writeObject(
           gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
-      
+
       juego.getPaqueteDeNPCS().setComando(Comando.SETEARNPC);
       juego.getCliente().getSalida().writeObject(
           gson.toJson(juego.getPaqueteDeNPCS(), PaqueteDeNPCS.class));
@@ -268,24 +264,20 @@ public void graficar(final Graphics g) {
 
       Iterator<Integer> it = personajesConectados.keySet().iterator();
       int key;
-      
+
       PaqueteMovimiento actual;
-      
+
       g.setColor(Color.WHITE);
       g.setFont(new Font("Book Antiqua", Font.PLAIN, SIZE));
       while (it.hasNext()) {
         key = it.next();
         actual = ubicacionPersonajes.get(key);
-        
-        //boolean soyInvisible = paquetePersonaje.getInvisibilidad();
-        //boolean soyInvisible = personajesConectados.get(getJuego().getPersonaje().getId()).getInvisibilidad();
-        //boolean actualVisible= !(personajesConectados.get(actual.getIdPersonaje()).getInvisibilidad());
-        
+
         if (actual != null && actual.getIdPersonaje()
         != getJuego().getPersonaje().getId()
         && personajesConectados.get(actual.getIdPersonaje()).getEstado()
-        == Estado.getEstadoJuego() 
-        && (visible(actual) || soyInvisible()) ) {
+        == Estado.getEstadoJuego()
+        && (visible(actual) || soyInvisible())) {
 
           Pantalla.centerString(g,
               new Rectangle((int) (actual.getPosX()
@@ -306,11 +298,12 @@ public void graficar(final Graphics g) {
   }
 
   public boolean visible(PaqueteMovimiento actual) {
-	  return !(getJuego().getPersonajesConectados().get(actual.getIdPersonaje()).getInvisibilidad());
+    return !(getJuego().getPersonajesConectados().
+            get(actual.getIdPersonaje()).getInvisibilidad());
   }
 
   public boolean soyInvisible() {
-	  return getJuego().getPersonaje().getInvisibilidad();
+     return getJuego().getPersonaje().getInvisibilidad();
   }
 
   /**
@@ -397,7 +390,6 @@ public boolean esEstadoDeJuego() {
    * @param g the g
    */
   public void graficarNPC(final Graphics g) {
-	  
     if (getJuego().getNpcs() != null) {
       npcs = new HashMap<Integer, PaqueteNPC>();
       npcs = getJuego().getNpcs();
@@ -405,14 +397,14 @@ public boolean esEstadoDeJuego() {
       g.setFont(new Font("Book Antiqua", Font.PLAIN, SIZE));
 
       for (int i = 0; i < this.npcs.size(); i++) {
-    	  if(npcs.get(i).getEstado() == getEstadoJuego()){
+      if (npcs.get(i).getEstado() == getEstadoJuego()) {
         g.drawImage(Recursos.getPersonaje().get("Minotauro")
             .get(IMAGEN_6)[0], (int) (npcs.get(i).getPosX()
             - getJuego().getCamara().getxOffset()),
             (int) (npcs.get(i).getPosY()
             - getJuego().getCamara().getyOffset()),
             WIDTH_MINOTAURO, HEIGHT_MINOTAURO, null);
-    	  }
+       }
     }
     }
   }

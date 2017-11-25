@@ -274,9 +274,9 @@ public void actualizar() {
                     paqueteEnemigo.setEstado(getEstadoBatallaNPC());
 
                     } else {
-                    if(personaje.modoDiosActivado() == false) {
+                    if (!personaje.modoDiosActivado()) {
                         enemigo.atacar(personaje);
-                    }                    
+                    }
                     if (!personaje.estaVivo()) {
                       getJuego().getEstadoJuego().setHaySolicitud(true,
                           getJuego().getPersonaje(), MenuInfoPersonaje
@@ -285,7 +285,7 @@ public void actualizar() {
                            .setEstado(Estado.getEstadoJuego());
 
                        getJuego().getNpcs().get(this.getPaqueteEnemigo().
-                    		   getId()).setEstado(Estado.getEstadoJuego());
+                       getId()).setEstado(Estado.getEstadoJuego());
                        paqueteFinalizarBatalla.setGanadorBatalla(this
                            .getPaqueteEnemigo().getId());
                        finalizarBatalla();
@@ -330,7 +330,7 @@ public void graficar(final Graphics gAux) {
   EstadoDePersonaje.dibujarEstadoDePersonaje(
   gAux, X_ESTADO_ENEMIGO, Y_ESTADO_ENEMIGO,
       enemigo, miniaturaEnemigo);
-  
+
 }
 
   /**
@@ -360,8 +360,8 @@ private void crearPersonajes() {
         Casta.class, Integer.TYPE, Integer.TYPE, Integer.TYPE)
         .newInstance(nombre, salud, energia, fuerza, destreza, magia, casta,
         experiencia, nivel, id);
-    if( paquetePersonaje.modoDiosActivado() ) {
-    	personaje.activarModoDios();
+    if (paquetePersonaje.modoDiosActivado()) {
+        personaje.activarModoDios();
     }
    } catch (InstantiationException | IllegalAccessException
    | ClassNotFoundException | IllegalArgumentException
@@ -375,7 +375,7 @@ private void crearPersonajes() {
   magia = paqueteEnemigo.getNpc().getMagia();
   nivel = paqueteEnemigo.getNpc().getNivel();
   id = paqueteEnemigo.getId();
-  
+
   enemigo = new NonPlayableCharacter(nombre, nivel, paqueteEnemigo.getDificultad());
   }
 
@@ -414,7 +414,7 @@ private void finalizarBatalla() {
 
     getJuego().getCliente().getSalida()
        .writeObject(gson.toJson(paquetePersonaje));
-    
+
     getJuego().getCliente().getSalida()
         .writeObject(gson.toJson(paqueteEnemigo));
 

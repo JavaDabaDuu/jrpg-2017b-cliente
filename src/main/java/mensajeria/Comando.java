@@ -18,7 +18,7 @@ public abstract class Comando {
    "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio",
    "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk",
    "ActualizarPtsLvl", "ActualizarNPC", "SetearNPC", "BatallaNPC",
-   "DesaparecerNPC", "ModoDios","ModoInvisible"};
+   "DesaparecerNPC", "ModoDios", "ModoInvisible"};
 
   /** The Constant CLASSNAMESBIS. */
   public static final String[] CLASSNAMESBIS = {"Conexion", "CrearPersonaje",
@@ -27,7 +27,7 @@ public abstract class Comando {
     "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario",
     "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk",
     "ActualizarPtsLvl", "ActualizarNPC", "SetearNPC", "BatallaNPC",
-    "DesaparecerNPC", "ModoDios","ModoInvisible"};
+    "DesaparecerNPC", "ModoDios", "ModoInvisible"};
 
   /** The Constant CONEXION. */
   public static final int CONEXION = 0;
@@ -104,7 +104,8 @@ public abstract class Comando {
 
   /** The Constant MODODIOS. */
   public static final int MODODIOS = 24;
-  
+
+  /** The Constant MODOINVISIBLE. */
   public static final int MODOINVISIBLE = 25;
   /** The gson. */
   private final Gson gson = new Gson();

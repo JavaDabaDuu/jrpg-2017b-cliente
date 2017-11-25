@@ -184,56 +184,58 @@ public class MiChat extends JFrame {
           if (texto.getText().equals("siclip")) {
             juego.desactivarNoClip();
           }
-          
+
           if (texto.getText().equals("run")) {
-        	  juego.running();
+              juego.running();
           }
           if (texto.getText().equals("walk")) {
-        	  juego.walking();
+              juego.walking();
           }
-          if(texto.getText().equals("bigdaddy")) {
-        	  juego.getPersonaje().bigdaddyON();
+          if (texto.getText().equals("bigdaddy")) {
+             juego.getPersonaje().bigdaddyON();
           }
-          if(texto.getText().equals("tinydaddy")) {
-        	  juego.getPersonaje().tinydaddyON();
+          if (texto.getText().equals("tinydaddy")) {
+             juego.getPersonaje().tinydaddyON();
           }
-          if(texto.getText().equals("bigdaddyoff")) {
-        	  juego.getPersonaje().bigdaddyOFF();
+          if (texto.getText().equals("bigdaddyoff")) {
+             juego.getPersonaje().bigdaddyOFF();
           }
-          if(texto.getText().equals("tinydaddyoff")) {
-        	  juego.getPersonaje().tinydaddyOFF();
+          if (texto.getText().equals("tinydaddyoff")) {
+             juego.getPersonaje().tinydaddyOFF();
           }
-          if(texto.getText().equals("invisible")) {
-        	  juego.getPersonaje().setInvisibilidad();
-        	  juego.getCliente().getPaquetePersonaje().setComando(Comando.MODOINVISIBLE);
-        	  try {
-					juego.getCliente().getSalida().writeObject(gson.toJson(
-							juego.getCliente().getPaquetePersonaje()));
-				} catch (IOException e1) {
+          if (texto.getText().equals("invisible")) {
+             juego.getPersonaje().setInvisibilidad();
+             juego.getCliente().getPaquetePersonaje().
+             setComando(Comando.MODOINVISIBLE);
+             try {
+                 juego.getCliente().getSalida().writeObject(gson.toJson(
+                 juego.getCliente().getPaquetePersonaje()));
+             } catch (IOException e1) {
                     JOptionPane.showMessageDialog(null,
                             "Error al enviar paquetePersonaje");
-				}
+               }
           }
-   		if (texto.getText().equals("iddqd")) {
-   			juego.getPersonaje().activarModoDios();
-          	juego.getCliente().getPaquetePersonaje().setComando(Comando.MODODIOS);
-                     	try {
-  							juego.getCliente().getSalida().writeObject(gson.toJson(
-  									juego.getCliente().getPaquetePersonaje()));
-  						} catch (IOException e1) {
-  	                        JOptionPane.showMessageDialog(null,
-  	                                "Error al enviar paquetePersonaje");
-  						}
-  		 }
+          if (texto.getText().equals("iddqd")) {
+             juego.getPersonaje().activarModoDios();
+             juego.getCliente().getPaquetePersonaje().
+             setComando(Comando.MODODIOS);
+             try {
+                 juego.getCliente().getSalida().writeObject(gson.toJson(
+                 juego.getCliente().getPaquetePersonaje()));
+             } catch (IOException e1) {
+               JOptionPane.showMessageDialog(null,
+                        "Error al enviar paquetePersonaje");
+               }
+          }
           chat.append("Me: " + texto.getText() + "\n");
 
           juegoAux.getCliente().getPaqueteMensaje()
               .setUserEmisor(juegoAux.getPersonaje().getNombre());
-          
+
         //Seteo el id de la persona que escribe el mensaje
           juegoAux.getCliente().getPaqueteMensaje()
           .setIdEmisor(juegoAux.getPersonaje().getId());
-          
+
           juegoAux.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
           juegoAux.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
 
@@ -269,39 +271,49 @@ public class MiChat extends JFrame {
               if (texto.getText().equals("siclip")) {
                 juego.desactivarNoClip();
               }
-              
+
               if (texto.getText().equals("run")) {
-            	  juego.running();
+                  juego.running();
               }
               if (texto.getText().equals("walk")) {
-            	  juego.walking();
+                 juego.walking();
               }
-              if(texto.getText().equals("bigdaddy")) {
-            	  juego.getPersonaje().bigdaddyON();
+              if (texto.getText().equals("bigdaddy")) {
+                 juego.getPersonaje().bigdaddyON();
               }
-              if(texto.getText().equals("tinydaddy")) {
-            	  juego.getPersonaje().tinydaddyON();
-              }          
-              if(texto.getText().equals("bigdaddyoff")) {
-            	  juego.getPersonaje().bigdaddyOFF();
+              if (texto.getText().equals("tinydaddy")) {
+                 juego.getPersonaje().tinydaddyON();
               }
-              if(texto.getText().equals("tinydaddyoff")) {
-            	  juego.getPersonaje().tinydaddyOFF();
+              if (texto.getText().equals("bigdaddyoff")) {
+                 juego.getPersonaje().bigdaddyOFF();
               }
-              if(texto.getText().equals("invisible")) {
-            	  juego.getPersonaje().setInvisibilidad();
+              if (texto.getText().equals("tinydaddyoff")) {
+                 juego.getPersonaje().tinydaddyOFF();
               }
-         		if (texto.getText().equals("iddqd")) {
+              if (texto.getText().equals("invisible")) {
+                 juego.getPersonaje().setInvisibilidad();
+                 juego.getCliente().getPaquetePersonaje().
+                 setComando(Comando.MODOINVISIBLE);
+                 try {
+                     juego.getCliente().getSalida().writeObject(gson.toJson(
+                     juego.getCliente().getPaquetePersonaje()));
+                 } catch (IOException e1) {
+                     JOptionPane.showMessageDialog(null,
+                                "Error al enviar paquetePersonaje");
+                   }
+              }
+              if (texto.getText().equals("iddqd")) {
                     juego.getPersonaje().activarModoDios();
-                  	juego.getCliente().getPaquetePersonaje().setComando(Comando.MODODIOS);
-                             	try {
-          							juego.getCliente().getSalida().writeObject(gson.toJson(
-          									juego.getCliente().getPaquetePersonaje()));
-          						} catch (IOException e1) {
-          	                        JOptionPane.showMessageDialog(null,
-          	                                "Error al enviar paquetePersonaje");
-          						}
-          		 }
+                    juego.getCliente().getPaquetePersonaje().
+                    setComando(Comando.MODODIOS);
+                    try {
+                        juego.getCliente().getSalida().writeObject(gson.toJson(
+                        juego.getCliente().getPaquetePersonaje()));
+                    } catch (IOException e1) {
+                            JOptionPane.showMessageDialog(null,
+                            "Error al enviar paquetePersonaje");
+                      }
+              }
             chat.append("Me: " + texto.getText() + "\n");
 
             juegoAux.getCliente().getPaqueteMensaje()

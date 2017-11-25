@@ -51,39 +51,39 @@ Cloneable {
 
   /** The nivel. */
   private int nivel = 1;
-  
+
   private boolean invisible = false;
-  
+
   private int idInventario;
-  
+
   private int idMochila;
-  
-  /** Cantidad de veces que se ejecuto "bigdaddy"*/
+
+  /** Cantidad de veces que se ejecuto "bigdaddy". */
   private int fuerzaAumentada;
-  
-  /**cantidad de veces que se uso "TinyDaddy"*/
+
+  /**cantidad de veces que se uso "TinyDaddy". */
   private int fuerzaDisminuida;
-  
-  private boolean [] npcsPeleados;
-  
-  private long [] peleaConNPC;
-  
+
+  private boolean[] npcsPeleados;
+
+  private long[] peleaConNPC;
+
   private boolean modoDios = false;
 
   public int getIdInventario() {
-	return idInventario;
+    return idInventario;
 }
 
 public void setIdInventario(int idInventario) {
-	this.idInventario = idInventario;
+    this.idInventario = idInventario;
 }
 
 public int getIdMochila() {
-	return idMochila;
+    return idMochila;
 }
 
 public void setIdMochila(int idMochila) {
-	this.idMochila = idMochila;
+    this.idMochila = idMochila;
 }
 
 /** The experiencia. */
@@ -104,13 +104,13 @@ public void setIdMochila(int idMochila) {
     estado = Estado.getEstadoOffline();
     fuerzaAumentada = 0;
     fuerzaDisminuida = 0;
-    npcsPeleados = new boolean [10];
+    npcsPeleados = new boolean[10];
     this.peleaConNPC = new long[10];
-    
+
     for (int i = 0; i < npcsPeleados.length; i++) {
-		npcsPeleados[i] = false;
-		peleaConNPC[i]=0;
-	}
+        npcsPeleados[i] = false;
+        peleaConNPC[i] = 0;
+    }
   }
 
   /**
@@ -673,61 +673,66 @@ public Object clone() {
     this.inteligencia += updates.get("inteligencia").intValue();
     this.energiaTope += updates.get("energia").intValue();
   }
-
-public boolean getInvisibilidad() {
-	return this.invisible;
+  /**
+   * Obtener visibilidad.
+   * @return si es invisible o no
+   */
+  public boolean getInvisibilidad() {
+     return this.invisible;
 }
 
 public void setInvisibilidad() {
     this.invisible = !(this.invisible);
 }
 
-public boolean getNpcsPeleados(int i) {
-	
-	//Con esto veo si ya pasaron mas de 10 segundos para volver a entrar en pelea
-	if(npcsPeleados[i] && (System.currentTimeMillis() - peleaConNPC[i]) >= 10000)
-		return false;
-	else
-		return npcsPeleados[i];
+  public boolean getNpcsPeleados(int i) {
+
+    /*Con esto veo si ya pasaron mas de 10 segundos para volver a
+     entrar en pelea*/
+    if (npcsPeleados[i] && (System.currentTimeMillis()
+        - peleaConNPC[i]) >= 10000) {
+       return false;
+    } else {
+       return npcsPeleados[i];
+      }
 }
 
-public void setNpcsPeleados(int i) {
-	this.npcsPeleados[i] = true;
-	
-	//para saber en que momento entro en pelea con el npc
-	this.peleaConNPC[i] = System.currentTimeMillis();
+  public void setNpcsPeleados(int i) {
+    this.npcsPeleados[i] = true;
+    //para saber en que momento entro en pelea con el npc
+    this.peleaConNPC[i] = System.currentTimeMillis();
 }
 
 
-public void bigdaddyON(){
-	this.fuerza = fuerza*2;
-	fuerzaAumentada++;
+  public void bigdaddyON() {
+    this.fuerza = fuerza * 2;
+    fuerzaAumentada++;
 }
 
-public void tinydaddyON(){
-	this.fuerza = fuerza/2;
-	fuerzaDisminuida++;
+public void tinydaddyON() {
+    this.fuerza = fuerza / 2;
+    fuerzaDisminuida++;
 }
 
-public void tinydaddyOFF(){
-	for(int i=0; i<this.fuerzaDisminuida; i++){
-		this.fuerza = fuerza * 2;
-	}
-	
+public void tinydaddyOFF() {
+    for (int i = 0; i < this.fuerzaDisminuida; i++) {
+        this.fuerza = fuerza * 2;
+        }
+
 }
 
 public void bigdaddyOFF() {
-	for(int i=0; i<this.fuerzaAumentada; i++){
-		this.fuerza = fuerza /2;
-	}
+    for (int i = 0; i < this.fuerzaAumentada; i++) {
+        this.fuerza = fuerza / 2;
+        }
 }
 
 public boolean modoDiosActivado() {
-	return modoDios;
+    return modoDios;
 }
 
 public void activarModoDios() {
-	this.modoDios = true;
+    this.modoDios = true;
 }
 
 }

@@ -169,70 +169,69 @@ public class MenuStats extends JFrame {
     saludPj.setHorizontalAlignment(SwingConstants.RIGHT);
     saludPj.setBounds(80, 100, 77, 16);
     contentPane.add(saludPj);
-    
+
     JLabel fzaPj = new JLabel(String.valueOf(paquetePersonaje.getFuerza()));
     fzaPj.setForeground(Color.WHITE);
     fzaPj.setHorizontalAlignment(SwingConstants.RIGHT);
     fzaPj.setBounds(80, 129, 77, 16);
     contentPane.add(fzaPj);
-    
+
     JLabel dstzaPj = new JLabel(String.valueOf(paquetePersonaje.getDestreza()));
     dstzaPj.setForeground(Color.WHITE);
     dstzaPj.setHorizontalAlignment(SwingConstants.RIGHT);
     dstzaPj.setBounds(80, 158, 77, 16);
     contentPane.add(dstzaPj);
-    
+
     JLabel intPj = new JLabel(String.valueOf(paquetePersonaje.getInteligencia()));
     intPj.setForeground(Color.WHITE);
     intPj.setHorizontalAlignment(SwingConstants.RIGHT);
     intPj.setBounds(80, 187, 77, 16);
     contentPane.add(intPj);
-    
+
     JLabel cantItem = new JLabel(String.valueOf(paquetePersonaje.getCantItems()));
     cantItem.setForeground(Color.WHITE);
     cantItem.setHorizontalAlignment(SwingConstants.RIGHT);
     cantItem.setBounds(118, 216, 39, 16);
     contentPane.add(cantItem);
-    
+
     JLabel lvPj = new JLabel(String.valueOf(paquetePersonaje.getNivel()));
     lvPj.setForeground(Color.WHITE);
     lvPj.setHorizontalAlignment(SwingConstants.RIGHT);
     lvPj.setBounds(251, 13, 77, 16);
     contentPane.add(lvPj);
-    
     JLabel xpPj = new JLabel(String.valueOf(paquetePersonaje.getExperiencia()));
     xpPj.setForeground(Color.WHITE);
     xpPj.setHorizontalAlignment(SwingConstants.RIGHT);
     xpPj.setBounds(251, 42, 77, 16);
     contentPane.add(xpPj);
-    
+
     JLabel energiaPj = new JLabel(String.valueOf(paquetePersonaje.getEnergiaTope()));
     energiaPj.setForeground(Color.WHITE);
     energiaPj.setHorizontalAlignment(SwingConstants.RIGHT);
     energiaPj.setBounds(251, 100, 77, 16);
     contentPane.add(energiaPj);
-    
+
     int ataquePj = calcularAtaque(paquetePersonaje.getFuerza());
     JLabel ataPj = new JLabel(String.valueOf(ataquePj));
     ataPj.setForeground(Color.WHITE);
     ataPj.setHorizontalAlignment(SwingConstants.RIGHT);
     ataPj.setBounds(251, 129, 77, 16);
     contentPane.add(ataPj);
-    
+
     JLabel defPj = new JLabel(String.valueOf(paquetePersonaje.getDestreza()));
     defPj.setForeground(Color.WHITE);
     defPj.setHorizontalAlignment(SwingConstants.RIGHT);
     defPj.setBounds(251, 158, 77, 16);
     contentPane.add(defPj);
-    
+
     int intePj = calcularMagia(paquetePersonaje.getInteligencia());
     JLabel magicPj = new JLabel(String.valueOf(intePj));
     magicPj.setForeground(Color.WHITE);
     magicPj.setHorizontalAlignment(SwingConstants.RIGHT);
     magicPj.setBounds(251, 187, 77, 16);
     contentPane.add(magicPj);
-    
-    
+
+
     JButton btnVolver = new JButton("Volver");
     btnVolver.setIcon(new ImageIcon("recursos//volver.png"));
     btnVolver.addActionListener(new ActionListener() {

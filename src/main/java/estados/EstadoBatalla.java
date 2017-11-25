@@ -217,10 +217,11 @@ public void actualizar() {
           if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == UNO) {
             if (personaje.puedeAtacar()) {
               seRealizoAccion = true;
-              if( enemigo.modoDiosActivado() == false || (enemigo.modoDiosActivado() && personaje.modoDiosActivado()) ){
+              if (!enemigo.modoDiosActivado()
+              || (enemigo.modoDiosActivado() && personaje.modoDiosActivado())) {
                   personaje.habilidadRaza1(enemigo);
-              } else if(personaje.getEnergia() >= ENERGIA_MINIMA ) {
-            	  personaje.reducirEnergia(ENERGIA_MINIMA);
+              } else if (personaje.getEnergia() >= ENERGIA_MINIMA) {
+              personaje.reducirEnergia(ENERGIA_MINIMA);
               }
             }
             haySpellSeleccionada = true;
@@ -229,10 +230,11 @@ public void actualizar() {
           if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == DOS) {
             if (personaje.puedeAtacar()) {
               seRealizoAccion = true;
-              if( enemigo.modoDiosActivado() == false || (enemigo.modoDiosActivado() && personaje.modoDiosActivado()) ){
+              if (!enemigo.modoDiosActivado()
+              || (enemigo.modoDiosActivado() && personaje.modoDiosActivado())) {
                   personaje.habilidadRaza2(enemigo);
-              } else if(personaje.getEnergia() >= ENERGIA_MINIMA ) {
-            	  personaje.reducirEnergia(ENERGIA_MINIMA);
+              } else if (personaje.getEnergia() >= ENERGIA_MINIMA) {
+              personaje.reducirEnergia(ENERGIA_MINIMA);
               }
             }
             haySpellSeleccionada = true;
@@ -241,10 +243,11 @@ public void actualizar() {
           if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == TRES) {
             if (personaje.puedeAtacar()) {
               seRealizoAccion = true;
-              if( enemigo.modoDiosActivado() == false || (enemigo.modoDiosActivado() && personaje.modoDiosActivado()) ){
+              if (!enemigo.modoDiosActivado()
+              || (enemigo.modoDiosActivado() && personaje.modoDiosActivado())) {
                   personaje.habilidadCasta1(enemigo);
-              } else if(personaje.getEnergia() >= ENERGIA_MINIMA ) {
-            	  personaje.reducirEnergia(ENERGIA_MINIMA);
+              } else if (personaje.getEnergia() >= ENERGIA_MINIMA) {
+              personaje.reducirEnergia(ENERGIA_MINIMA);
               }
             }
             haySpellSeleccionada = true;
@@ -254,10 +257,11 @@ public void actualizar() {
           posMouse[0], posMouse[1]) == CUATRO) {
             if (personaje.puedeAtacar()) {
               seRealizoAccion = true;
-              if( enemigo.modoDiosActivado() == false || (enemigo.modoDiosActivado() && personaje.modoDiosActivado()) ){
+              if (!enemigo.modoDiosActivado()
+              || (enemigo.modoDiosActivado() && personaje.modoDiosActivado())) {
                   personaje.habilidadCasta2(enemigo);
-              } else if(personaje.getEnergia() >= ENERGIA_MINIMA ) {
-            	  personaje.reducirEnergia(ENERGIA_MINIMA);
+              } else if (personaje.getEnergia() >= ENERGIA_MINIMA) {
+              personaje.reducirEnergia(ENERGIA_MINIMA);
               }
             }
             haySpellSeleccionada = true;
@@ -267,10 +271,11 @@ public void actualizar() {
           posMouse[0], posMouse[1]) == CINCO) {
             if (personaje.puedeAtacar()) {
               seRealizoAccion = true;
-              if( enemigo.modoDiosActivado() == false || (enemigo.modoDiosActivado() && personaje.modoDiosActivado()) ){
+              if (!enemigo.modoDiosActivado()
+              || (enemigo.modoDiosActivado() && personaje.modoDiosActivado())) {
                   personaje.habilidadCasta3(enemigo);
-              } else if(personaje.getEnergia() >= ENERGIA_MINIMA ) {
-            	  personaje.reducirEnergia(ENERGIA_MINIMA);
+              } else if (personaje.getEnergia() >= ENERGIA_MINIMA) {
+                        personaje.reducirEnergia(ENERGIA_MINIMA);
               }
             }
             haySpellSeleccionada = true;
@@ -376,8 +381,8 @@ public void graficar(final Graphics gAux) {
           Casta.class, Integer.TYPE, Integer.TYPE, Integer.TYPE)
           .newInstance(nombre, salud, energia, fuerza, destreza, inteligencia,
           casta, experiencia, nivel, id);
-          if(paquetePersonaje.modoDiosActivado()) {
-        	  personaje.activarModoDios();
+          if (paquetePersonaje.modoDiosActivado()) {
+              personaje.activarModoDios();
           }
     } catch (InstantiationException | IllegalAccessException
        | ClassNotFoundException | IllegalArgumentException
@@ -417,8 +422,8 @@ public void graficar(final Graphics gAux) {
       enemigo = new Elfo(nombre, salud, energia, fuerza, destreza, inteligencia,
         casta, experiencia, nivel, id);
     }
-    if(paqueteEnemigo.modoDiosActivado()) {
-    	enemigo.activarModoDios();
+    if (paqueteEnemigo.modoDiosActivado()) {
+        enemigo.activarModoDios();
     }
   }
 
